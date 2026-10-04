@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #card { position: absolute; left: 110px; top: 580px; width: 860px; height: 660px; padding: 70px 64px; }
+        #card .l4 { display: block; margin-bottom: 26px; }
+        #card .l2 { font-size: 100px; }
+        #fw { margin-top: 30px; display: flex; align-items: center; gap: 22px; font-size: 52px; font-weight: 600; }
+        #next { margin-top: 44px; display: inline-flex; align-items: center; gap: 16px; height: 76px; padding: 0 34px; border-radius: 38px; background: #80011F; font-size: 32px; font-weight: 800; letter-spacing: 0.12em; }
+        #sig { position: absolute; left: 0; right: 0; top: 1380px; display: flex; flex-direction: column; align-items: center; gap: 18px; }
+        #sigline { width: 120px; height: 3px; background: rgba(251, 252, 235, 0.5); }
+        #sig .l4 { font-size: 28px; }
+      </style>
+      <div id="root" data-composition-id="s15-cta" data-width="1080" data-height="1920">
+        <div id="card" class="glass">
+          <span class="l4" id="k">Coming up</span>
+          <div class="mask"><div class="l2" id="c1">CREATIVE</div></div>
+          <div class="mask"><div class="l2" id="c2">TESTING</div></div>
+          <div id="fw">Practical framework <span>→</span></div>
+          <div id="next">NEXT CONTENT</div>
+        </div>
+        <div id="sig"><div id="sigline"></div><div class="l4">Fahad Bin Ali</div></div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // local = global − 100.35 ; "Creative testing নিয়ে আমি" 100.45, "practical framework" ≈102.4, "next content" ≈103.3
+        tl.fromTo("#card", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.55, ease: "power3.out" }, 0.05);
+        tl.fromTo("#k", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.2);
+        tl.fromTo("#c1", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.15);
+        tl.fromTo("#c2", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.3);
+        tl.fromTo("#fw", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.5, ease: "power3.out" }, 1.95);
+        tl.fromTo("#next", { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.5)" }, 2.85);
+        tl.fromTo("#sig", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 3.3);
+        window.__timelines["s15-cta"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

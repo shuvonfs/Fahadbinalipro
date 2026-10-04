@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #head { top: 780px; transform-origin: 50% 0%; }
+        #wires { position: absolute; left: 0; top: 0; }
+        #hub { position: absolute; left: 380px; top: 870px; width: 320px; height: 120px; border-radius: 60px; display: flex; align-items: center; justify-content: center; gap: 14px; background: #720013; border: 2px solid rgba(251, 252, 235, 0.45); }
+        #hub svg { width: 52px; height: 52px; }
+        #hub span { font-size: 32px; font-weight: 800; letter-spacing: 0.06em; }
+        .ang { position: absolute; width: 224px; height: 196px; padding: 22px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; }
+        .ang .idx { position: absolute; left: 18px; top: 14px; font-size: 22px; font-weight: 600; letter-spacing: 0.12em; color: rgba(251, 252, 235, 0.55); }
+        .ang svg { width: 72px; height: 72px; }
+        .ang .nm { font-size: 30px; font-weight: 800; letter-spacing: 0.06em; }
+        #out { top: 1440px; }
+        #out .l3 { font-weight: 800; }
+      </style>
+      <div id="root" data-composition-id="s06-framework" data-width="1080" data-height="1920">
+        <div id="head" class="center">
+          <div class="mask"><div class="l2" id="h1"><span class="mark">REAL</span> CREATIVE</div></div>
+          <div class="mask"><div class="l2" id="h2">DIVERSIFICATION</div></div>
+        </div>
+        <svg id="wires" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="hub">
+          <svg viewBox="0 0 24 24"><path class="ic" d="M4 10l1.5-5h13L20 10M4 10h16M4 10v9h16v-9M9.5 19v-5h5v5" /></svg>
+          <span>ONE BUSINESS</span>
+        </div>
+        <div id="a1" class="ang glass" style="left:428px; top:462px"><div class="idx">01</div>
+          <svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="9" /><path class="ic" d="M9.6 9.3a2.5 2.5 0 1 1 3.4 2.3c-.7.3-1 .8-1 1.5v.6" /><circle class="ic" cx="12" cy="16.8" r=".5" /></svg>
+          <div class="nm">PROBLEM</div></div>
+        <div id="a2" class="ang glass" style="left:713px; top:732px"><div class="idx">02</div>
+          <svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="12" r="9" /><circle class="ic" cx="12" cy="12" r="5.5" /><circle class="ic" cx="12" cy="12" r="2" /></svg>
+          <div class="nm">DESIRE</div></div>
+        <div id="a3" class="ang glass" style="left:608px; top:1142px"><div class="idx">03</div>
+          <svg viewBox="0 0 24 24"><path class="ic" d="M4 5.5h16V16H10l-4.5 3.5V16H4z" /><path class="ic" d="M9 10.7h.01M12 10.7h.01M15 10.7h.01" stroke-width="2.4" /></svg>
+          <div class="nm">OBJECTION</div></div>
+        <div id="a4" class="ang glass" style="left:248px; top:1142px"><div class="idx">04</div>
+          <svg viewBox="0 0 24 24"><path class="ic" d="M4 9h13M14 5.5 17.5 9 14 12.5M20 15H7M10 11.5 6.5 15 10 18.5" /></svg>
+          <div class="nm">VALUE</div></div>
+        <div id="a5" class="ang glass" style="left:143px; top:732px"><div class="idx">05</div>
+          <svg viewBox="0 0 24 24"><path class="ic" d="M4 19c3 0 3-7 8-7s5-7 8-7" /><circle class="ic" cx="4" cy="19" r="1.6" /><circle class="ic" cx="12" cy="12" r="1.6" /><circle class="ic" cx="20" cy="5" r="1.6" /></svg>
+          <div class="nm">STORY</div></div>
+        <div id="out" class="center"><div class="mask"><div class="l3" id="out-w">5 ANGLES → 5 REAL CREATIVES</div></div></div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="s06-framework"]';
+        const svg = document.querySelector(scope + ' #wires');
+        const ends = [[540, 658], [713, 830], [663, 1142], [417, 1142], [367, 830]];
+        const wires = ends.map(([x, y]) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', `M540 930 L${x} ${y}`);
+          p.setAttribute('stroke', 'rgba(251,252,235,0.4)');
+          p.setAttribute('stroke-width', '3');
+          p.setAttribute('fill', 'none');
+          svg.appendChild(p);
+          const len = p.getTotalLength();
+          p.style.strokeDasharray = len;
+          return [p, len];
+        });
+
+        // local = global − 29.15
+        tl.fromTo("#h1", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.15);
+        tl.fromTo("#h2", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.3);
+        // 32.84 "একই business-এর জন্য" — heading becomes the section title, hub appears
+        tl.to("#head", { y: -540, scale: 0.6, duration: 0.8, ease: "power3.inOut" }, 3.3);
+        tl.fromTo("#hub", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.6, ease: "back.out(1.5)" }, 3.75);
+        // five branches on the spoken words
+        const beats = [6.35, 8.22, 10.05, 11.2, 12.85];
+        beats.forEach((t, i) => {
+          const [p, len] = wires[i];
+          tl.fromTo(p, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, t - 0.1);
+          tl.fromTo("#a" + (i + 1), { opacity: 0, scale: 0.8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.5, ease: "back.out(1.5)" }, t);
+        });
+        // 44.43 "থেকে creative তৈরি করা।" — the system lights up into output
+        tl.to(["#a1", "#a2", "#a3", "#a4", "#a5"], { borderColor: "rgba(251,252,235,0.75)", duration: 0.3, stagger: 0.08 }, 15.2);
+        wires.forEach(([p]) => tl.to(p, { stroke: "rgba(251,252,235,0.8)", duration: 0.3 }, 15.2));
+        tl.fromTo("#out-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 15.35);
+        window.__timelines["s06-framework"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

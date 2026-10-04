@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #board { position: absolute; left: 140px; top: 470px; width: 800px; height: 520px; padding: 40px; }
+        .note { position: absolute; width: 170px; height: 120px; border-radius: 16px; background: rgba(251, 252, 235, 0.08); border: 2px solid rgba(251, 252, 235, 0.18); }
+        .note i { position: absolute; left: 20px; height: 12px; border-radius: 6px; background: rgba(251, 252, 235, 0.4); }
+        #lines { position: absolute; left: 0; top: 0; }
+        #person { position: absolute; left: 610px; top: 330px; width: 150px; height: 150px; }
+        #kick { top: 1100px; }
+        #mis { top: 1160px; font-size: 92px; }
+        #warn { position: absolute; left: 490px; top: 1310px; width: 100px; height: 100px; }
+      </style>
+      <div id="root" data-composition-id="s03-misread" data-width="1080" data-height="1920">
+        <div id="board" class="glass">
+          <svg id="lines" width="800" height="520" viewBox="0 0 800 520">
+            <path class="ic" id="ln1" d="M230 140 C 300 140, 320 250, 380 250" stroke-width="3" stroke-dasharray="8 10" />
+            <path class="ic" id="ln2" d="M520 250 C 580 250, 590 360, 640 360" stroke-width="3" stroke-dasharray="8 10" />
+          </svg>
+          <div class="note" style="left:60px; top:80px"><i style="top:30px; width:120px"></i><i style="top:58px; width:80px"></i></div>
+          <div class="note" style="left:360px; top:190px"><i style="top:30px; width:110px"></i><i style="top:58px; width:130px"></i></div>
+          <div class="note" style="left:600px; top:60px"><i style="top:30px; width:90px"></i><i style="top:58px; width:120px"></i></div>
+          <div class="note" style="left:620px; top:300px"><i style="top:30px; width:120px"></i><i style="top:58px; width:70px"></i></div>
+          <div class="note" style="left:90px; top:320px"><i style="top:30px; width:100px"></i><i style="top:58px; width:120px"></i></div>
+        </div>
+        <svg id="person" viewBox="0 0 24 24"><circle class="ic" cx="12" cy="8" r="3.6" /><path class="ic" d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6" /></svg>
+        <div id="kick" class="center l4">Many marketers are</div>
+        <div class="center" id="mis"><div class="mask"><div id="mis-w" class="l2" style="font-size:92px">MISUNDERSTANDING</div></div></div>
+        <svg id="warn" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#80011F" /><path d="M12 7v6" stroke="#FBFCEB" stroke-width="2.2" stroke-linecap="round" /><circle cx="12" cy="16.6" r="1.2" fill="#FBFCEB" /></svg>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // speech 5.34–7.51 → local 0.09–2.26
+        tl.fromTo("#board", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.05);
+        tl.fromTo("#board .note", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out", stagger: 0.07 }, 0.25);
+        tl.fromTo(["#ln1", "#ln2"], { opacity: 0 }, { opacity: 0.6, duration: 0.4, stagger: 0.15 }, 0.6);
+        tl.fromTo("#person", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.35);
+        tl.fromTo("#kick", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 0.75);
+        // "ভুল বুঝছে" ≈ 6.7 → local 1.45
+        tl.fromTo("#mis-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 1.35);
+        tl.fromTo("#warn", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.6)" }, 1.75);
+        tl.to("#board .note", { rotation: (i) => [-3, 2, -2, 3, -1][i], duration: 0.6, ease: "power2.inOut" }, 1.6);
+        tl.to("#board", { opacity: 0.55, duration: 0.6 }, 1.9);
+        window.__timelines["s03-misread"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

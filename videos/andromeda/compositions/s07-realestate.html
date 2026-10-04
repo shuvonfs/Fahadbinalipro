@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #chip { position: absolute; left: 290px; top: 300px; width: 500px; height: 76px; border-radius: 38px; display: flex; align-items: center; justify-content: center; }
+        #chip .l4 { color: #FBFCEB; font-size: 28px; }
+        #bld { position: absolute; left: 240px; top: 440px; width: 600px; height: 700px; }
+        #pin { position: absolute; left: 400px; top: 380px; width: 120px; height: 120px; }
+        #title { top: 1230px; }
+      </style>
+      <div id="root" data-composition-id="s07-realestate" data-width="1080" data-height="1920">
+        <div id="chip" class="glass"><span class="l4">Real estate example</span></div>
+        <svg id="bld" viewBox="0 0 600 700">
+          <g id="bld-g">
+            <rect x="110" y="100" width="220" height="580" fill="#3F1521" stroke="#FBFCEB" stroke-width="3" />
+            <rect x="330" y="230" width="170" height="450" fill="#2D0001" stroke="#FBFCEB" stroke-width="3" />
+            <path d="M110 100 L220 70 L330 100" fill="none" stroke="#FBFCEB" stroke-width="3" />
+            <rect x="60" y="610" width="480" height="70" fill="#720013" stroke="#FBFCEB" stroke-width="3" />
+            <path d="M270 680v-46h60v46" fill="none" stroke="#FBFCEB" stroke-width="3" />
+            <g id="wins"></g>
+          </g>
+          <path d="M10 682 H590" stroke="#FBFCEB" stroke-width="3" />
+        </svg>
+        <svg id="pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12z" fill="#80011F" stroke="#FBFCEB" stroke-width="1.4" /><circle cx="12" cy="10" r="2.6" fill="#FBFCEB" /></svg>
+        <div id="title" class="center">
+          <div class="mask"><div class="l2" id="t1">APARTMENT</div></div>
+          <div class="mask"><div class="l2" id="t2">PROJECT</div></div>
+        </div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="s07-realestate"]';
+        const g = document.querySelector(scope + ' #wins');
+        const NS = 'http://www.w3.org/2000/svg';
+        const wins = [], lit = [];
+        const add = (x, y, i, j) => {
+          const r = document.createElementNS(NS, 'rect');
+          r.setAttribute('x', x); r.setAttribute('y', y);
+          r.setAttribute('width', 28); r.setAttribute('height', 24); r.setAttribute('rx', 3);
+          r.setAttribute('fill', '#FBFCEB');
+          r.setAttribute('opacity', '0.1');
+          g.appendChild(r);
+          wins.push(r);
+          if ((i * 7 + j * 3) % 4 === 0) lit.push(r);
+        };
+        for (let j = 0; j < 10; j++) for (let i = 0; i < 4; i++) add(135 + i * 50, 130 + j * 46, i, j);
+        for (let j = 0; j < 7; j++) for (let i = 0; i < 3; i++) add(352 + i * 48, 262 + j * 46, i + 1, j);
+
+        // local = global − 47.2
+        tl.fromTo("#chip", { opacity: 0, y: -16 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.3);
+        tl.fromTo("#bld-g", { clipPath: "inset(100% 0% 0% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "power3.inOut" }, 0.45);
+        tl.fromTo(lit, { opacity: 0.1 }, { opacity: 0.85, duration: 0.3, stagger: 0.06 }, 1.4);
+        // 48.59 "একটা apartment"
+        tl.fromTo("#t1", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 1.35);
+        // 49.81 "project promote করছেন"
+        tl.fromTo("#t2", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 2.55);
+        tl.fromTo("#pin", { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.6, ease: "back.out(1.4)" }, 2.6);
+        tl.fromTo("#bld", { scale: 1 }, { scale: 1.04, duration: 4, ease: "sine.inOut" }, 1.2);
+        window.__timelines["s07-realestate"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

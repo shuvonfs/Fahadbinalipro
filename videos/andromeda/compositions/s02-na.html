@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #na { top: 700px; font-weight: 800; font-size: 380px; line-height: 1.1; }
+      </style>
+      <div id="root" data-composition-id="s02-na" data-width="1080" data-height="1920">
+        <div id="na" class="center">না।</div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // "না।" spoken at 4.62 (local 0.22) — one clean, quiet hit
+        tl.fromTo("#na", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.22, ease: "power3.out" }, 0.12);
+        window.__timelines["s02-na"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

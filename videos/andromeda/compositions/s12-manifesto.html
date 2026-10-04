@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #stack { position: absolute; left: 90px; right: 90px; top: 600px; transform-origin: 50% 50%; }
+        .ln { font-weight: 800; font-size: 100px; line-height: 1.08; letter-spacing: -0.01em; text-align: left; }
+        #qm { position: absolute; left: 84px; top: 420px; font-size: 220px; font-weight: 800; line-height: 1; color: #80011F; }
+        #rule { position: absolute; left: 90px; top: 1250px; width: 300px; height: 6px; border-radius: 3px; background: #FBFCEB; transform-origin: left center; }
+      </style>
+      <div id="root" data-composition-id="s12-manifesto" data-width="1080" data-height="1920">
+        <div id="qm" data-layout-allow-overlap>&ldquo;</div>
+        <div id="stack">
+          <div class="mask"><div class="ln" id="m1">MORE</div></div>
+          <div class="mask"><div class="ln" id="m2"><span class="mark">MEANINGFUL</span></div></div>
+          <div class="mask"><div class="ln" id="m3">WAYS TO SELL</div></div>
+          <div class="mask"><div class="ln" id="m4">THE SAME VALUE.</div></div>
+        </div>
+        <div id="rule"></div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        // local = global − 86.3 ; phrase 86.66–89.23
+        tl.fromTo("#qm", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
+        tl.fromTo("#m1", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.3);
+        tl.fromTo("#m2", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.6);
+        tl.fromTo("#m3", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 1.25);
+        tl.fromTo("#m4", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 1.95);
+        tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 2.7);
+        tl.fromTo("#stack", { scale: 1 }, { scale: 1.035, duration: 3.75, ease: "sine.inOut" }, 0);
+        window.__timelines["s12-manifesto"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

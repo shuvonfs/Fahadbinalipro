@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #intro { top: 800px; padding: 0 90px; }
+        .step { top: 380px; }
+        #count { top: 1330px; }
+        #notdiv { top: 1290px; }
+        #notdiv .l2 { font-size: 92px; }
+        #dupk { top: 1300px; }
+        #dup { top: 1350px; }
+        #dup .l1 { font-size: 136px; }
+        #dupbar { position: absolute; left: 290px; top: 1520px; width: 500px; height: 12px; border-radius: 6px; background: #80011F; transform-origin: left center; }
+        .ad.alt .img { background: linear-gradient(140deg, #80011F, #720013 60%, #3F1521); }
+        .ad.bold .t1 { height: 26px; width: 250px; }
+      </style>
+      <div id="root" data-composition-id="s05-duplicate" data-width="1080" data-height="1920">
+        <div id="intro" data-layout-allow-overlap class="center l3">কিন্তু creative diversification-এর মানে এই না যে—</div>
+        <div id="step1" class="center l4 step">One original creative</div>
+        <div id="step2" class="center l4 step">+ Background change</div>
+        <div id="step3" class="center l4 step">+ Font change</div>
+        <div id="step4" class="center l4 step">Duplicate · Duplicate · Duplicate</div>
+        <div id="big"></div>
+        <div id="grid"></div>
+        <div id="count" data-layout-allow-overlap class="center"><div class="mask"><div class="l2" id="count-w" data-layout-allow-overlap>= 15 ADS</div></div></div>
+        <div id="notdiv" data-layout-allow-overlap class="center">
+          <div class="mask"><div class="l2" id="nd1" data-layout-allow-overlap><span class="mark">NOT</span></div></div>
+          <div class="mask"><div class="l2" id="nd2" data-layout-allow-overlap>DIVERSIFICATION</div></div>
+        </div>
+        <div id="dupk" data-layout-allow-overlap class="center l4">A beautiful version of</div>
+        <div id="dup" data-layout-allow-overlap class="center"><div class="mask"><div class="l1" id="dup-w" data-layout-allow-overlap>DUPLICATION</div></div></div>
+        <div id="dupbar"></div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="s05-duplicate"]';
+        const PHOTO = '<div class="hd"></div><div class="hl"></div><div class="img"></div><div class="t1"></div><div class="t2"></div><div class="cta"></div>';
+        const mk = (parent, cls, left, top) => {
+          const c = document.createElement('div');
+          c.className = 'ad ' + cls;
+          c.innerHTML = PHOTO;
+          c.style.left = left + 'px';
+          c.style.top = top + 'px';
+          document.querySelector(scope + ' ' + parent).appendChild(c);
+          return c;
+        };
+        // three big cards: original, background change, font change
+        const orig = mk('#big', '', 390, 700);
+        const bgc = mk('#big', 'alt', 390, 700);
+        const fnt = mk('#big', 'alt bold', 700, 700);
+        gsap.set([orig, bgc, fnt], { scale: 0.7 });
+        // 15 near-identical cards
+        const grid = [];
+        for (let i = 0; i < 15; i++) {
+          const c = i % 5, r = Math.floor(i / 5);
+          grid.push(mk('#grid', i % 3 === 1 ? 'alt' : i % 4 === 2 ? 'bold' : '', 150 + c * 165, 600 + r * 210));
+        }
+        gsap.set(grid, { scale: 0.45, transformOrigin: '0 0' });
+
+        // local = global − 13.5
+        tl.fromTo("#intro", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.2);
+        tl.to("#intro", { opacity: 0, y: -24, duration: 0.35, ease: "power2.in" }, 2.6);
+
+        // 16.48 "একটা image নিলাম"
+        tl.fromTo("#step1", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 2.95);
+        tl.fromTo(orig, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 0.7, duration: 0.5, ease: "power3.out" }, 2.95);
+        // 17.71 background change
+        tl.to("#step1", { opacity: 0, duration: 0.25 }, 4.1);
+        tl.fromTo("#step2", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 4.2);
+        tl.to(orig, { x: -310, duration: 0.6, ease: "power3.inOut" }, 4.15);
+        tl.fromTo(bgc, { opacity: 0, x: -310 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.inOut" }, 4.15);
+        // 20.29 font change
+        tl.to("#step2", { opacity: 0, duration: 0.25 }, 6.7);
+        tl.fromTo("#step3", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 6.8);
+        tl.fromTo(fnt, { opacity: 0, x: -310 }, { opacity: 1, x: 0, duration: 0.6, ease: "power3.inOut" }, 6.75);
+        // 22.30 "আর ১৫টা ad বানিয়ে ফেললাম"
+        tl.to("#step3", { opacity: 0, duration: 0.25 }, 8.7);
+        tl.fromTo("#step4", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 8.8);
+        tl.to([orig, bgc, fnt], { opacity: 0, scale: 0.5, duration: 0.3, ease: "power2.in" }, 8.7);
+        tl.fromTo(grid, { opacity: 0, scale: 0.2 }, { opacity: 1, scale: 0.45, duration: 0.35, ease: "back.out(1.6)", stagger: 0.05 }, 8.85);
+        tl.fromTo("#count-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 9.3);
+        // 24.05 "এটা diversification না।"
+        tl.to(["#count-w", "#step4"], { opacity: 0, duration: 0.3 }, 10.35);
+        tl.to(grid, { opacity: 0.35, duration: 0.4 }, 10.45);
+        tl.fromTo("#nd1", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 10.5);
+        tl.fromTo("#nd2", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, 10.62);
+        // 26.83 "এটা duplication-এর একটা সুন্দর version।" — collapse into one neat stack
+        tl.to(["#nd1", "#nd2"], { yPercent: -125, duration: 0.4, ease: "expo.in" }, 12.95);
+        tl.to(grid, {
+          x: (i) => 472 - (150 + (i % 5) * 165) + (i - 7) * 3,
+          y: (i) => 800 - (600 + Math.floor(i / 5) * 210) + (i - 7) * 4,
+          rotation: (i) => (i % 2 ? 2 : -2) * (i / 15),
+          opacity: 1, duration: 0.8, ease: "power3.inOut", stagger: 0.02
+        }, 13.15);
+        tl.fromTo("#dupk", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, 13.5);
+        tl.fromTo("#dup-w", { yPercent: 125 }, { yPercent: 0, duration: 0.6, ease: "expo.out" }, 13.6);
+        tl.fromTo("#dupbar", { scaleX: 0 }, { scaleX: 1, duration: 0.6, ease: "power3.inOut" }, 14.1);
+        window.__timelines["s05-duplicate"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

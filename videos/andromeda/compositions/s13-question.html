@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+        #grid { position: absolute; inset: 0; }
+        #kick { top: 380px; }
+        #bubble { position: absolute; left: 110px; top: 460px; width: 860px; padding: 40px 40px; text-align: center; font-size: 50px; }
+        #bubble:after { content: ""; position: absolute; left: 120px; bottom: -22px; width: 40px; height: 40px; background: #3F1521; border-right: 2px solid rgba(251, 252, 235, 0.2); border-bottom: 2px solid rgba(251, 252, 235, 0.2); transform: rotate(45deg); }
+        #thirty { top: 1000px; }
+        #ask { top: 820px; }
+        #final { top: 720px; }
+        #final .l1 { font-size: 190px; line-height: 1.12; }
+      </style>
+      <div id="root" data-composition-id="s13-question" data-width="1080" data-height="1920">
+        <div id="grid"></div>
+        <div id="kick" data-layout-allow-overlap class="center l4">Next time someone says</div>
+        <div id="bubble" data-layout-allow-overlap class="glass l3">“Andromeda এসেছে, 30টা ad লাগবে”</div>
+        <div id="thirty" data-layout-allow-overlap class="center"><div class="mask"><div class="l1" id="thirty-w" data-layout-allow-overlap>30 ADS?</div></div></div>
+        <div id="ask" data-layout-allow-overlap class="center l3">একটা question করবেন:</div>
+        <div id="final" data-layout-allow-overlap class="center">
+          <div class="mask"><div class="l1" id="f1" data-layout-allow-overlap>30টা AD</div></div>
+          <div class="mask"><div class="l1" id="f2" data-layout-allow-overlap><span class="mark">কেন?</span></div></div>
+        </div>
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const scope = '[data-composition-id="s13-question"]';
+        const PHOTO = '<div class="hd"></div><div class="hl"></div><div class="img"></div><div class="t1"></div><div class="t2"></div><div class="cta"></div>';
+        const grid = [];
+        for (let i = 0; i < 30; i++) {
+          const c = document.createElement('div');
+          c.className = 'ad';
+          c.innerHTML = PHOTO;
+          c.style.left = (210 + (i % 6) * 114) + 'px';
+          c.style.top = (640 + Math.floor(i / 6) * 144) + 'px';
+          document.querySelector(scope + ' #grid').appendChild(c);
+          grid.push(c);
+        }
+        gsap.set(grid, { scale: 0.3, transformOrigin: '0 0' });
+
+        // local = global − 90.05
+        tl.fromTo("#kick", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, 0.2);
+        // 91.80 "Andromeda এসেছে, 30টা ad লাগবে"
+        tl.fromTo("#bubble", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 1.7);
+        tl.fromTo(grid, { opacity: 0 }, { opacity: 0.3, duration: 0.25, stagger: 0.04 }, 1.95);
+        tl.fromTo("#thirty-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 2.85);
+        // 93.81 freeze — deliberate pause
+        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0.25, duration: 0.5 }, 3.8);
+        tl.to(grid, { opacity: 0.1, duration: 0.5 }, 3.8);
+        // 94.49 "একটা question করবেন:"
+        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0, duration: 0.3 }, 4.3);
+        tl.fromTo("#ask", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.4);
+        // 95.89 "30টা ad কেন?"
+        tl.to("#ask", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 5.55);
+        tl.fromTo("#f1", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 5.8);
+        tl.fromTo("#f2", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 6.05);
+        window.__timelines["s13-question"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
