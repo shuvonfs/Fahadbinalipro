@@ -5,49 +5,101 @@
     <meta name="viewport" content="width=1920, height=1080" />
     <script src="vendor/gsap.min.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        margin: 0;
-        width: 1920px;
-        height: 1080px;
-        overflow: hidden;
-        background: #0a0a0a;
-      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #07070b; }
       #root {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        font-family: system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+        color: #f5f5f7; background: #07070b;
       }
-      #title {
-        color: #f4f4f5;
-        font-size: 72px;
-        font-weight: 600;
-        letter-spacing: -0.03em;
+      .blob { position: absolute; border-radius: 50%; filter: blur(140px); opacity: 0.55; }
+      #blob-a { width: 900px; height: 900px; left: -200px; top: -250px; background: #6d28d9; }
+      #blob-b { width: 800px; height: 800px; right: -150px; bottom: -300px; background: #f97316; }
+      #grid {
+        position: absolute; inset: 0; opacity: 0.07;
+        background-image: linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px);
+        background-size: 80px 80px;
       }
+      .scene { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .word { display: block; font-size: 220px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; text-transform: uppercase; }
+      .mask { overflow: hidden; padding: 0 20px; }
+      .accent { color: #fb923c; }
+      .tag { font-size: 54px; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: #c4b5fd; margin-top: 36px; }
+      #bar { width: 0; height: 12px; background: linear-gradient(90deg, #7c3aed, #fb923c); margin-top: 40px; border-radius: 6px; }
+      .pro { font-size: 380px; font-weight: 900; letter-spacing: -0.05em; line-height: 1; text-transform: uppercase; }
+      .pillars { display: flex; gap: 70px; }
+      .pillar { font-size: 140px; font-weight: 800; letter-spacing: -0.03em; text-transform: uppercase; }
+      .pillar.o { color: #c4b5fd; }
+      #logo-ring { width: 220px; height: 220px; border-radius: 50%; border: 14px solid #fb923c; display: flex; align-items: center; justify-content: center; margin-bottom: 40px; }
+      #logo-ring span { font-size: 72px; font-weight: 900; letter-spacing: -0.04em; }
+      .lockup { font-size: 110px; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; }
     </style>
   </head>
   <body>
-    <div
-      id="root"
-      data-composition-id="main"
-      data-start="0"
-      data-duration="10"
-      data-width="1920"
-      data-height="1080"
-    >
-      <h1 id="title" class="clip" data-start="0" data-duration="10" data-track-index="0">Title</h1>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+      <div id="blob-a" class="blob"></div>
+      <div id="blob-b" class="blob"></div>
+      <div id="grid"></div>
+
+      <!-- Scene 1: name slams in -->
+      <div id="s1" class="scene clip" data-start="0" data-duration="4" data-track-index="1">
+        <div class="mask"><span class="word s1w">Fahad</span></div>
+        <div class="mask"><span class="word s1w accent">Bin Ali</span></div>
+      </div>
+
+      <!-- Scene 2: PRO -->
+      <div id="s2" class="scene clip" data-start="4" data-duration="4" data-track-index="1">
+        <div class="mask"><span class="pro" id="pro-word">Pro</span></div>
+        <div id="bar"></div>
+        <div class="tag" id="s2-tag">Create · Animate · Ship</div>
+      </div>
+
+      <!-- Scene 3: pillars -->
+      <div id="s3" class="scene clip" data-start="8" data-duration="4" data-track-index="1">
+        <div class="pillars">
+          <div class="pillar" id="p1">Ideas</div>
+          <div class="pillar o" id="p2">Motion</div>
+          <div class="pillar accent" id="p3">Impact</div>
+        </div>
+      </div>
+
+      <!-- Scene 4: lockup -->
+      <div id="s4" class="scene clip" data-start="12" data-duration="3" data-track-index="1">
+        <div id="logo-ring"><span>FBA</span></div>
+        <div class="lockup" id="lockup">Fahad Bin Ali <span class="accent">Pro</span></div>
+        <div class="tag" id="s4-tag">Welcome</div>
+      </div>
     </div>
+
     <script>
+      window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
-      // Example: tl.fromTo("#title", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.6 }, 0);
+
+      // Background drift across full 15s
+      tl.fromTo("#blob-a", { x: 0, y: 0 }, { x: 500, y: 250, duration: 15, ease: "none" }, 0);
+      tl.fromTo("#blob-b", { x: 0, y: 0 }, { x: -500, y: -200, duration: 15, ease: "none" }, 0);
+      tl.fromTo("#grid", { y: 0 }, { y: 160, duration: 15, ease: "none" }, 0);
+
+      // Scene 1 (0-4)
+      tl.fromTo(".s1w", { yPercent: 110 }, { yPercent: 0, duration: 0.8, ease: "expo.out", stagger: 0.18 }, 0.2);
+      tl.to(".s1w", { yPercent: -110, duration: 0.5, ease: "expo.in", stagger: 0.08 }, 3.4);
+
+      // Scene 2 (4-8)
+      tl.fromTo("#pro-word", { yPercent: 110, scale: 1.15 }, { yPercent: 0, scale: 1, duration: 0.9, ease: "expo.out" }, 4.1);
+      tl.fromTo("#bar", { width: 0 }, { width: 900, duration: 0.9, ease: "power3.inOut" }, 4.7);
+      tl.fromTo("#s2-tag", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 5.2);
+      tl.to("#s2 > *", { opacity: 0, y: -40, duration: 0.45, ease: "power2.in", stagger: 0.05 }, 7.5);
+
+      // Scene 3 (8-12)
+      tl.fromTo(["#p1", "#p2", "#p3"], { opacity: 0, y: 120, rotationX: -50 }, { opacity: 1, y: 0, rotationX: 0, duration: 0.8, ease: "back.out(1.6)", stagger: 0.35 }, 8.2);
+      tl.to(["#p1", "#p2", "#p3"], { opacity: 0, scale: 0.9, duration: 0.45, ease: "power2.in", stagger: 0.06 }, 11.4);
+
+      // Scene 4 (12-15)
+      tl.fromTo("#logo-ring", { scale: 0, rotation: -180 }, { scale: 1, rotation: 0, duration: 0.9, ease: "back.out(1.4)" }, 12.1);
+      tl.fromTo("#lockup", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.7, ease: "power3.out" }, 12.6);
+      tl.fromTo("#s4-tag", { opacity: 0, scale: 1.4 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" }, 13.1);
+      tl.to("#s4", { opacity: 0, duration: 0.4, ease: "power1.in" }, 14.6);
+
       window.__timelines["main"] = tl;
       tl.seek(0);
     </script>
