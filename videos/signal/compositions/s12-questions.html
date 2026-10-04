@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #think { top: 250px; }
+        .stage { position: absolute; left: 0; top: 0; width: 1080px; height: 1080px; }
+        .sh { position: absolute; left: 0; right: 0; top: 320px; text-align: center; }
+        #rows { position: absolute; left: 110px; top: 1100px; width: 860px; }
+        .qr { display: flex; align-items: center; gap: 18px; height: 78px; font-size: 36px; font-weight: 800; opacity: 0.0; }
+        .qr i { font-style: normal; font-size: 24px; font-weight: 800; letter-spacing: 0.1em; width: 52px; color: rgba(251,252,235,0.55); }
+        .qr span { padding: 6px 14px; border-radius: 12px; }
+        #per { position: absolute; left: 300px; top: 560px; transform-origin: 50% 50%; }
+        .pchip { position: absolute; }
+        #offer { position: absolute; left: 220px; top: 520px; width: 640px; height: 260px; border-radius: 30px; padding: 30px 34px; display: flex; flex-direction: column; gap: 12px; }
+        #offer .t { font-size: 52px; font-weight: 800; }
+        #act { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 850px; height: 100px; padding: 0 56px; border-radius: 50px; background: #FBFCEB; color: #2D0001;
+          display: flex; align-items: center; gap: 16px; font-size: 44px; font-weight: 800; letter-spacing: 0.06em; }
+        #act .ic { stroke: #2D0001; }
+        #cur { position: absolute; left: 640px; top: 900px; width: 80px; height: 80px; }
+        #q4v, #q5v { position: absolute; left: 0; top: 0; }
+        .fn { position: absolute; left: 320px; width: 440px; }
+        #br { position: absolute; left: 300px; top: 618px; width: 480px; height: 236px; border-radius: 28px; border: 3px dashed #FBFCEB; }
+        #brl { position: absolute; left: 800px; top: 690px; width: 200px; }
+
+      </style>
+      <div id="root" data-composition-id="s12-questions" data-width="1080" data-height="1920">
+
+        <div id="think" class="center micro" data-layout-allow-overlap>I'LL THINK ABOUT—</div>
+        <div class="stage" id="g1"><div class="sh"><div class="mask"><div class="l1" id="who" data-layout-allow-overlap>WHO?</div></div></div><div id="per"></div></div>
+        <div class="stage" id="g2"><div class="sh"><div class="mask"><div class="l2" id="prob" data-layout-allow-overlap>PROBLEM?</div></div></div><div id="pchips"></div></div>
+        <div class="stage" id="g3"><div class="sh"><div class="mask"><div class="l2" id="off" data-layout-allow-overlap>OFFER → ACTION</div></div></div>
+          <div id="offer" class="glass"><span id="oi"></span><div class="t" data-layout-allow-overlap>Easy payment plan</div><div class="micro" data-layout-allow-overlap>THE OFFER</div></div>
+          <div id="act"><span id="ai2"></span><span data-layout-allow-overlap>BOOK A VISIT</span></div>
+          <svg id="cur" viewBox="0 0 24 24"><path d="M6 3.5l12 7-5.2 1.4 3.4 6-2.4 1.4-3.4-6L6.5 17z" fill="#FBFCEB" stroke="#2D0001" stroke-width="1.2" stroke-linejoin="round" /></svg></div>
+        <div class="stage" id="g4"><div class="sh"><div class="mask"><div class="l2" id="cre" data-layout-allow-overlap>CREATIVE → INTENT</div></div></div><svg id="q4v" width="1080" height="1080" viewBox="0 0 1080 1080"></svg><div id="ads4"></div><div id="ppl4"></div></div>
+        <div class="stage" id="g5"><svg id="q5v" width="1080" height="1080" viewBox="0 0 1080 1080"></svg><div id="fun"></div><div id="br"></div><div id="brl" class="micro" data-layout-allow-overlap>CONVERSION<br>SIGNAL</div></div>
+        <div id="rows"></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 66.75, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s12-questions"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        const Q = ["কাকে attract করতে চাই?", "তার problem কী?", "কোন offer তাকে action নিতে বাধ্য করবে?", "কোন creative তার intent signal করবে?", "Meta-কে আমি কোন conversion signal দিচ্ছি?"];
+        const rows = Q.map((q, k) => { const r = S.el(`<div class="qr"><i>0${k + 1}</i><span data-layout-allow-overlap>${q}</span></div>`); $('#rows').appendChild(r); return r; });
+        const T = [67.95, 69.33, 70.38, 72.65, 74.78];
+        const END = [69.25, 70.3, 72.55, 74.68, 77.25];
+        fadeUp("#think", 66.95);
+        rows.forEach((r, k) => {
+          tl.fromTo(r, { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.3, ease: "power3.out" }, at(T[k]));
+          tl.fromTo(r.querySelector('span'), { backgroundColor: "rgba(128,1,31,0)" }, { backgroundColor: "rgba(128,1,31,1)", duration: 0.25 }, at(T[k]));
+          if (k < 4) {
+            tl.to(r.querySelector('span'), { backgroundColor: "rgba(128,1,31,0)", duration: 0.25 }, at(END[k]));
+            tl.to(r, { opacity: 0.5, duration: 0.25 }, at(END[k]));
+          }
+        });
+        const stageIn = (id, k) => {
+          tl.fromTo(id, { opacity: 0 }, { opacity: 1, duration: 0.2 }, at(T[k]) - 0.05);
+          if (k < 4) tl.to(id, { opacity: 0, duration: 0.2 }, at(END[k]) - 0.05);
+        };
+        ["#g1", "#g2", "#g3", "#g4", "#g5"].forEach((g, k) => { gsap.set(g, { opacity: 0 }); stageIn(g, k); });
+        // Q1 WHO — a buyer persona
+        const per = S.put($('#per'), S.persona("BUYER PERSONA", "who do I want to attract?", ["NEEDS", "BUDGET", "INTENT"]), 0, 0);
+        per.style.width = "480px";
+        rise("#who", 67.98);
+        tl.fromTo(per, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1.2, duration: 0.4, ease: "power3.out" }, at(68.1));
+        // Q2 PROBLEM — conceptual examples
+        rise("#prob", 69.37, 0.35);
+        const PC = [["COMMUTE", "clock", 130, 540], ["SPACE", "space", 590, 540], ["INVESTMENT", "graph", 130, 680], ["LOCATION", "pin", 590, 680]];
+        const pcs = PC.map(([l, i, x, y]) => S.put($('#pchips'), S.chip(l, i), x, y));
+        tl.fromTo(pcs, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.6)", stagger: 0.08 }, at(69.45));
+        // Q3 OFFER → ACTION (no invented prices)
+        $('#oi').outerHTML = S.icon("tag", 60);
+        $('#ai2').outerHTML = S.icon("cursor", 44);
+        rise("#off", 70.42);
+        tl.fromTo("#offer", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(70.55));
+        tl.fromTo("#act", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.6)" }, at(71.1));
+        tl.fromTo("#cur", { opacity: 0, x: 120, y: 120 }, { opacity: 1, x: 0, y: 0, duration: 0.5, ease: "power2.out" }, at(71.4));
+        tl.to("#act", { scale: 0.94, duration: 0.1, yoyo: true, repeat: 1 }, at(71.95));
+        // Q4 CREATIVE → INTENT — three creatives, three different people
+        rise("#cre", 72.69);
+        const ads = [0, 1, 2].map((k) => H.place($('#ads4'), H.angleAd(k, "q" + k), 260 + k * 280, 610, 0.3));
+        tl.fromTo(ads, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out", stagger: 0.1 }, at(72.8));
+        const ppl = [0, 1, 2].map((k) => { const p = S.put($('#ppl4'), `<div style="width:96px;height:96px;border-radius:50%;background:#720013;border:2px solid rgba(251,252,235,0.6);display:flex;align-items:center;justify-content:center">${S.icon("user", 56)}</div>`, 212 + k * 280, 880); return p; });
+        tl.fromTo(ppl, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.1 }, at(73.4));
+        [0, 1, 2].forEach((k) => draw(line($('#q4v'), `M${260 + k * 280} 726 V 874`, '#FBFCEB', 4), 73.5 + k * 0.1, 0.3));
+        // Q5 CONVERSION SIGNAL — the funnel Meta learns from (conceptual)
+        const F = [["AD VIEW", "eye"], ["CLICK", "cursor"], ["LEAD", "form"], ["QUALIFIED LEAD", "star"], ["BUSINESS OUTCOME", "goal"]];
+        const fn = F.map(([l, i], k) => { const n = S.put($('#fun'), S.node(l, i, k === 2 || k === 3 ? "hot" : ""), 320, 400 + k * 120); n.style.width = "440px"; return n; });
+        fn.forEach((n, k) => {
+          tl.fromTo(n, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, at(74.85) + k * 0.16);
+          if (k < 4) draw(line($('#q5v'), `M540 ${496 + k * 120} V ${520 + k * 120}`, 'rgba(251,252,235,0.6)', 4), 75.0 + k * 0.16, 0.15);
+        });
+        // "conversion" 75.85
+        tl.fromTo("#br", { opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.35, ease: "power3.out" }, at(75.85));
+        fadeUp("#brl", 75.95);
+
+        window.__timelines["s12-questions"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

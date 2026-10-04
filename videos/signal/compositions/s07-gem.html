@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #tag { top: 250px; }
+        .st { position: absolute; top: 330px; width: 290px; height: 250px; padding: 22px 20px; border-radius: 26px; display: flex; flex-direction: column; gap: 14px; }
+        .st b { font-size: 29px; font-weight: 800; line-height: 1.12; letter-spacing: 0.02em; }
+        .st .ics { display: flex; gap: 14px; margin-top: auto; }
+        #flow { position: absolute; left: 0; top: 0; }
+        #model { position: absolute; left: 240px; top: 700px; width: 600px; height: 240px; border-radius: 34px; background: #720013; border: 3px solid rgba(251,252,235,0.75);
+          display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 30px 80px rgba(20,0,0,0.55); }
+        #model .g { font-size: 128px; font-weight: 800; line-height: 1; letter-spacing: 0.02em; }
+        #rank { position: absolute; left: 240px; top: 1000px; width: 600px; height: 210px; padding: 22px 30px; border-radius: 28px; }
+        #rank .hd { display: flex; align-items: center; gap: 12px; }
+        .bar { position: absolute; left: 30px; height: 22px; border-radius: 11px; background: rgba(251,252,235,0.7); }
+        #out { position: absolute; left: 0; top: 0; }
+        #rl { top: 1400px; }
+
+      </style>
+      <div id="root" data-composition-id="s07-gem" data-width="1080" data-height="1920">
+
+        <div id="tag" class="center micro" data-layout-allow-overlap>SIMPLIFIED MODEL</div>
+        <svg id="flow" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="s1" class="st glass" style="left:60px"><b data-layout-allow-overlap>USER<br>ACTIVITY</b><div class="ics" id="i1"></div></div>
+        <div id="s2" class="st glass" style="left:395px"><b data-layout-allow-overlap>CREATIVE<br>REPRESENTATION</b><div class="ics" id="i2"></div></div>
+        <div id="s3" class="st glass" style="left:730px"><b data-layout-allow-overlap>INTERACTION<br>SIGNAL</b><div class="ics" id="i3"></div></div>
+        <div id="model"><div class="micro" style="color:rgba(251,252,235,0.8)" data-layout-allow-overlap>FOUNDATION MODEL</div><div class="g" id="gem" data-layout-allow-overlap>GEM</div></div>
+        <div id="rank" class="glass"><div class="hd"><span id="ri"></span><span class="micro" data-layout-allow-overlap>RANKING SYSTEMS</span></div><div id="bars"></div></div>
+        <div id="out"></div>
+        <div id="rl" class="center micro" data-layout-allow-overlap>MORE RELEVANT DELIVERY</div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 34.85, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s07-gem"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        $('#ri').outerHTML = S.icon("rank", 40);
+        [["cursor", "eye", "heart", "graph"], ["image", "play", "text", "tag"], ["cursor", "check", "chat", "bolt"]].forEach((set, k) => {
+          $('#i' + (k + 1)).innerHTML = set.map((ic) => S.icon(ic, 46)).join("");
+        });
+        // ranking bars: positions are slots; sorting swaps their y
+        const L = [300, 420, 220, 380];
+        const bars = L.map((w, i) => S.put($('#bars'), `<div class="bar" style="width:${w}px"></div>`, 30, 0));
+        bars.forEach((b, i) => { b.style.top = (82 + i * 30) + "px"; });
+        const order = [1, 3, 0, 2]; // sorted longest first → slot index per bar
+        fadeUp("#tag", 35.0);
+        // 35.10 "GEM-এর মতো foundation model"
+        tl.fromTo("#model", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, at(35.05));
+        // 36.94 "নতুন ranking systems"
+        tl.fromTo("#rank", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(36.9));
+        bars.forEach((b, i) => tl.to(b, { y: (order.indexOf(i) - i) * 30, duration: 0.6, ease: "power3.inOut" }, at(37.4)));
+        // three signal streams flow into the model, each on its words
+        const flow = $('#flow');
+        const xs = [205, 540, 875];
+        [39.2, 40.35, 41.95].forEach((t, k) => {
+          tl.fromTo("#s" + (k + 1), { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(t));
+          const base = line(flow, `M${xs[k]} 584 C ${xs[k]} 650, 540 640, 540 698`, 'rgba(251,252,235,0.3)', 3);
+          draw(base, t + 0.2, 0.4);
+          const pulse = line(flow, `M${xs[k]} 584 C ${xs[k]} 650, 540 640, 540 698`, '#FBFCEB', 6);
+          const len = pulse.getTotalLength();
+          pulse.style.strokeDasharray = `26 ${len}`;
+          tl.fromTo(pulse, { strokeDashoffset: 26 }, { strokeDashoffset: -len, duration: 0.7, ease: "none", repeat: Math.floor((45.4 - t - 0.5) / 0.7) - 1 }, at(t + 0.5));
+        });
+        // 43.3 "আরও sophisticated ভাবে ব্যবহার করছে"
+        tl.to("#model", { scale: 1.04, duration: 0.4, yoyo: true, repeat: 1, ease: "sine.inOut" }, at(43.3));
+        bars.forEach((b, i) => tl.to(b, { y: ([2, 0, 3, 1].indexOf(i) - i) * 30, duration: 0.5, ease: "power3.inOut" }, at(43.5)));
+        const ads = [0, 1, 2].map((k) => H.place($('#out'), H.angleAd(k, "g" + k), 330 + k * 210, 1300, 0.2));
+        tl.fromTo(ads, { opacity: 0, scale: 0.08 }, { opacity: 1, scale: 0.2, duration: 0.4, ease: "back.out(1.5)", stagger: 0.12 }, at(43.8));
+        fadeUp("#rl", 44.3);
+
+        window.__timelines["s07-gem"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+[confident, conversational]
+
+“একটা কথা এখন মেনে নিতেই হবে—
+Meta Ads-এর game আগের মতো নেই।”
+
+“আর শুধু interest, age, location, detailed targeting নিয়ে বসে থাকলে,
+আপনি Meta-এর বর্তমান advertising system-এর একটা বড় অংশ miss করছেন।”
+
+[skeptical]
+“Meta-এর Andromeda নিয়ে অনেকেই শুধু একটা কথাই বলে—
+‘Targeting শেষ।’”
+
+[confident]
+“আমি কিন্তু এভাবে বলব না।”
+
+“কারণ Andromeda আসলে advertiser-এর জন্য কোনো নতুন targeting button না।”
+
+[calmly, explanatory]
+“এটা Meta-এর ads recommendation system-এর retrieval layer—
+যেটা বিশাল সংখ্যক ad candidate থেকে,
+কোন ads কোন মানুষের সামনে relevant হতে পারে,
+সেটা AI-driven system-এর মাধ্যমে বাছাই করতে সাহায্য করে।”
+
+“And Meta এখানেই থামেনি।”
+
+“GEM-এর মতো foundation model এবং নতুন ranking systems-এর মাধ্যমে Meta এখন—
+user activity,
+ad creative representation,
+আর বিভিন্ন interaction signal
+আরও sophisticated ভাবে ব্যবহার করছে।”
+
+[curious]
+“এর মানে কী?”
+
+[thoughtful]
+“এর মানে হলো—
+আপনার control-এর একটা অংশ audience selection থেকে সরে গিয়ে,
+creative, conversion signal আর business objective-এর দিকে যাচ্ছে।”
+
+[energetic, conversational]
+“ধরেন, আপনি একটা real estate project-এর ad চালাচ্ছেন।”
+
+“আগের mindset হতে পারে—
+Bashundhara,
+Age 30 to 50,
+Property Interest,
+আর কিছু manual audience…”
+
+[confident]
+“কিন্তু এখন আমি শুধু audience নিয়ে চিন্তা করব না।”
+
+“I’ll think about—
+কাকে attract করতে চাই?
+তার problem কী?
+কোন offer তাকে action নিতে বাধ্য করবে?
+কোন creative তার intent signal করবে?
+আর Meta-কে আমি কোন conversion signal দিচ্ছি?”
+
+[thoughtful, slightly slower]
+“কারণ 2026-এর Meta Ads-এ,
+আমার কাছে সবচেয়ে গুরুত্বপূর্ণ question আর শুধু—
+‘কাকে target করব?’—না।”
+
+[firm, authoritative]
+“Question হচ্ছে—
+‘Meta-কে আমি কী signal দিচ্ছি,
+যাতে system সঠিক মানুষকে
+সঠিক ad দেখাতে পারে?’”
+
+[slightly provocative, conversational]
+“আপনি এখনও Meta Ads-এ audience-কে সবচেয়ে বড় lever ভাবছেন?”
+
+[curious]
+“কমেন্টে বলুন—
+Targeting,
+Creative,
+নাকি Data—
+কোনটা এখন সবচেয়ে powerful?”

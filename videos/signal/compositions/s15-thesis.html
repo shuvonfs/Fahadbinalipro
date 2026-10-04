@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #old { position: absolute; left: 110px; top: 250px; opacity: 0.5; }
+        #old .uchip { height: 64px; font-size: 24px; }
+        #rq { top: 370px; }
+        #hero { top: 420px; }
+        #hero .l2 { font-size: 80px; }
+        #ins { position: absolute; left: 90px; top: 650px; width: 900px; display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; }
+        #ins .uchip { height: 76px; font-size: 26px; padding: 0 24px; }
+        #sv { position: absolute; left: 0; top: 0; }
+        #aiw .snode { position: absolute; left: 340px; top: 900px; width: 400px; }
+        #pw .pcard { width: 400px; }
+        .ol { position: absolute; top: 1365px; width: 400px; text-align: center; font-size: 40px; font-weight: 800; }
+        #plus { position: absolute; left: 515px; top: 1200px; font-size: 64px; font-weight: 800; }
+
+      </style>
+      <div id="root" data-composition-id="s15-thesis" data-width="1080" data-height="1920">
+
+        <div id="old"></div>
+        <div id="rq" class="center micro" data-layout-allow-overlap>THE REAL QUESTION</div>
+        <div id="hero" class="center">
+          <div class="mask"><div class="l2" id="h1" data-layout-allow-overlap>WHAT <span class="mark">SIGNAL</span></div></div>
+          <div class="mask"><div class="l2" id="h2" data-layout-allow-overlap>AM I GIVING META?</div></div>
+        </div>
+        <svg id="sv" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="ins"></div>
+        <div id="aiw"></div>
+        <div id="pw"></div>
+        <div id="adw"></div>
+        <div id="plus">+</div>
+        <div id="o1" class="ol" style="left:90px" data-layout-allow-overlap>RIGHT PERSON</div>
+        <div id="o2" class="ol" style="left:590px" data-layout-allow-overlap>RIGHT AD</div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 83.85, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s15-thesis"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        $('#old').innerHTML = S.chip("WHO DO I TARGET?", "target", "dim");
+        const IN = [["BUSINESS OBJECTIVE", "goal"], ["CONVERSION SIGNAL", "check"], ["CREATIVE", "image"], ["USER SIGNALS", "signal"]];
+        $('#ins').innerHTML = IN.map(([l, i]) => S.chip(l, i)).join("");
+        const ins = $$('#ins .uchip');
+        const ai = S.put($('#aiw'), S.node("AI SYSTEM", "ai", "hot"), 0, 0); ai.style.left = "340px"; ai.style.top = "900px"; ai.style.width = "400px";
+        const per = S.put($('#pw'), S.persona("PERSON", "most likely to act"), 90, 1110);
+        const ad = H.place($('#adw'), H.angleAd(1, "th"), 790, 1240, 0.27);
+        const sv = $('#sv');
+        tl.fromTo("#old", { opacity: 0 }, { opacity: 0.5, duration: 0.3 }, 0);
+        // 84.10 "Question হচ্ছে—"
+        fadeUp("#rq", 84.1);
+        // 85.10 "Meta-কে আমি কী signal দিচ্ছি"
+        tl.to("#rq", { opacity: 0, duration: 0.2 }, at(85.0));
+        rise("#h1", 85.1);
+        rise("#h2", 85.4);
+        tl.fromTo(ins, { opacity: 0, y: 24, scale: 0.92 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.5)", stagger: 0.16 }, at(85.95));
+        // 86.90 "যাতে system" → AI SYSTEM
+        [[300, 836], [780, 836]].forEach(([x, y], k) => draw(line(sv, `M${x} ${y} C ${x} 870, 540 860, 540 896`, '#FBFCEB', 4), 86.85 + k * 0.06, 0.35));
+        tl.fromTo(ai, { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(1.5)" }, at(87.15));
+        // 87.70 "সঠিক মানুষকে"
+        draw(line(sv, "M480 996 C 420 1050, 300 1060, 290 1106", '#FBFCEB', 4), 87.6, 0.35);
+        tl.fromTo(per, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(87.75));
+        fadeUp("#o1", 87.9);
+        // 88.66 "সঠিক ad"
+        draw(line(sv, "M600 996 C 660 1050, 780 1050, 790 1136", '#FBFCEB', 4), 88.55, 0.35);
+        fadeUp("#plus", 88.6, 0.3);
+        tl.fromTo(ad, { opacity: 0, scale: 0.12 }, { opacity: 1, scale: 0.27, duration: 0.45, ease: "back.out(1.4)" }, at(88.7));
+        fadeUp("#o2", 88.85);
+        // hold: gentle breath on the outcome
+        tl.to(["#hero"], { scale: 1.03, duration: 1.2, ease: "sine.inOut" }, at(88.95));
+
+        window.__timelines["s15-thesis"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

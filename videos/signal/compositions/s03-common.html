@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        .cm { position: absolute; left: 110px; width: 860px; padding: 28px 32px; border-radius: 28px; display: flex; gap: 22px; align-items: flex-start; }
+        .cm .av { width: 72px; height: 72px; border-radius: 50%; background: #720013; border: 2px solid rgba(251,252,235,0.5); flex: none; display: flex; align-items: center; justify-content: center; }
+        .cm .nm { width: 200px; height: 14px; border-radius: 7px; background: rgba(251,252,235,0.45); margin: 8px 0 18px; }
+        .cm .ln { height: 12px; border-radius: 6px; background: rgba(251,252,235,0.22); margin-bottom: 12px; }
+        #main { top: 760px; }
+        #main .q { font-size: 96px; font-weight: 800; line-height: 1.15; margin-top: 4px; }
+        #take { position: absolute; left: 110px; top: 690px; }
+        #tag { position: absolute; left: 0; right: 0; top: 330px; text-align: center; }
+        #ns { top: 1270px; }
+        #ns .l1 { font-size: 150px; }
+
+      </style>
+      <div id="root" data-composition-id="s03-common" data-width="1080" data-height="1920">
+
+        <div id="tag" class="micro">ANDROMEDA · WHAT PEOPLE SAY</div>
+        <div id="c1" class="cm glass" style="top:430px"><div class="av"></div><div style="flex:1"><div class="nm"></div><div class="ln" style="width:520px"></div><div class="ln" style="width:360px"></div></div></div>
+        <div id="c2" class="cm glass" style="top:610px"><div class="av"></div><div style="flex:1"><div class="nm"></div><div class="ln" style="width:470px"></div><div class="ln" style="width:300px"></div></div></div>
+        <div id="main" class="cm glass"><div class="av" id="mav"></div><div style="flex:1"><div class="nm"></div><div class="q" data-layout-allow-overlap>“Targeting শেষ।”</div></div></div>
+        <div id="take" class="micro" data-layout-allow-overlap>COMMON TAKE</div>
+        <div id="ns" class="center">
+          <div class="mask"><div class="l1" id="n1" data-layout-allow-overlap>NOT THAT</div></div>
+          <div class="mask"><div class="l1" id="n2" data-layout-allow-overlap><span class="mark">SIMPLE</span></div></div>
+        </div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 11.85, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s03-common"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        $$('.av').forEach((a) => { a.innerHTML = S.icon("user", 40); });
+        fadeUp("#tag", 12.05);
+        tl.fromTo(["#c1", "#c2"], { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out", stagger: 0.45 }, at(12.2));
+        // 15.02 “Targeting শেষ”
+        tl.to(["#c1", "#c2"], { opacity: 0.25, y: -40, duration: 0.4 }, at(14.85));
+        tl.fromTo("#main", { opacity: 0, y: 40, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, at(14.95));
+        fadeUp("#take", 15.2);
+        // 16.31 “আমি কিন্তু এভাবে বলব না।” — push the take back, correct it
+        tl.to(["#main", "#take"], { opacity: 0.4, scale: 0.86, y: -170, duration: 0.5, ease: "power3.inOut" }, at(16.25));
+        tl.to(["#c1", "#c2", "#tag"], { opacity: 0, duration: 0.3 }, at(16.25));
+        rise("#n1", 16.35);
+        rise("#n2", 16.7);
+
+        window.__timelines["s03-common"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #panel { left: 130px; top: 360px; width: 820px; }
+        .row { display: flex; align-items: center; justify-content: space-between; height: 104px; border-top: 2px solid rgba(251,252,235,0.12); }
+        .row .k { display: flex; align-items: center; gap: 16px; font-size: 32px; font-weight: 800; }
+        .row .v { font-size: 26px; font-weight: 600; padding: 10px 18px; border-radius: 12px; background: rgba(251,252,235,0.1); color: rgba(251,252,235,0.85); }
+        #wave { position: absolute; left: 130px; top: 360px; width: 820px; height: 560px; }
+        #hero { top: 1060px; }
+        #hero .l1 { font-size: 150px; }
+
+      </style>
+      <div id="root" data-composition-id="s01-hook" data-width="1080" data-height="1920">
+
+        <div id="panel" class="panel glass">
+          <div class="ph" id="ph"><span id="ph-i"></span>AUDIENCE · DETAILED TARGETING</div>
+          <div class="row" id="r1"><div class="k"><span class="ri"></span>Location</div><div class="v">Dhaka</div></div>
+          <div class="row" id="r2"><div class="k"><span class="ri"></span>Age</div><div class="v">25 – 45</div></div>
+          <div class="row" id="r3"><div class="k"><span class="ri"></span>Interests</div><div class="v">+ add interests</div></div>
+          <div class="row" id="r4"><div class="k"><span class="ri"></span>Detailed targeting</div><div class="v">Include people who…</div></div>
+        </div>
+        <svg id="wave" viewBox="0 0 820 560"></svg>
+        <div id="hero" class="center">
+          <div class="mask"><div class="l1" id="h1" data-layout-allow-overlap>THE GAME</div></div>
+          <div class="mask"><div class="l1" id="h2" data-layout-allow-overlap><span class="mark">CHANGED</span></div></div>
+        </div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 0, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s01-hook"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        $('#ph-i').outerHTML = S.icon("users", 34);
+        const ris = $$('.ri'); ["pin", "cal", "heart", "filter"].forEach((ic, i) => { ris[i].outerHTML = S.icon(ic, 40); });
+        // signal waves that take over the old panel when the game changes
+        const svg = $('#wave');
+        const waves = [0, 1, 2, 3].map((k) => line(svg, `M0 ${150 + k * 95} C 140 ${90 + k * 95}, 270 ${210 + k * 95}, 410 ${150 + k * 95} S 680 ${90 + k * 95}, 820 ${150 + k * 95}`, '#FBFCEB', 3));
+        tl.fromTo("#panel", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at(0.05));
+        tl.fromTo(["#r1", "#r2", "#r3", "#r4"], { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out", stagger: 0.22 }, at(0.3));
+        // "game … আগের মতো নেই" — the old interface gives way
+        tl.to(["#r1 .v", "#r2 .v", "#r3 .v", "#r4 .v"], { opacity: 0, x: 30, duration: 0.3, stagger: 0.06 }, at(2.45));
+        tl.to("#panel", { opacity: 0.35, scale: 0.94, duration: 0.6, ease: "power2.inOut" }, at(2.5));
+        waves.forEach((w, i) => draw(w, 2.6 + i * 0.08, 0.7));
+        rise("#h1", 2.55);
+        rise("#h2", 3.0);
+
+        window.__timelines["s01-hook"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

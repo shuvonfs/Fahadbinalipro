@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #lbl { top: 360px; }
+        #btn { position: absolute; left: 0; right: 0; margin: 0 auto; top: 780px; width: fit-content; height: 150px; padding: 0 64px; border-radius: 75px; background: #FBFCEB; color: #2D0001;
+          display: flex; align-items: center; gap: 22px; font-size: 60px; font-weight: 800; letter-spacing: 0.02em; box-shadow: 0 30px 70px rgba(20,0,0,0.5); }
+        #btn .ic { stroke: #2D0001; }
+        #cur { position: absolute; left: 720px; top: 1180px; width: 110px; height: 110px; }
+        #nb { top: 1080px; }
+        #nb .l2 { font-size: 84px; }
+
+      </style>
+      <div id="root" data-composition-id="s04-button" data-width="1080" data-height="1920">
+
+        <div id="lbl" class="center micro">ANDROMEDA FOR ADVERTISERS</div>
+        <div id="btn"><span id="bi"></span>NEW TARGETING</div>
+        <svg id="cur" viewBox="0 0 24 24"><path d="M6 3.5l12 7-5.2 1.4 3.4 6-2.4 1.4-3.4-6L6.5 17z" fill="#FBFCEB" stroke="#2D0001" stroke-width="1.2" stroke-linejoin="round" /></svg>
+        <div id="nb" class="center">
+          <div class="mask"><div class="l2" id="nb1" data-layout-allow-overlap>NOT A NEW</div></div>
+          <div class="mask"><div class="l2" id="nb2" data-layout-allow-overlap>TARGETING BUTTON</div></div>
+        </div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const S = window.SIG, H = window.HFX;
+        const T0 = 17.6, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s04-button"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.45, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.4, ease: "power3.out" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.25, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.5, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(251,252,235,0.45)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+
+        $('#bi').outerHTML = S.icon("target", 64);
+        fadeUp("#lbl", 17.85);
+        tl.fromTo("#btn", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.5)" }, at(18.3));
+        // cursor reaches for it on "নতুন targeting button"
+        tl.fromTo("#cur", { opacity: 0, x: 120, y: 160 }, { opacity: 1, x: -150, y: -330, duration: 1.1, ease: "power2.inOut" }, at(19.85));
+        tl.to("#cur", { scale: 0.85, duration: 0.1, yoyo: true, repeat: 1 }, at(21.0));
+        // 21.26 "না" — the button isn't the thing
+        tl.to("#btn", { opacity: 0.18, scale: 0.92, duration: 0.35, ease: "power2.out" }, at(21.22));
+        tl.to("#cur", { opacity: 0, duration: 0.2 }, at(21.25));
+        rise("#nb1", 21.24, 0.35);
+        rise("#nb2", 21.34, 0.35);
+
+        window.__timelines["s04-button"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

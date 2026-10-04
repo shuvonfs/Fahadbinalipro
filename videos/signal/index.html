@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="vendor/gsap.min.js"></script>
+    <script src="assets/hfx.js"></script>
+    <script src="assets/sig.js"></script>
+    <style>
+      /* Anek Bangla — Bengali + Latin, shipped locally */
+      @font-face { font-family: "Anek Bangla"; font-weight: 400; src: url("assets/fonts/anek-bangla-bengali-400-normal.woff2") format("woff2"); unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+200C-200D, U+25CC; }
+      @font-face { font-family: "Anek Bangla"; font-weight: 600; src: url("assets/fonts/anek-bangla-bengali-600-normal.woff2") format("woff2"); unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+200C-200D, U+25CC; }
+      @font-face { font-family: "Anek Bangla"; font-weight: 800; src: url("assets/fonts/anek-bangla-bengali-800-normal.woff2") format("woff2"); unicode-range: U+0951-0952, U+0964-0965, U+0980-09FE, U+200C-200D, U+25CC; }
+      @font-face { font-family: "Anek Bangla"; font-weight: 400; src: url("assets/fonts/anek-bangla-latin-400-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193, U+2212; }
+      @font-face { font-family: "Anek Bangla"; font-weight: 600; src: url("assets/fonts/anek-bangla-latin-600-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193, U+2212; }
+      @font-face { font-family: "Anek Bangla"; font-weight: 800; src: url("assets/fonts/anek-bangla-latin-800-normal.woff2") format("woff2"); unicode-range: U+0000-00FF, U+2000-206F, U+2190-2193, U+2212; }
+
+      @font-face { font-family: "Playfair Display"; font-weight: 700; font-style: italic; src: url("assets/fonts/playfair-display-latin-700-italic.woff2") format("woff2"); }
+
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1080px; height: 1920px; overflow: hidden; background: #2D0001; }
+
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        font-family: "Anek Bangla", sans-serif;
+        color: #FBFCEB;
+        background: linear-gradient(170deg, #3F1521 0%, #2D0001 55%, #2D0001 100%);
+      }
+      #bg-glow {
+        position: absolute; width: 1600px; height: 1600px; left: -260px; top: -300px;
+        background: radial-gradient(circle at center, rgba(114, 0, 19, 0.55) 0%, rgba(114, 0, 19, 0.18) 40%, rgba(45, 0, 1, 0) 68%);
+      }
+      #bg-glow-2 {
+        position: absolute; width: 1400px; height: 1400px; left: -160px; top: 900px;
+        background: radial-gradient(circle at center, rgba(128, 1, 31, 0.32) 0%, rgba(45, 0, 1, 0) 65%);
+      }
+      #bg-vignette {
+        position: absolute; inset: 0;
+        background: radial-gradient(ellipse at 50% 45%, rgba(45, 0, 1, 0) 55%, rgba(20, 0, 0, 0.55) 100%);
+      }
+      [data-composition-id="main"] > div[data-composition-src] { position: absolute; inset: 0; }
+
+      /* ---------- shared design system (used by every scene) ---------- */
+      .l1 { font-weight: 800; font-size: 168px; line-height: 1.02; letter-spacing: -0.02em; }
+      .l2 { font-weight: 800; font-size: 96px; line-height: 1.05; letter-spacing: -0.01em; }
+      .l3 { font-weight: 600; font-size: 58px; line-height: 1.25; }
+      .l4 { font-weight: 600; font-size: 32px; letter-spacing: 0.24em; text-transform: uppercase; color: rgba(251, 252, 235, 0.72); }
+      .mark { display: inline-block; background: #80011F; border-radius: 14px; padding: 0.06em 0.16em 0; line-height: 1; }
+      .mask { overflow: hidden; display: block; }
+      .center { position: absolute; left: 0; right: 0; text-align: center; }
+
+      .glass {
+        background: linear-gradient(155deg, rgba(251, 252, 235, 0.11) 0%, rgba(251, 252, 235, 0.03) 45%, rgba(63, 21, 33, 0.35) 100%);
+        border: 2px solid rgba(251, 252, 235, 0.2);
+        border-radius: 32px;
+        box-shadow: inset 0 2px 0 rgba(251, 252, 235, 0.12), 0 24px 60px rgba(20, 0, 0, 0.45);
+      }
+      .ic { fill: none; stroke: #FBFCEB; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+      .ic-accent { fill: none; stroke: #80011F; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+      /* Ad-card: a generic social ad creative silhouette */
+      .ad { position: absolute; width: 300px; height: 400px; border-radius: 26px; overflow: hidden;
+        background: #3F1521; border: 2px solid rgba(251, 252, 235, 0.22); box-shadow: 0 20px 50px rgba(20, 0, 0, 0.5); }
+      .ad .hd { position: absolute; left: 22px; top: 20px; width: 34px; height: 34px; border-radius: 50%; background: rgba(251, 252, 235, 0.35); }
+      .ad .hl { position: absolute; left: 68px; top: 30px; width: 120px; height: 12px; border-radius: 6px; background: rgba(251, 252, 235, 0.3); }
+      .ad .img { position: absolute; left: 0; right: 0; top: 72px; height: 210px; background: linear-gradient(140deg, #720013, #80011F 60%, #2D0001); }
+      .ad .t1 { position: absolute; left: 22px; top: 304px; width: 230px; height: 18px; border-radius: 9px; background: rgba(251, 252, 235, 0.75); }
+      .ad .t2 { position: absolute; left: 22px; top: 336px; width: 160px; height: 14px; border-radius: 7px; background: rgba(251, 252, 235, 0.35); }
+      .ad .cta { position: absolute; right: 22px; bottom: 22px; width: 70px; height: 26px; border-radius: 13px; background: #FBFCEB; }
+      /* distinct creative formats */
+      .ad.v-type { background: #720013; }
+      .ad .big { position: absolute; left: 26px; height: 34px; border-radius: 8px; background: #FBFCEB; }
+      .ad.v-quote { background: #2D0001; }
+      .ad .qm { position: absolute; left: 22px; top: 70px; font-size: 150px; line-height: 1; font-weight: 800; color: #80011F; }
+      .ad .bar { position: absolute; bottom: 118px; width: 36px; border-radius: 6px 6px 0 0; background: #FBFCEB; }
+      .ad .av { position: absolute; left: 90px; top: 96px; width: 120px; height: 120px; border-radius: 50%; border: 3px solid rgba(251, 252, 235, 0.8); background: #80011F; }
+      .ad .play { position: absolute; left: 128px; top: 232px; width: 0; height: 0; border-left: 36px solid #FBFCEB; border-top: 22px solid transparent; border-bottom: 22px solid transparent; }
+      /* ---------- social-feed ad mockup (native 640 × 740) ---------- */
+      .fbad { position: absolute; width: 640px; height: 740px; border-radius: 34px; overflow: hidden; background: #3F1521;
+        border: 2px solid rgba(251, 252, 235, 0.22); box-shadow: 0 30px 80px rgba(20, 0, 0, 0.55); color: #FBFCEB; }
+      .fbad .fb-h { height: 100px; display: flex; align-items: center; gap: 18px; padding: 0 28px; }
+      .fbad .fb-av { width: 60px; height: 60px; border-radius: 50%; background: #80011F; border: 2px solid rgba(251, 252, 235, 0.6); display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; }
+      .fbad .fb-nm { font-size: 26px; font-weight: 800; line-height: 1.2; }
+      .fbad .fb-sp { font-size: 20px; font-weight: 600; opacity: 0.6; display: flex; align-items: center; gap: 6px; }
+      .fbad .fb-dots { margin-left: auto; font-size: 30px; opacity: 0.6; }
+      .fbad .fb-tx { height: 60px; padding: 0 28px; }
+      .fbad .fb-tx i { display: block; height: 12px; border-radius: 6px; background: rgba(251, 252, 235, 0.35); margin-bottom: 12px; }
+      .fbad .fb-img { position: relative; width: 640px; height: 440px; overflow: hidden; background: #2D0001; }
+      .fbad .fb-f { height: 140px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 0 28px; background: rgba(45, 0, 1, 0.55); }
+      .fbad .fb-dm { font-size: 17px; font-weight: 600; letter-spacing: 0.08em; opacity: 0.55; }
+      .fbad .fb-hl { font-size: 34px; font-weight: 800; line-height: 1.15; margin-top: 4px; }
+      .fbad .fb-cta { flex: none; height: 58px; padding: 0 26px; border-radius: 14px; background: rgba(251, 252, 235, 0.16); display: flex; align-items: center; font-size: 22px; font-weight: 800; }
+      .fbad.serif .fb-hl { font-family: "Playfair Display", serif; font-style: italic; font-weight: 700; font-size: 38px; letter-spacing: 0; }
+      .fbad.alt { background: #720013; }
+      .fbad.alt .fb-f { background: rgba(251, 252, 235, 0.08); }
+      /* ---------- signal components ---------- */
+      .uchip { display: inline-flex; align-items: center; gap: 14px; height: 84px; padding: 0 30px; border-radius: 20px; white-space: nowrap;
+        background: rgba(251, 252, 235, 0.07); border: 2px solid rgba(251, 252, 235, 0.28); font-size: 34px; font-weight: 800; letter-spacing: 0.04em; }
+      .uchip.hot { background: #80011F; border-color: rgba(251, 252, 235, 0.7); }
+      .uchip.dim { opacity: 0.45; }
+      .panel { position: absolute; border-radius: 34px; padding: 34px 36px; }
+      .panel .ph { display: flex; align-items: center; gap: 14px; margin-bottom: 26px; font-size: 26px; font-weight: 800; letter-spacing: 0.2em; color: rgba(251, 252, 235, 0.7); }
+      .pcard { display: flex; align-items: center; gap: 20px; width: 400px; padding: 22px 24px; border-radius: 26px; flex-wrap: wrap; }
+      .pcard .pc-av { width: 84px; height: 84px; border-radius: 50%; background: #720013; border: 2px solid rgba(251, 252, 235, 0.55); display: flex; align-items: center; justify-content: center; }
+      .pcard b { display: block; font-size: 34px; font-weight: 800; }
+      .pcard em { display: block; font-style: normal; font-size: 24px; font-weight: 600; color: rgba(251, 252, 235, 0.65); }
+      .pcard .pc-tags { width: 100%; display: flex; gap: 10px; flex-wrap: wrap; }
+      .pcard .pc-tags i { font-style: normal; font-size: 22px; font-weight: 800; letter-spacing: 0.06em; padding: 6px 14px; border-radius: 10px; background: rgba(251, 252, 235, 0.1); }
+      .snode { display: flex; align-items: center; justify-content: center; gap: 14px; height: 96px; padding: 0 28px; border-radius: 24px; white-space: nowrap;
+        background: #3F1521; border: 2px solid rgba(251, 252, 235, 0.32); font-size: 32px; font-weight: 800; letter-spacing: 0.06em; }
+      .snode.hot { background: #720013; border-color: rgba(251, 252, 235, 0.75); }
+      .cand { position: absolute; width: 120px; height: 150px; border-radius: 16px; overflow: hidden; background: #3F1521; border: 2px solid rgba(251, 252, 235, 0.3); }
+      .cand b { position: absolute; left: 0; right: 0; top: 0; height: 80px; background: linear-gradient(140deg, #80011F, #2D0001); }
+      .cand i { position: absolute; left: 12px; top: 92px; width: 80px; height: 9px; border-radius: 5px; background: rgba(251, 252, 235, 0.45); }
+      .cand u { position: absolute; left: 12px; bottom: 10px; text-decoration: none; font-size: 22px; font-weight: 800; letter-spacing: 0.04em; }
+      .micro { font-size: 24px; font-weight: 800; letter-spacing: 0.22em; color: rgba(251, 252, 235, 0.6); }
+      .ico { display: block; flex: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="98.429" data-width="1080" data-height="1920">
+      <div id="bg-glow"></div>
+      <div id="bg-glow-2"></div>
+      <div id="bg-vignette"></div>
+
+      <div id="el-s01" data-composition-id="s01-hook" data-composition-src="compositions/s01-hook.html" data-start="0" data-duration="3.95" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s02" data-composition-id="s02-targeting" data-composition-src="compositions/s02-targeting.html" data-start="3.95" data-duration="7.9" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s03" data-composition-id="s03-common" data-composition-src="compositions/s03-common.html" data-start="11.85" data-duration="5.75" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s04" data-composition-id="s04-button" data-composition-src="compositions/s04-button.html" data-start="17.6" data-duration="4.95" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s05" data-composition-id="s05-retrieval" data-composition-src="compositions/s05-retrieval.html" data-start="22.55" data-duration="10.65" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s06" data-composition-id="s06-deeper" data-composition-src="compositions/s06-deeper.html" data-start="33.2" data-duration="1.65" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s07" data-composition-id="s07-gem" data-composition-src="compositions/s07-gem.html" data-start="34.85" data-duration="10.7" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s08" data-composition-id="s08-sowhat" data-composition-src="compositions/s08-sowhat.html" data-start="45.55" data-duration="1.2" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s09" data-composition-id="s09-shift" data-composition-src="compositions/s09-shift.html" data-start="46.75" data-duration="7.85" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s10" data-composition-id="s10-realestate" data-composition-src="compositions/s10-realestate.html" data-start="54.6" data-duration="3.25" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s11" data-composition-id="s11-oldmind" data-composition-src="compositions/s11-oldmind.html" data-start="57.85" data-duration="8.9" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s12" data-composition-id="s12-questions" data-composition-src="compositions/s12-questions.html" data-start="66.75" data-duration="10.5" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s13" data-composition-id="s13-chapter" data-composition-src="compositions/s13-chapter.html" data-start="77.25" data-duration="2.05" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s14" data-composition-id="s14-oldq" data-composition-src="compositions/s14-oldq.html" data-start="79.3" data-duration="4.55" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s15" data-composition-id="s15-thesis" data-composition-src="compositions/s15-thesis.html" data-start="83.85" data-duration="6.3" data-track-index="1" data-width="1080" data-height="1920"></div>
+      <div id="el-s16" data-composition-id="s16-cta" data-composition-src="compositions/s16-cta.html" data-start="90.15" data-duration="8.279" data-track-index="1" data-width="1080" data-height="1920"></div>
+
+      <audio id="voiceover" src="assets/voiceover.mp3" data-start="0" data-duration="98.429" data-track-index="10" data-volume="1"></audio>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      // Slow ambient drift of the brand glow across the whole piece
+      tl.fromTo("#bg-glow", { x: 0, y: 0 }, { x: 260, y: 420, duration: 52, ease: "sine.inOut" }, 0);
+      tl.to("#bg-glow", { x: -120, y: 160, duration: 46.429, ease: "sine.inOut" }, 52);
+      tl.fromTo("#bg-glow-2", { x: 0 }, { x: 300, duration: 98.429, ease: "sine.inOut" }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
