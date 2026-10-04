@@ -6,85 +6,102 @@
       <style>
         #root { position: absolute; inset: 0; }
         #wires { position: absolute; left: 0; top: 0; }
-        #core { position: absolute; left: 410px; top: 810px; width: 260px; height: 260px; border-radius: 50%; }
-        #core svg { position: absolute; left: 50px; top: 50px; width: 160px; height: 160px; }
-        .rc { position: absolute; width: 210px; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
-        .rc svg { width: 56px; height: 56px; }
-        .rc span { font-size: 26px; font-weight: 800; letter-spacing: 0.06em; }
+        #core { position: absolute; left: 380px; top: 750px; width: 320px; height: 320px; border-radius: 50%; overflow: hidden; border: 4px solid rgba(251, 252, 235, 0.6); box-shadow: 0 24px 60px rgba(20, 0, 0, 0.5); }
+        .per { position: absolute; left: 400px; width: 540px; height: 120px; display: flex; align-items: center; gap: 22px; padding: 0 28px; border-radius: 26px; }
+        .per svg { width: 60px; height: 60px; flex: none; }
+        .per b { font-size: 34px; font-weight: 800; letter-spacing: 0.04em; }
+        .per em { margin-left: auto; font-style: normal; font-size: 26px; font-weight: 600; color: rgba(251, 252, 235, 0.65); }
         #hA { top: 300px; }
-        #hB { top: 290px; }
+        #hP { top: 330px; }
+        #hB { top: 270px; }
         #hB .l2 { font-size: 84px; }
         #sA { top: 1430px; }
-        #sB { top: 1420px; }
+        #sB { top: 1440px; }
         .sub { font-size: 44px; font-weight: 800; letter-spacing: 0.02em; line-height: 1.25; }
       </style>
       <div id="root" data-composition-id="s09-same" data-width="1080" data-height="1920">
         <svg id="wires" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
-        <div id="core" class="glass">
-          <svg id="ico-b" viewBox="0 0 24 24"><path class="ic" d="M5 21V6l7-3v18M12 9l7 2.5V21M3 21h18M8 8.5h1.5M8 12h1.5M8 15.5h1.5M15 14h1.5M15 17h1.5" /></svg>
-          <svg id="ico-p" viewBox="0 0 24 24"><circle class="ic" cx="12" cy="8" r="3.6" /><path class="ic" d="M5 20c.8-3.6 3.6-5.6 7-5.6s6.2 2 7 5.6" /></svg>
-        </div>
-        <div id="r1" class="rc glass" style="left:435px; top:525px"><svg viewBox="0 0 24 24"><path class="ic" d="M4 18l5-5 4 3 7-8M15 8h5v5" /></svg><span>INVESTMENT</span></div>
-        <div id="r2" class="rc glass" style="left:725px; top:785px"><svg viewBox="0 0 24 24"><path class="ic" d="M4 11l8-6.5L20 11M6 9.5V20h12V9.5M10 20v-5h4v5" /></svg><span>FAMILY</span></div>
-        <div id="r3" class="rc glass" style="left:615px; top:1195px"><svg viewBox="0 0 24 24"><path class="ic" d="M12 21s6.5-5.8 6.5-11a6.5 6.5 0 1 0-13 0c0 5.2 6.5 11 6.5 11z" /><circle class="ic" cx="12" cy="10" r="2.3" /></svg><span>LOCATION</span></div>
-        <div id="r4" class="rc glass" style="left:255px; top:1195px"><svg viewBox="0 0 24 24"><path class="ic" d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z" /><path class="ic" d="M8.8 12.2l2.2 2.2 4.2-4.4" /></svg><span>TRUST</span></div>
-        <div id="r5" class="rc glass" style="left:145px; top:785px"><svg viewBox="0 0 24 24"><rect class="ic" x="3" y="6" width="18" height="12" rx="2" /><path class="ic" d="M3 10h18M7 14.5h4" /></svg><span>OFFER</span></div>
-        <div id="hA" data-layout-allow-overlap class="center"><div class="mask"><div class="l2" id="hA-w" data-layout-allow-overlap>SAME PRODUCT</div></div></div>
-        <div id="hB" data-layout-allow-overlap class="center">
+        <div id="core"></div>
+        <div id="ads"></div>
+        <div id="pers"></div>
+        <div id="hA" class="center" data-layout-allow-overlap><div class="mask"><div class="l2" id="hA-w" data-layout-allow-overlap>SAME PRODUCT</div></div></div>
+        <div id="hP" class="center l4" data-layout-allow-overlap>Different people</div>
+        <div id="hB" class="center" data-layout-allow-overlap>
           <div class="mask"><div class="l2" id="hB1" data-layout-allow-overlap>NOT THE SAME</div></div>
           <div class="mask"><div class="l2" id="hB2" data-layout-allow-overlap><span class="mark">REASON</span></div></div>
         </div>
-        <div id="sA" data-layout-allow-overlap class="center"><div class="mask"><div class="sub" id="sA-w" data-layout-allow-overlap>5 DIFFERENT REASONS TO CARE</div></div></div>
-        <div id="sB" data-layout-allow-overlap class="center sub">
+        <div id="sA" class="center" data-layout-allow-overlap><div class="mask"><div class="sub" id="sA-w" data-layout-allow-overlap>5 DIFFERENT REASONS TO CARE</div></div></div>
+        <div id="sB" class="center sub" data-layout-allow-overlap>
           <div class="mask"><div id="sB1" data-layout-allow-overlap>DIFFERENT CREATIVE</div></div>
           <div class="mask"><div id="sB2" data-layout-allow-overlap>→ DIFFERENT MOTIVATION</div></div>
         </div>
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
+        const H = window.HFX;
+        const T0 = 69.85, at = (g) => +(g - T0).toFixed(3);
         const scope = '[data-composition-id="s09-same"]';
-        const svg = document.querySelector(scope + ' #wires');
-        const ends = [[540, 675], [725, 889], [679, 1195], [401, 1195], [355, 889]];
-        const wires = ends.map(([x, y]) => {
-          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-          const dx = x - 540, dy = y - 940, d0 = Math.hypot(dx, dy);
-          p.setAttribute('d', `M${540 + dx / d0 * 132} ${940 + dy / d0 * 132} L${x} ${y}`);
-          p.setAttribute('stroke', 'rgba(251,252,235,0.35)');
-          p.setAttribute('stroke-width', '3');
-          p.setAttribute('fill', 'none');
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        $('#core').innerHTML = H.photos.tower("sp");
+        const ring = [[540, 560], [830, 810], [720, 1230], [360, 1230], [250, 810]];
+        const ads = ring.map(([x, y], i) => H.place($('#ads'), H.angleAd(i, "s" + i), x, y, 0.22));
+        const svg = $('#wires');
+        const NS = 'http://www.w3.org/2000/svg';
+        const spokes = ring.map(([x, y]) => {
+          const dx = x - 540, dy = y - 910, d = Math.hypot(dx, dy);
+          const p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', `M${540 + dx / d * 165} ${910 + dy / d * 165} L${x - dx / d * 95} ${y - dy / d * 95}`);
+          p.setAttribute('stroke', 'rgba(251,252,235,0.45)'); p.setAttribute('stroke-width', '3'); p.setAttribute('fill', 'none');
           svg.appendChild(p);
-          const len = p.getTotalLength();
-          p.style.strokeDasharray = len;
+          const len = p.getTotalLength(); p.style.strokeDasharray = len;
           return [p, len];
         });
-        const cards = ["#r1", "#r2", "#r3", "#r4", "#r5"];
-        const from = [[0, -300], [400, 0], [300, 300], [-300, 300], [-400, 0]];
+        // personas, one per creative
+        const P = [
+          ["INVESTOR", "returns", '<path class="ic" d="M4 18l5-5 4 3 7-8M15 8h5v5" />'],
+          ["FAMILY", "space", '<path class="ic" d="M4 11l8-6.5L20 11M6 9.5V20h12V9.5M10 20v-5h4v5" />'],
+          ["COMMUTER", "time", '<circle class="ic" cx="12" cy="12" r="9" /><path class="ic" d="M12 7v5l3 2" />'],
+          ["CAREFUL BUYER", "safety", '<path class="ic" d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z" /><path class="ic" d="M8.8 12.2l2.2 2.2 4.2-4.4" />'],
+          ["BUDGET BUYER", "ease", '<rect class="ic" x="3" y="6" width="18" height="12" rx="2" /><path class="ic" d="M3 10h18M7 14.5h4" />']
+        ];
+        const rows = [600, 770, 940, 1110, 1280];
+        const pers = P.map(([n, why, ic], i) => {
+          const d = document.createElement('div');
+          d.className = 'per glass';
+          d.style.top = (rows[i] - 60) + 'px';
+          d.innerHTML = `<svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="8.5" r="3.4" /><path class="ic" d="M5.5 19.5c.8-3.3 3.3-5.1 6.5-5.1s5.7 1.8 6.5 5.1" /></svg><b>${n}</b><em>${why}</em>`;
+          $('#pers').appendChild(d);
+          return d;
+        });
+        const links = rows.map((y) => {
+          const p = document.createElementNS(NS, 'path');
+          p.setAttribute('d', `M310 ${y} H392`);
+          p.setAttribute('stroke', '#FBFCEB'); p.setAttribute('stroke-width', '4'); p.setAttribute('fill', 'none');
+          p.setAttribute('stroke-linecap', 'round');
+          svg.appendChild(p);
+          return p;
+        });
 
-        // local = global − 69.55
-        tl.fromTo("#core", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 0.3);
-        tl.set("#ico-p", { opacity: 0 }, 0);
-        cards.forEach((c, i) => {
-          tl.fromTo(c, { opacity: 0, x: from[i][0], y: from[i][1] }, { opacity: 1, x: 0, y: 0, duration: 0.7, ease: "power3.out" }, 0.4 + i * 0.07);
-          tl.fromTo(wires[i][0], { strokeDashoffset: wires[i][1] }, { strokeDashoffset: 0, duration: 0.4 }, 0.9 + i * 0.07);
-        });
-        tl.fromTo("#hA-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.5);
-        tl.fromTo("#sA-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 1.4);
-        // 72.40 "কিন্তু সবগুলো একই মানুষকে" — the product becomes a person
-        tl.to(["#hA-w", "#sA-w"], { yPercent: -125, duration: 0.4, ease: "expo.in" }, 2.7);
-        tl.to("#ico-b", { opacity: 0, scale: 0.8, duration: 0.4 }, 2.85);
-        tl.fromTo("#ico-p", { opacity: 0, scale: 0.8 }, { opacity: 1, scale: 1, duration: 0.45, ease: "power3.out" }, 3.0);
-        // each creative pulls on a different motivation, one at a time
-        cards.forEach((c, i) => {
-          const t = 3.2 + i * 0.32;
-          tl.to(wires[i][0], { stroke: "rgba(251,252,235,0.9)", strokeWidth: 5, duration: 0.2 }, t);
-          tl.to(c, { borderColor: "rgba(251,252,235,0.8)", scale: 1.06, duration: 0.2 }, t);
-          tl.to(c, { scale: 1, duration: 0.3 }, t + 0.25);
-        });
-        // 74.48 "একই reason-এ convince করছে না।"
-        tl.fromTo("#hB1", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 4.85);
-        tl.fromTo("#hB2", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 5.0);
-        tl.fromTo("#sB1", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 5.4);
-        tl.fromTo("#sB2", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 5.55);
+        // 69.93 "সবগুলো creative একই project-এর।"
+        tl.fromTo("#core", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, at(69.9));
+        tl.fromTo(ads, { opacity: 0, scale: 0.08 }, { opacity: 1, scale: 0.22, duration: 0.5, ease: "back.out(1.5)", stagger: 0.07 }, at(70.0));
+        spokes.forEach(([p, len], i) => tl.fromTo(p, { strokeDashoffset: len }, { strokeDashoffset: 0, duration: 0.35 }, at(70.3) + i * 0.07));
+        tl.fromTo("#hA-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(70.05));
+        tl.fromTo("#sA-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(70.9));
+        // 72.35 "কিন্তু সবগুলো একই মানুষকে," — each creative reaches a different person
+        tl.to(["#hA-w", "#sA-w"], { yPercent: -125, duration: 0.35, ease: "expo.in" }, at(72.2));
+        tl.to("#core", { opacity: 0, scale: 0.6, duration: 0.4, ease: "power2.in" }, at(72.25));
+        spokes.forEach(([p]) => tl.to(p, { opacity: 0, duration: 0.25 }, at(72.25)));
+        tl.to(ads, { x: (i) => 230 - ring[i][0], y: (i) => rows[i] - ring[i][1], duration: 0.7, ease: "power3.inOut" }, at(72.35));
+        tl.fromTo("#hP", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, at(72.5));
+        tl.fromTo(links, { opacity: 0, scaleX: 0, transformOrigin: "0% 50%" }, { opacity: 1, scaleX: 1, duration: 0.3, stagger: 0.25 }, at(73.0));
+        tl.fromTo(pers, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.25 }, at(73.05));
+        // 74.43 "একই reason-এ convince করছে না।"
+        tl.to("#hP", { opacity: 0, duration: 0.2 }, at(74.3));
+        tl.fromTo("#hB1", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(74.4));
+        tl.fromTo("#hB2", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(74.55));
+        tl.fromTo("#sB1", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(75.0));
+        tl.fromTo("#sB2", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(75.15));
         window.__timelines["s09-same"] = tl;
       </script>
     </template>

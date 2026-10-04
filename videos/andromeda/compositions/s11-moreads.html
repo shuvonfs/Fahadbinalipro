@@ -9,7 +9,6 @@
         #blk { position: absolute; left: 0; right: 0; top: 740px; height: 200px; }
         #more { text-align: center; }
         #strike { position: absolute; left: 150px; top: 82px; width: 780px; height: 20px; border-radius: 10px; background: #80011F; box-shadow: 0 0 0 3px rgba(251, 252, 235, 0.85); transform-origin: left center; }
-        #notjob { top: 990px; }
         #borong { top: 860px; }
       </style>
       <div id="root" data-composition-id="s11-moreads" data-width="1080" data-height="1920">
@@ -18,11 +17,11 @@
           <div class="mask"><div class="l1" id="more">MORE ADS</div></div>
           <div id="strike"></div>
         </div>
-        <div id="notjob" data-layout-allow-overlap class="center l4">is not the job</div>
         <div id="borong" data-layout-allow-overlap class="center"><div class="mask"><div class="l1" id="borong-w">বরং—</div></div></div>
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
+        const T0 = 83.95, at = (g) => +(g - T0).toFixed(3);
         const scope = '[data-composition-id="s11-moreads"]';
         const spots = [[120, 380], [660, 380], [-40, 760], [820, 760], [120, 1150], [660, 1150], [390, 300], [390, 1250]];
         const ghost = spots.map(([x, y]) => {
@@ -34,20 +33,14 @@
           return c;
         });
         gsap.set(ghost, { scale: 0.7 });
-
-        // local = global − 81.9 ; "More ads" 82.06
-        tl.fromTo(ghost, { opacity: 0 }, { opacity: 0.16, duration: 0.3, stagger: 0.06 }, 0.1);
-        tl.fromTo("#more", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 0.1);
-        // 82.85 "বানানো না।" — cross it out, quietly
-        tl.fromTo("#strike", { scaleX: 0 }, { scaleX: 1, duration: 0.45, ease: "power3.inOut" }, 0.9);
-        tl.to("#more", { opacity: 0.4, duration: 0.4 }, 1.25);
-        tl.to(ghost, { opacity: 0, duration: 0.5 }, 1.2);
-        tl.fromTo("#notjob", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, 1.2);
-        // 84.34 "বরং—"
-        tl.to("#blk", { y: -260, scale: 0.6, opacity: 0.35, duration: 0.6, ease: "power3.inOut" }, 2.3);
-        tl.to("#notjob", { opacity: 0, duration: 0.3 }, 2.3);
-        tl.fromTo("#borong-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 2.45);
-        tl.to(["#blk", "#borong-w"], { opacity: 0, duration: 0.3 }, 4.05);
+        // "More ads" 84.45 · "বানানো না" 85.01 · "বরং" 85.9
+        tl.fromTo(ghost, { opacity: 0 }, { opacity: 0.18, duration: 0.25, stagger: 0.04 }, at(84.3));
+        tl.fromTo("#more", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(84.35));
+        tl.fromTo("#strike", { scaleX: 0 }, { scaleX: 1, duration: 0.4, ease: "power3.inOut" }, at(84.98));
+        tl.to("#more", { opacity: 0.4, duration: 0.35 }, at(85.3));
+        tl.to(ghost, { opacity: 0, duration: 0.4 }, at(85.25));
+        tl.to("#blk", { y: -260, scale: 0.6, opacity: 0.35, duration: 0.5, ease: "power3.inOut" }, at(85.7));
+        tl.fromTo("#borong-w", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(85.82));
         window.__timelines["s11-moreads"] = tl;
       </script>
     </template>

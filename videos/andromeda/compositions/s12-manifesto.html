@@ -22,14 +22,15 @@
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
-        // local = global − 86.3 ; phrase 86.66–89.23
-        tl.fromTo("#qm", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 0.1);
-        tl.fromTo("#m1", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.3);
-        tl.fromTo("#m2", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 0.6);
-        tl.fromTo("#m3", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 1.25);
-        tl.fromTo("#m4", { yPercent: 125 }, { yPercent: 0, duration: 0.8, ease: "power3.out" }, 1.95);
-        tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.inOut" }, 2.7);
-        tl.fromTo("#stack", { scale: 1 }, { scale: 1.035, duration: 3.75, ease: "sine.inOut" }, 0);
+        const T0 = 86.5, at = (g) => +(g - T0).toFixed(3);
+        // "More meaningful" 86.77 · "ways to sell" ≈87.6 · "the same value" 88.6
+        tl.fromTo("#qm", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at(86.55));
+        tl.fromTo("#m1", { yPercent: 125 }, { yPercent: 0, duration: 0.7, ease: "power3.out" }, at(86.68));
+        tl.fromTo("#m2", { yPercent: 125 }, { yPercent: 0, duration: 0.7, ease: "power3.out" }, at(86.98));
+        tl.fromTo("#m3", { yPercent: 125 }, { yPercent: 0, duration: 0.7, ease: "power3.out" }, at(87.55));
+        tl.fromTo("#m4", { yPercent: 125 }, { yPercent: 0, duration: 0.7, ease: "power3.out" }, at(88.45));
+        tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power3.inOut" }, at(89.15));
+        tl.fromTo("#stack", { scale: 1 }, { scale: 1.035, duration: 3.55, ease: "sine.inOut" }, 0);
         window.__timelines["s12-manifesto"] = tl;
       </script>
     </template>

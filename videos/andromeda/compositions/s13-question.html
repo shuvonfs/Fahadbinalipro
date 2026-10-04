@@ -41,22 +41,19 @@
         }
         gsap.set(grid, { scale: 0.3, transformOrigin: '0 0' });
 
-        // local = global − 90.05
-        tl.fromTo("#kick", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, 0.2);
-        // 91.80 "Andromeda এসেছে, 30টা ad লাগবে"
-        tl.fromTo("#bubble", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.5, ease: "power3.out" }, 1.7);
-        tl.fromTo(grid, { opacity: 0 }, { opacity: 0.3, duration: 0.25, stagger: 0.04 }, 1.95);
-        tl.fromTo("#thirty-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 2.85);
-        // 93.81 freeze — deliberate pause
-        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0.25, duration: 0.5 }, 3.8);
-        tl.to(grid, { opacity: 0.1, duration: 0.5 }, 3.8);
-        // 94.49 "একটা question করবেন:"
-        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0, duration: 0.3 }, 4.3);
-        tl.fromTo("#ask", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, 4.4);
-        // 95.89 "30টা ad কেন?"
-        tl.to("#ask", { opacity: 0, y: -20, duration: 0.3, ease: "power2.in" }, 5.55);
-        tl.fromTo("#f1", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 5.8);
-        tl.fromTo("#f2", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 6.05);
+        const T0 = 90.05, at = (g) => +(g - T0).toFixed(3);
+        // "তাই next time কেউ বললে" 90.2 · "Andromeda এসেছে" 91.83 · "30টা ad লাগবে" 92.9 · pause 93.86 · "একটা question করবেন" 94.44 · "30টা ad কেন?" 95.84
+        tl.fromTo("#kick", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, at(90.15));
+        tl.fromTo("#bubble", { opacity: 0, y: 30, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, at(91.72));
+        tl.fromTo(grid, { opacity: 0 }, { opacity: 0.3, duration: 0.2, stagger: 0.033 }, at(91.9));
+        tl.fromTo("#thirty-w", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(92.85));
+        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0.25, duration: 0.45 }, at(93.85));
+        tl.to(grid, { opacity: 0.1, duration: 0.45 }, at(93.85));
+        tl.to(["#bubble", "#kick", "#thirty-w"], { opacity: 0, duration: 0.25 }, at(94.3));
+        tl.fromTo("#ask", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(94.38));
+        tl.to("#ask", { opacity: 0, y: -20, duration: 0.25, ease: "power2.in" }, at(95.55));
+        tl.fromTo("#f1", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(95.78));
+        tl.fromTo("#f2", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(96.05));
         window.__timelines["s13-question"] = tl;
       </script>
     </template>

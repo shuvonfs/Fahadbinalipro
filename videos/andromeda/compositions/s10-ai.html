@@ -5,50 +5,42 @@
     <template>
       <style>
         #root { position: absolute; inset: 0; }
-        #kick { top: 270px; }
-        #head { top: 350px; }
+        #kick { top: 260px; }
+        #head { top: 320px; }
         #head .l2 { font-size: 88px; }
         #net { position: absolute; left: 0; top: 0; }
-        .pp { position: absolute; left: 125px; width: 90px; height: 90px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-        .pp svg { width: 54px; height: 54px; }
-        #hub { position: absolute; left: 420px; top: 810px; width: 240px; height: 300px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
-        #hub svg { width: 110px; height: 110px; }
-        #hub .l4 { text-align: center; font-size: 24px; color: #FBFCEB; letter-spacing: 0.18em; }
-        .mc { position: absolute; left: 820px; width: 120px; height: 150px; border-radius: 18px; background: #3F1521; border: 2px solid rgba(251, 252, 235, 0.25); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; }
-        .mc svg { width: 50px; height: 50px; }
-        .mc i { display: block; width: 70px; height: 8px; border-radius: 4px; background: rgba(251, 252, 235, 0.4); }
-        #job { top: 1440px; }
-        #job .l2 { font-size: 76px; }
+        .pp { position: absolute; left: 110px; width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .pp svg { width: 58px; height: 58px; }
+        #hub { position: absolute; left: 410px; top: 800px; width: 260px; height: 320px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; background: #720013; border: 3px solid rgba(251, 252, 235, 0.5); border-radius: 36px; }
+        #hub svg { width: 120px; height: 120px; }
+        #hub .t { text-align: center; font-size: 26px; font-weight: 800; letter-spacing: 0.12em; line-height: 1.3; }
+        #job { top: 1420px; }
+        #job .l2 { font-size: 80px; }
       </style>
       <div id="root" data-composition-id="s10-ai" data-width="1080" data-height="1920">
         <div id="kick" class="center l4">AI-driven delivery</div>
-        <div id="head" class="center"><div class="mask"><div class="l2" id="head-w">MATCHING RELEVANCE</div></div></div>
+        <div id="head" class="center"><div class="mask"><div class="l2" id="head-w">RELEVANCE MATCHING</div></div></div>
         <svg id="net" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
         <div id="people"></div>
-        <div id="hub" class="glass">
+        <div id="hub">
           <svg viewBox="0 0 24 24">
             <circle class="ic" cx="12" cy="12" r="2.6" /><circle class="ic" cx="5" cy="6" r="1.6" /><circle class="ic" cx="19" cy="6" r="1.6" /><circle class="ic" cx="5" cy="18" r="1.6" /><circle class="ic" cx="19" cy="18" r="1.6" />
             <path class="ic" d="M6.3 7l3.7 3.2M17.7 7 14 10.2M6.3 17l3.7-3.2M17.7 17 14 13.8" stroke-width="1.2" />
           </svg>
-          <div class="l4">Delivery system</div>
+          <div class="t">DELIVERY<br />SYSTEM</div>
         </div>
         <div id="cards"></div>
         <div id="job" class="center"><div class="mask"><div class="l2" id="job-w">আপনার JOB →</div></div></div>
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
+        const H = window.HFX;
+        const T0 = 76.55, at = (g) => +(g - T0).toFixed(3);
         const scope = '[data-composition-id="s10-ai"]';
         const NS = 'http://www.w3.org/2000/svg';
         const net = document.querySelector(scope + ' #net');
-        const ys = [620, 790, 960, 1130, 1300];
-        const perm = [2, 0, 4, 1, 3];
-        const ICONS = [
-          '<path class="ic" d="M4 18l5-5 4 3 7-8M15 8h5v5" />',
-          '<path class="ic" d="M4 11l8-6.5L20 11M6 9.5V20h12V9.5M10 20v-5h4v5" />',
-          '<path class="ic" d="M12 21s6.5-5.8 6.5-11a6.5 6.5 0 1 0-13 0c0 5.2 6.5 11 6.5 11z" /><circle class="ic" cx="12" cy="10" r="2.3" />',
-          '<path class="ic" d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z" /><path class="ic" d="M8.8 12.2l2.2 2.2 4.2-4.4" />',
-          '<rect class="ic" x="3" y="6" width="18" height="12" rx="2" /><path class="ic" d="M3 10h18M7 14.5h4" />'
-        ];
+        const ys = [640, 790, 940, 1090, 1240];
+        const perm = [1, 0, 4, 2, 3];
         const people = [], cards = [], base = [], pulse = [];
         const path = (d, stroke, w) => {
           const p = document.createElementNS(NS, 'path');
@@ -61,21 +53,15 @@
         ys.forEach((y, i) => {
           const pp = document.createElement('div');
           pp.className = 'pp glass';
-          pp.style.top = (y - 45) + 'px';
+          pp.style.top = (y - 50) + 'px';
           pp.innerHTML = '<svg viewBox="0 0 24 24"><circle class="ic" cx="12" cy="8.5" r="3.4" /><path class="ic" d="M5.5 19.5c.8-3.3 3.3-5.1 6.5-5.1s5.7 1.8 6.5 5.1" /></svg>';
           document.querySelector(scope + ' #people').appendChild(pp);
           people.push(pp);
-          const mc = document.createElement('div');
-          mc.className = 'mc';
-          mc.style.top = (y - 75) + 'px';
-          mc.innerHTML = '<svg viewBox="0 0 24 24">' + ICONS[i] + '</svg><i></i>';
-          document.querySelector(scope + ' #cards').appendChild(mc);
-          cards.push(mc);
+          cards.push(H.place(document.querySelector(scope + ' #cards'), H.angleAd(i, "m" + i), 880, y, 0.18));
         });
-        // a matched route: person i → system → card perm[i]
         ys.forEach((y, i) => {
           const yc = ys[perm[i]];
-          const d = `M215 ${y} C 330 ${y}, 330 960, 420 960 M660 960 C 750 960, 750 ${yc}, 820 ${yc}`;
+          const d = `M215 ${y} C 330 ${y}, 330 960, 410 960 M670 960 C 750 960, 750 ${yc}, 820 ${yc}`;
           base.push(path(d, 'rgba(251,252,235,0.16)', 3));
           const pl = path(d, '#FBFCEB', 5);
           const len = pl.getTotalLength();
@@ -83,23 +69,26 @@
           pulse.push([pl, len]);
         });
 
-        // local = global − 76.6
-        tl.fromTo("#kick", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.45 }, 0.3);
-        tl.fromTo("#head-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 0.4);
-        tl.fromTo(people, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.07 }, 0.55);
-        tl.fromTo("#hub", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, 0.8);
-        tl.fromTo(cards, { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.07 }, 1.0);
-        tl.fromTo(base, { opacity: 0 }, { opacity: 1, duration: 0.5 }, 1.2);
+        // "AI-driven delivery system" 76.97 · "relevant creative" 79.13 · "match করতে পারে" 80.89
+        tl.fromTo("#kick", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4 }, at(76.9));
+        tl.fromTo("#head-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(77.0));
+        tl.fromTo("#hub", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(1.4)" }, at(77.5));
+        tl.fromTo(people, { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out", stagger: 0.07 }, at(78.0));
+        tl.fromTo(base, { opacity: 0 }, { opacity: 1, duration: 0.5 }, at(78.3));
+        tl.fromTo(cards, { opacity: 0, scale: 0.06 }, { opacity: 1, scale: 0.18, duration: 0.4, ease: "back.out(1.5)", stagger: 0.08 }, at(79.1));
+        tl.to("#hub", { scale: 1.05, duration: 0.45, ease: "sine.inOut", yoyo: true, repeat: 3 }, at(79.6));
         pulse.forEach(([pl, len], i) => {
-          const t = 1.6 + i * 0.32;
+          const t = at(79.7) + i * 0.3;
           tl.fromTo(pl, { strokeDashoffset: 70, opacity: 1 }, { strokeDashoffset: -len, duration: 0.9, ease: "power1.inOut" }, t);
-          tl.to(base[i], { stroke: "rgba(251,252,235,0.5)", duration: 0.3 }, t + 0.5);
-          tl.to(cards[perm[i]], { borderColor: "rgba(251,252,235,0.85)", background: "#720013", duration: 0.3 }, t + 0.7);
-          tl.to(people[i], { borderColor: "rgba(251,252,235,0.85)", duration: 0.3 }, t + 0.1);
+          tl.to(people[i], { borderColor: "rgba(251,252,235,0.9)", duration: 0.25 }, t);
+          tl.to(base[i], { stroke: "rgba(251,252,235,0.55)", duration: 0.3 }, t + 0.5);
         });
-        tl.to("#hub", { scale: 1.05, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 3 }, 1.6);
-        // 79.0 "আপনার job তত বেশি হয়ে যাচ্ছে—"
-        tl.fromTo("#job-w", { yPercent: 125 }, { yPercent: 0, duration: 0.55, ease: "expo.out" }, 2.6);
+        // matched pairs light up on "match"
+        tl.to(cards.map((c) => c.querySelector('.fbad')), { borderColor: "rgba(251,252,235,0.95)", duration: 0.3, stagger: 0.1 }, at(80.9));
+        // 82.05 "আপনার job তত বেশি হয়ে যাচ্ছে—"
+        tl.fromTo("#job-w", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, at(82.15));
+        tl.to(["#net", "#people", "#cards", "#hub"], { opacity: 0.35, duration: 0.5 }, at(82.4));
+        tl.fromTo("#job-w", { scale: 1 }, { scale: 1.08, duration: 1.4, ease: "sine.inOut" }, at(82.7));
         window.__timelines["s10-ai"] = tl;
       </script>
     </template>

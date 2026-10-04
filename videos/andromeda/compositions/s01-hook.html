@@ -6,58 +6,46 @@
       <style>
         #root { position: absolute; inset: 0; }
         #cards { position: absolute; inset: 0; }
-        .ad { left: 0; top: 0; }
-        #kicker { top: 400px; }
-        #nums { position: absolute; left: 0; right: 0; top: 700px; display: flex; justify-content: center; gap: 34px; }
+        #kicker { top: 470px; }
+        #nums { position: absolute; left: 0; right: 0; top: 720px; display: flex; justify-content: center; gap: 34px; }
         .num { font-weight: 800; font-size: 168px; line-height: 1; letter-spacing: -0.03em; }
-        #word { top: 950px; }
+        #word { top: 960px; }
         #word .l2 { font-size: 120px; }
       </style>
       <div id="root" data-composition-id="s01-hook" data-width="1080" data-height="1920">
         <div id="cards"></div>
         <div id="kicker" class="center l4">Andromeda update</div>
         <div id="nums">
-          <div class="mask"><div class="num" id="n20">20?</div></div>
-          <div class="mask"><div class="num" id="n30">30?</div></div>
-          <div class="mask"><div class="num" id="n50">50?</div></div>
+          <div class="mask"><div class="num" id="n20" data-layout-allow-overlap>20?</div></div>
+          <div class="mask"><div class="num" id="n30" data-layout-allow-overlap>30?</div></div>
+          <div class="mask"><div class="num" id="n50" data-layout-allow-overlap>50?</div></div>
         </div>
-        <div id="word" class="center"><div class="mask"><div class="l2" id="creatives">CREATIVES?</div></div></div>
+        <div id="word" class="center"><div class="mask"><div class="l2" id="creatives" data-layout-allow-overlap>CREATIVES?</div></div></div>
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
-        // Ad-card silhouettes that multiply behind the numbers
+        const H = window.HFX;
+        const T0 = 0, at = (g) => +(g - T0).toFixed(3);
         const box = document.querySelector('[data-composition-id="s01-hook"] #cards');
-        const spots = [
-          [390, 760], [110, 520], [670, 520], [110, 1000], [670, 1000],
-          [-60, 760], [840, 760], [390, 300], [390, 1220], [-60, 1240],
-          [840, 1240], [-60, 280], [840, 280], [230, 1450], [550, 1450], [230, 60], [550, 60]
-        ];
-        const cards = spots.map(([x, y], i) => {
-          const c = document.createElement('div');
-          c.className = 'ad';
-          c.innerHTML = '<div class="hd"></div><div class="hl"></div><div class="img"></div><div class="t1"></div><div class="t2"></div><div class="cta"></div>';
-          c.style.left = x + 'px';
-          c.style.top = y + 'px';
-          box.appendChild(c);
-          return c;
-        });
-        // multiply: 1 → 5 → 17, accelerating with the numbers
-        tl.fromTo(cards, { opacity: 0, scale: 0.6 }, {
-          opacity: (i) => (i === 0 ? 0.28 : 0.2), scale: 0.72, duration: 0.45, ease: "power3.out",
-          stagger: (i) => (i === 0 ? 0 : i < 5 ? 0.9 + i * 0.12 : 1.75 + (i - 5) * 0.09)
-        }, 0.1);
-        tl.fromTo(box, { scale: 1.08 }, { scale: 1, duration: 3.4, ease: "power2.out" }, 0);
-        // tension: the multiplication stops and the field dims
-        tl.to(cards, { opacity: 0.12, duration: 0.6, ease: "power2.inOut" }, 3.5);
+        // real ad creatives that keep multiplying behind the question
+        const spots = [[540, 900], [235, 560], [845, 560], [235, 1240], [845, 1240], [540, 330], [540, 1470],
+          [-20, 900], [1100, 900], [235, 140], [845, 140], [-20, 1600], [1100, 1600], [235, 1720], [845, 1720]];
+        const cards = spots.map(([x, y], i) => H.place(box, H.angleAd(i % 5, "h" + i), x, y, 0.36));
+        tl.fromTo(cards, { opacity: 0, scale: 0.25 }, {
+          opacity: (i) => (i === 0 ? 0.32 : 0.24), scale: 0.36, duration: 0.45, ease: "power3.out",
+          stagger: (i) => (i === 0 ? 0 : i < 5 ? 0.85 + i * 0.12 : 1.6 + (i - 5) * 0.11)
+        }, 0.15);
+        tl.fromTo(box, { scale: 1.08 }, { scale: 1, duration: 3.6, ease: "power2.out" }, 0);
+        // tension — multiplication stops, the field dims
+        tl.to(cards, { opacity: 0.1, duration: 0.5, ease: "power2.inOut" }, at(3.7));
 
-        tl.fromTo("#kicker", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.05);
-        // numbers land on the spoken words (20 @1.80, 30 @2.15, 50 @2.55)
-        [["#n20", 1.72], ["#n30", 2.07], ["#n50", 2.47]].forEach(([sel, t]) => {
-          tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: 0.42, ease: "expo.out" }, t);
+        tl.fromTo("#kicker", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at(0.08));
+        // "বিশটা" 1.52 · "ত্রিশটা" 2.12 · "পঞ্চাশটা" 2.76 · "creative" 3.28
+        [["#n20", 1.45], ["#n30", 2.05], ["#n50", 2.68]].forEach(([sel, t]) => {
+          tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: 0.4, ease: "expo.out" }, at(t));
         });
-        tl.fromTo("#creatives", { yPercent: 125 }, { yPercent: 0, duration: 0.5, ease: "expo.out" }, 2.78);
-        // hold, slight push-in for tension
-        tl.fromTo(["#nums", "#word"], { scale: 1 }, { scale: 1.04, duration: 1.2, ease: "sine.inOut" }, 3.2);
+        tl.fromTo("#creatives", { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(3.22));
+        tl.fromTo(["#nums", "#word"], { scale: 1 }, { scale: 1.04, duration: 1.0, ease: "sine.inOut" }, at(3.6));
         window.__timelines["s01-hook"] = tl;
       </script>
     </template>

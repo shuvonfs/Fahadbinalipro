@@ -12,8 +12,9 @@
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
-        // "না।" spoken at 4.62 (local 0.22) — one clean, quiet hit
-        tl.fromTo("#na", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.22, ease: "power3.out" }, 0.12);
+        const T0 = 4.4, at = (g) => +(g - T0).toFixed(3);
+        // "না।" 4.57–4.91 — one clean, quiet hit
+        tl.fromTo("#na", { opacity: 0, scale: 1.06 }, { opacity: 1, scale: 1, duration: 0.2, ease: "power3.out" }, at(4.52));
         window.__timelines["s02-na"] = tl;
       </script>
     </template>

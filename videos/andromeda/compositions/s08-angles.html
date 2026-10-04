@@ -5,141 +5,85 @@
     <template>
       <style>
         #root { position: absolute; inset: 0; }
-        .hdr { position: absolute; left: 0; right: 0; top: 290px; text-align: center; }
-        .hdr .l4 { display: block; margin-bottom: 14px; }
-        .hdr .l2 { font-size: 104px; }
-        #panel { position: absolute; left: 110px; top: 560px; width: 860px; height: 600px; overflow: hidden; }
-        .pv { position: absolute; inset: 0; }
-        .pv svg.full { position: absolute; left: 0; top: 0; }
-        .q { position: absolute; left: 100px; right: 100px; top: 1240px; text-align: center; }
-        .row { position: absolute; left: 300px; display: flex; align-items: center; gap: 24px; font-size: 40px; font-weight: 600; }
-        .row svg { width: 64px; height: 64px; }
-        .pill { position: absolute; left: 180px; top: 500px; width: 500px; height: 70px; border-radius: 35px; background: #80011F; display: flex; align-items: center; justify-content: center; font-size: 30px; font-weight: 800; letter-spacing: 0.06em; }
-        .stp { position: absolute; top: 420px; width: 220px; text-align: center; font-size: 28px; font-weight: 600; color: rgba(251, 252, 235, 0.85); }
+        .lbl { position: absolute; left: 0; right: 0; top: 250px; text-align: center; }
+        .ttl { position: absolute; left: 0; right: 0; top: 300px; text-align: center; }
+        .ttl .l2 { font-size: 100px; }
+        .q { position: absolute; left: 90px; right: 90px; top: 1235px; text-align: center; font-size: 60px; font-weight: 800; line-height: 1.28; }
+        #pill { position: absolute; left: 0; right: 0; margin: 0 auto; width: fit-content; top: 960px; height: 76px; padding: 0 34px; border-radius: 38px; background: #80011F; border: 2px solid rgba(251, 252, 235, 0.7); display: flex; align-items: center; font-size: 34px; font-weight: 800; letter-spacing: 0.04em; }
       </style>
       <div id="root" data-composition-id="s08-angles" data-width="1080" data-height="1920">
-        <div id="h1" data-layout-allow-overlap class="hdr"><span class="l4" data-layout-allow-overlap>Creative 01 / 05</span><div class="l2" data-layout-allow-overlap>INVESTMENT</div></div>
-        <div id="h2" data-layout-allow-overlap class="hdr"><span class="l4" data-layout-allow-overlap>Creative 02 / 05</span><div class="l2" data-layout-allow-overlap>FAMILY</div></div>
-        <div id="h3" data-layout-allow-overlap class="hdr"><span class="l4" data-layout-allow-overlap>Creative 03 / 05</span><div class="l2" data-layout-allow-overlap>LOCATION</div></div>
-        <div id="h4" data-layout-allow-overlap class="hdr"><span class="l4" data-layout-allow-overlap>Creative 04 / 05</span><div class="l2" data-layout-allow-overlap>TRUST</div></div>
-        <div id="h5" data-layout-allow-overlap class="hdr"><span class="l4" data-layout-allow-overlap>Creative 05 / 05</span><div class="l2" data-layout-allow-overlap>OFFER</div></div>
-
-        <div id="panel" class="glass">
-          <!-- 1 · investment: property + a rising, unlabeled trend (no promised returns) -->
-          <div id="p1" class="pv">
-            <svg class="full" width="860" height="600" viewBox="0 0 860 600">
-              <g transform="translate(70 170)">
-                <rect x="0" y="40" width="110" height="260" fill="#3F1521" stroke="#FBFCEB" stroke-width="3" />
-                <rect x="110" y="110" width="80" height="190" fill="#2D0001" stroke="#FBFCEB" stroke-width="3" />
-                <path d="M20 80h70M20 125h70M20 170h70M20 215h70M130 150h40M130 195h40M130 240h40" stroke="rgba(251,252,235,0.5)" stroke-width="3" />
-              </g>
-              <path d="M330 470 H800 M330 470 V110" stroke="rgba(251,252,235,0.35)" stroke-width="3" fill="none" />
-              <path id="trend" d="M340 430 L430 400 L520 410 L610 340 L700 300 L790 220" stroke="#FBFCEB" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-              <circle id="tdot" cx="790" cy="220" r="12" fill="#80011F" stroke="#FBFCEB" stroke-width="3" />
-            </svg>
-          </div>
-          <!-- 2 · family: floor plan with the living room expanding -->
-          <div id="p2" class="pv">
-            <svg class="full" width="860" height="600" viewBox="0 0 860 600">
-              <rect x="130" y="90" width="600" height="420" fill="none" stroke="#FBFCEB" stroke-width="4" />
-              <rect x="130" y="90" width="200" height="190" fill="rgba(251,252,235,0.04)" stroke="rgba(251,252,235,0.5)" stroke-width="3" />
-              <rect x="130" y="280" width="200" height="230" fill="rgba(251,252,235,0.04)" stroke="rgba(251,252,235,0.5)" stroke-width="3" />
-              <rect id="living" x="330" y="90" width="230" height="420" fill="#720013" stroke="#FBFCEB" stroke-width="3" />
-              <text x="230" y="195" text-anchor="middle" font-size="24" font-weight="600" fill="rgba(251,252,235,0.7)">BED</text>
-              <text x="230" y="405" text-anchor="middle" font-size="24" font-weight="600" fill="rgba(251,252,235,0.7)">BED</text>
-              <text id="livt" x="445" y="310" text-anchor="middle" font-size="34" font-weight="800" fill="#FBFCEB">LIVING</text>
-              <g transform="translate(610 360) scale(4.2)">
-                <circle class="ic" cx="6" cy="6" r="2.4" /><circle class="ic" cx="14" cy="6" r="2.4" /><circle class="ic" cx="10" cy="12" r="1.8" />
-                <path class="ic" d="M1.5 19c.4-3 2.2-5 4.5-5M18.5 19c-.4-3-2.2-5-4.5-5M7 20c.3-2.2 1.5-3.6 3-3.6s2.7 1.4 3 3.6" />
-              </g>
-            </svg>
-          </div>
-          <!-- 3 · location: home → office route -->
-          <div id="p3" class="pv">
-            <svg class="full" width="860" height="600" viewBox="0 0 860 600">
-              <path d="M0 140H860M0 300H860M0 460H860M150 0V600M380 0V600M560 0V600M720 0V600" stroke="rgba(251,252,235,0.1)" stroke-width="14" />
-              <path id="route" d="M150 440 H380 V300 H560 V150 H700" stroke="#FBFCEB" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-              <circle cx="150" cy="440" r="18" fill="#80011F" stroke="#FBFCEB" stroke-width="4" />
-              <circle cx="700" cy="150" r="18" fill="#80011F" stroke="#FBFCEB" stroke-width="4" />
-              <text x="150" y="400" text-anchor="middle" font-size="30" font-weight="800" fill="#FBFCEB">HOME</text>
-              <text x="700" y="110" text-anchor="middle" font-size="30" font-weight="800" fill="#FBFCEB">OFFICE</text>
-            </svg>
-            <div id="commute" class="pill">30 MINUTES LESS COMMUTE</div>
-          </div>
-          <!-- 4 · trust: verification checklist -->
-          <div id="p4" class="pv">
-            <svg class="full" width="860" height="600" viewBox="0 0 860 600">
-              <g transform="translate(70 170) scale(8.5)">
-                <path class="ic" d="M12 3l7 3v5.5c0 4.4-3 8-7 9.5-4-1.5-7-5.1-7-9.5V6z" stroke-width="1.1" />
-                <path class="ic" d="M8.8 12.2l2.2 2.2 4.2-4.4" stroke-width="1.1" />
-              </g>
-            </svg>
-            <div id="c1" class="row" style="top:150px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#80011F" /><path class="ic" d="M7.5 12.3l3 3 6-6.3" stroke-width="2.2" /></svg>Developer credibility</div>
-            <div id="c2" class="row" style="top:268px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#80011F" /><path class="ic" d="M7.5 12.3l3 3 6-6.3" stroke-width="2.2" /></svg>Project quality</div>
-            <div id="c3" class="row" style="top:386px"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#80011F" /><path class="ic" d="M7.5 12.3l3 3 6-6.3" stroke-width="2.2" /></svg>Documentation</div>
-          </div>
-          <!-- 5 · offer: payment-plan card (no invented prices) -->
-          <div id="p5" class="pv">
-            <svg class="full" width="860" height="600" viewBox="0 0 860 600">
-              <g transform="translate(70 60) scale(5)">
-                <path class="ic" d="M4 21V8l8-5 8 5v13M4 21h16M9.5 21v-6h5v6M8 10.5h2M14 10.5h2" stroke-width="1.2" />
-              </g>
-              <text id="ept" x="230" y="150" font-size="52" font-weight="800" fill="#FBFCEB">EASY PAYMENT PLAN</text>
-              <path id="sline" d="M190 360 H670" stroke="rgba(251,252,235,0.4)" stroke-width="4" />
-              <circle class="sd" cx="190" cy="360" r="20" fill="#80011F" stroke="#FBFCEB" stroke-width="4" />
-              <circle class="sd" cx="430" cy="360" r="20" fill="#80011F" stroke="#FBFCEB" stroke-width="4" />
-              <circle class="sd" cx="670" cy="360" r="20" fill="#80011F" stroke="#FBFCEB" stroke-width="4" />
-            </svg>
-            <div class="stp s1" style="left:80px">Booking</div>
-            <div class="stp s2" style="left:320px">Installments</div>
-            <div class="stp s3" style="left:560px">Handover</div>
-          </div>
-        </div>
-
-        <div id="q1" class="q l3">আপনার next investment কি property হওয়া উচিত?</div>
-        <div id="q2" class="q l3">Family-এর জন্য বড় living space দরকার?</div>
-        <div id="q3" class="q l3">আপনার প্রতিদিনের commute যদি ৩০ মিনিট কমে যায়?</div>
-        <div id="q4" class="q l3">Developer বাছাই করার আগে এই ৩টা জিনিস দেখুন।</div>
-        <div id="q5" class="q l3">Easy payment plan-এ নিজের apartment নেওয়ার সুযোগ।</div>
+        <div id="ads"></div>
+        <div id="pill">− 30 MIN COMMUTE</div>
+        <div id="texts"></div>
       </div>
       <script>
         const tl = gsap.timeline({ paused: true });
+        const H = window.HFX;
+        const T0 = 41.9, at = (g) => +(g - T0).toFixed(3);
         const scope = '[data-composition-id="s08-angles"]';
-        const $ = (s) => document.querySelector(scope + ' ' + s);
-        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; return l; };
+        const $$ = (s) => document.querySelectorAll(scope + ' ' + s);
+        const Q = [
+          "আপনার next investment কি property হওয়া উচিত?",
+          "Family-এর জন্য বড় living space দরকার?",
+          "আপনার প্রতিদিনের commute যদি ৩০ মিনিট কমে যায়?",
+          "Developer বাছাই করার আগে এই ৩টা জিনিস দেখুন।",
+          "Easy payment plan-এ নিজের apartment নেওয়ার সুযোগ।"
+        ];
+        // measured from the voiceover: [“Creative N”, “X angle”, question start, scene end]
+        const W = [
+          [41.99, 43.03, 44.38, 47.5],
+          [47.58, 48.54, 49.76, 52.55],
+          [52.63, 53.62, 54.86, 58.45],
+          [58.55, 59.65, 60.76, 64.2],
+          [64.31, 65.37, 66.47, null]
+        ];
+        const texts = document.querySelector(scope + ' #texts');
+        const ads = [];
+        W.forEach((w, i) => {
+          const g = document.createElement('div');
+          g.innerHTML = `<div class="lbl l4" id="lb${i}" data-layout-allow-overlap>Creative 0${i + 1} / 05</div>
+            <div class="ttl" id="tt${i}" data-layout-allow-overlap><div class="mask"><div class="l2" id="ttw${i}" data-layout-allow-overlap>${H.angles[i].name}</div></div></div>
+            <div class="q" id="q${i}" data-layout-allow-overlap>${Q[i]}</div>`;
+          texts.appendChild(g);
+          ads.push(H.place(document.querySelector(scope + ' #ads'), H.angleAd(i, "a" + i), 540, 830, 0.95));
+        });
 
-        // local = global − 52.45; [in, question, out]
-        const W = [[0.2, 1.2, 2.35], [2.45, 3.45, 5.95], [6.1, 7.2, 8.25], [8.35, 9.2, 11.8], [11.9, 14.05, null]];
-        tl.fromTo("#panel", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 0.15);
-        W.forEach(([tin, tq, tout], k) => {
-          const n = k + 1;
-          tl.fromTo("#h" + n, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, tin);
-          tl.fromTo("#p" + n, { opacity: 0, x: 60 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, tin + 0.05);
-          tl.fromTo("#q" + n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, tq);
-          if (tout !== null) {
-            tl.to(["#h" + n, "#q" + n], { opacity: 0, y: -20, duration: 0.25, ease: "power2.in" }, tout - 0.15);
-            tl.to("#p" + n, { opacity: 0, x: -60, duration: 0.3, ease: "power2.in" }, tout - 0.15);
+        W.forEach(([tc, ta, tq, tend], i) => {
+          const ad = ads[i];
+          // “Creative N” — label + the ad slides in
+          tl.fromTo("#lb" + i, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at(tc) - 0.05);
+          tl.fromTo(ad, { opacity: 0, x: 260, rotation: 4 }, { opacity: 1, x: 0, rotation: 0, duration: 0.6, ease: "power3.out" }, at(tc) - 0.05);
+          // “X angle” — the angle name lands
+          tl.fromTo("#ttw" + i, { yPercent: 125 }, { yPercent: 0, duration: 0.45, ease: "expo.out" }, at(ta) - 0.08);
+          // question — readable, held until the next creative
+          tl.fromTo("#q" + i, { opacity: 0, y: 26 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, at(tq) - 0.1);
+          tl.fromTo(ad, { scale: 0.95 }, { scale: 0.98, duration: (tend || 69.85) - tq, ease: "sine.inOut", immediateRender: false }, at(tq));
+          if (tend !== null) {
+            tl.to(["#lb" + i, "#tt" + i, "#q" + i], { opacity: 0, y: -18, duration: 0.25, ease: "power2.in" }, at(tend) - 0.2);
+            tl.to(ad, { opacity: 0, x: -260, rotation: -4, duration: 0.4, ease: "power2.in" }, at(tend) - 0.2);
           }
         });
-        // 1 · investment trend draws
-        const tLen = dash($("#trend"));
-        tl.fromTo("#trend", { strokeDashoffset: tLen }, { strokeDashoffset: 0, duration: 1.1, ease: "power2.out" }, 0.45);
-        tl.fromTo("#tdot", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(2)" }, 1.45);
-        // 2 · living space expands
-        tl.fromTo("#living", { attr: { width: 230 } }, { attr: { width: 400 }, duration: 1.0, ease: "power3.inOut" }, 3.6);
-        tl.fromTo("#livt", { attr: { x: 445 } }, { attr: { x: 530 }, duration: 1.0, ease: "power3.inOut" }, 3.6);
-        // 3 · route + commute
-        const rLen = dash($("#route"));
-        tl.fromTo("#route", { strokeDashoffset: rLen }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 6.35);
-        tl.fromTo("#commute", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 7.2);
-        // 4 · checklist on "এই ৩টা জিনিস"
-        tl.fromTo(["#c1", "#c2", "#c3"], { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out", stagger: 0.45 }, 9.55);
-        // 5 · payment plan
-        tl.fromTo("#ept", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 13.95);
-        const sLen = dash($("#sline"));
-        tl.fromTo("#sline", { strokeDashoffset: sLen }, { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 14.35);
-        tl.fromTo(scope + " .sd", { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.3, ease: "back.out(2)", stagger: 0.3 }, 14.35);
-        tl.fromTo([scope + " .s1", scope + " .s2", scope + " .s3"], { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.3 }, 14.45);
+
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; return l; };
+        // 1 · investment — trend rises with the angle
+        const tr = ads[0].querySelector('.trend'); const trl = dash(tr);
+        tl.fromTo(tr, { strokeDashoffset: trl }, { strokeDashoffset: 0, duration: 1.2, ease: "power2.out" }, at(43.05));
+        tl.fromTo(ads[0].querySelector('.trend-head'), { opacity: 0 }, { opacity: 1, duration: 0.2 }, at(44.2));
+        // 2 · family — people settle in, the space opens up
+        tl.fromTo(ads[1].querySelectorAll('.people > *'), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.1 }, at(48.6));
+        tl.fromTo(ads[1].querySelector('.expand'), { opacity: 0, scaleX: 0.6, transformOrigin: "50% 50%" }, { opacity: 1, scaleX: 1, duration: 0.6, ease: "power3.out" }, at(50.5));
+        // 3 · location — home → office route, then the time saved
+        const rt = ads[2].querySelector('.route'); const rtl = dash(rt);
+        tl.fromTo(ads[2].querySelectorAll('.pin-home, .pin-office'), { opacity: 0, scale: 0.4, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)", stagger: 0.25 }, at(53.65));
+        tl.fromTo(rt, { strokeDashoffset: rtl }, { strokeDashoffset: 0, duration: 1.3, ease: "power2.inOut" }, at(54.9));
+        tl.fromTo("#pill", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)" }, at(56.2));
+        tl.to("#pill", { opacity: 0, duration: 0.25 }, at(58.25));
+        // 4 · trust — three checks on “এই ৩টা জিনিস”
+        tl.fromTo(ads[3].querySelectorAll('.chk'), { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out", stagger: 0.45 }, at(61.7));
+        tl.fromTo(ads[3].querySelector('.seal'), { scale: 0, transformOrigin: "50% 50%" }, { scale: 1, duration: 0.45, ease: "back.out(1.8)" }, at(59.7));
+        // 5 · offer — the payment plan builds step by step
+        tl.fromTo(ads[4].querySelectorAll('.pstep'), { opacity: 0, x: 20 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out", stagger: 0.4 }, at(66.6));
+        tl.fromTo(ads[4].querySelector('.key'), { rotation: -18, transformOrigin: "30% 30%" }, { rotation: 0, duration: 0.8, ease: "power3.out" }, at(65.4));
         window.__timelines["s08-angles"] = tl;
       </script>
     </template>
