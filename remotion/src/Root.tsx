@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
-import { VIDEO } from "./config/video";
+import { FORMATS, VIDEO } from "./config/video";
+import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
 import { SampleShowcase } from "./compositions/SampleShowcase/SampleShowcase";
 import { TOTAL_FRAMES } from "./compositions/SampleShowcase/timing";
 import "./theme/fonts";
@@ -27,6 +28,15 @@ export const RemotionRoot: React.FC = () => {
           subtitle: "Remotion · Motion Studio",
           cta: "Your next video starts here.",
         }}
+      />
+      <Composition
+        id="FahadIntro"
+        component={FahadIntro}
+        durationInFrames={FAHAD_INTRO_FRAMES}
+        fps={FAHAD_INTRO_FPS}
+        width={FORMATS.portrait.width}
+        height={FORMATS.portrait.height}
+        defaultProps={{ voiceover: "fahad-intro/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>

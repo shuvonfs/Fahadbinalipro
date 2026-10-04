@@ -27,6 +27,8 @@ src/
     SyncedAudio             <Audio> from public/ with fade-in/out
   compositions/
     SampleShowcase/         3 scenes + TransitionSeries (slide, fade); timing.ts holds scene lengths
+    FahadIntro/             1080×1920 personal-brand intro synced to public/fahad-intro/voiceover.mp3;
+                            cues.ts = measured word times (s), scenes/* key every motion to a cue
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs
