@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #yrs { position: absolute; left: 110px; top: 290px; display: flex; align-items: baseline; gap: 22px; }
+        #yrs b { font-size: 170px; font-weight: 800; letter-spacing: -0.04em; color: #720013; line-height: 1; }
+        #tline { position: absolute; left: 110px; top: 520px; width: 860px; height: 6px; border-radius: 3px; background: rgba(114,0,19,0.12); }
+        #tfill { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; border-radius: 3px; background: #80011F; transform-origin: left center; }
+        .tk { position: absolute; top: -9px; width: 24px; height: 24px; border-radius: 50%; background: #FBFCEB; border: 4px solid #80011F; }
+        .ind { position: absolute; width: 420px; height: 210px; padding: 28px; border-radius: 30px; display: flex; flex-direction: column; justify-content: space-between; }
+        .ind b { font-size: 34px; font-weight: 800; letter-spacing: 0.04em; line-height: 1.15; }
+        .ind.hot { background: #720013; border-color: #720013; color: #FBFCEB; }
+        .ind.hot .ic { stroke: #FBFCEB; }
+
+      </style>
+      <div id="root" data-composition-id="s03-industries" data-width="1080" data-height="1920">
+
+        <div id="yrs"><b data-layout-allow-overlap>7+</b><span class="lab" data-layout-allow-overlap>YEARS OF DIGITAL MARKETING</span></div>
+        <div id="tline"><div id="tfill"></div></div>
+        <div id="cards"></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 14.65, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s03-industries"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        const I = [["REAL ESTATE", "building", "hot"], ["STUDY ABROAD", "grad", "hot"], ["TRAVEL", "plane"], ["AUTOMOTIVE", "car"], ["FINANCIAL", "chart"], ["SERVICE BUSINESSES", "nodes"]];
+        const cards = I.map(([l, ic, h], k) => K.put($('#cards'), `<div class="ind glass ${h || ""}">${K.icon(ic, 64)}<b data-layout-allow-overlap>${l}</b></div>`, k % 2 ? 550 : 110, 600 + Math.floor(k / 2) * 240));
+        const ticks = [0, 1, 2, 3, 4, 5, 6].map((k) => K.put($('#tline'), '<div class="tk"></div>', k * 139 - 2, -9));
+        // "গত 7+ বছর"
+        tl.fromTo("#yrs", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at(C.years - 0.1));
+        tl.fromTo("#tfill", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, at(C.years + 0.1));
+        tl.fromTo(ticks, { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2)", stagger: 0.2 }, at(C.years + 0.1));
+        // each industry enters with its spoken emphasis
+        const T = [C.realEstate, C.studyAbroad, C.localIntl, C.localIntl + 0.4, C.localIntl + 0.8, C.service];
+        cards.forEach((c, k) => tl.fromTo(c, { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, at(T[k]) - 0.08));
+
+        window.__timelines["s03-industries"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

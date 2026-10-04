@@ -1,0 +1,88 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #s1 { top: 640px; }
+        #s2 { top: 960px; }
+        #s1 .h1, #s2 .h1 { font-size: 132px; }
+        #jr { top: 1330px; }
+        #frame { position: absolute; left: 300px; top: 300px; width: 480px; height: 640px; border-radius: 40px; overflow: hidden; border: 3px solid rgba(114,0,19,0.25); box-shadow: 0 36px 80px rgba(45,0,1,0.2); }
+        #frame img { width: 100%; height: 100%; object-fit: cover; }
+        #halo { position: absolute; left: 140px; top: 200px; width: 800px; height: 900px; background: radial-gradient(ellipse, rgba(128,1,31,0.2) 0%, rgba(128,1,31,0) 65%); }
+        #nm { top: 990px; }
+        #rl { top: 1150px; }
+        #fl { top: 1250px; padding: 0 120px; }
+        #fl .h3 { font-size: 50px; color: #2D0001; font-weight: 600; }
+
+      </style>
+      <div id="root" data-composition-id="s13-final" data-width="1080" data-height="1920">
+
+        <div id="s1" class="center">
+          <div class="mask"><div class="h1" id="a1" data-layout-allow-overlap>DON'T JUST</div></div>
+          <div class="mask"><div class="h1" id="a2" data-layout-allow-overlap>RUN ADS.</div></div>
+        </div>
+        <div id="s2" class="center">
+          <div class="mask"><div class="h1" id="b1" data-layout-allow-overlap>THINK</div></div>
+          <div class="mask"><div class="h1" id="b2" data-layout-allow-overlap><span class="mark">GROWTH.</span></div></div>
+        </div>
+        <div id="jr" class="center lab" data-layout-allow-overlap>JOIN THE JOURNEY</div>
+        <div id="halo"></div>
+        <div id="frame"><img id="ph" src="assets/fahad.jpg" alt="Fahad" /></div>
+        <div id="nm" class="center"><div class="mask"><div class="h1" id="n1" data-layout-allow-overlap>FAHAD</div></div></div>
+        <div id="rl" class="center h3" data-layout-allow-overlap>Digital Marketing <span class="acc">&amp;</span> Growth</div>
+        <div id="fl" class="center"><div class="h3" id="f1" data-layout-allow-overlap>I'm here to talk about what actually drives <span class="acc">business growth.</span></div></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 82.85, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s13-final"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        // "আপনি যদি শুধু Ads চালানোর মানুষ না"
+        rise("#a1", C.ifYou);
+        rise("#a2", C.ifYou + 0.3);
+        // "বরং Business Growth নিয়ে চিন্তা করেন"
+        rise("#b1", C.thinkGrowth);
+        rise("#b2", C.thinkGrowth + 0.3);
+        // "এই journey-তে আমার সঙ্গে থাকুন"
+        fadeUp("#jr", C.journey);
+        // "আমি Fahad।" — everything simplifies; the portrait returns
+        tl.to(["#s1", "#s2", "#jr"], { opacity: 0, y: -40, duration: 0.45, ease: "power2.in" }, at(C.fahad2 - 0.55));
+        tl.fromTo("#halo", { opacity: 0 }, { opacity: 1, duration: 0.8 }, at(C.fahad2 - 0.2));
+        tl.fromTo("#frame", { opacity: 0, clipPath: "inset(10% 10% 10% 10% round 40px)" }, { opacity: 1, clipPath: "inset(0% 0% 0% 0% round 40px)", duration: 0.8, ease: "power3.out" }, at(C.fahad2 - 0.2));
+        tl.fromTo("#ph", { scale: 1.06 }, { scale: 1, duration: C.end - C.fahad2, ease: "power1.out" }, at(C.fahad2 - 0.2));
+        rise("#n1", C.fahad2);
+        fadeUp("#rl", C.fahad2 + 0.4);
+        // "And I'm here to talk about what actually drives business growth." — held to the end
+        fadeUp("#f1", C.final, 0.6);
+
+        window.__timelines["s13-final"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

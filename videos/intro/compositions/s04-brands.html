@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #hd { position: absolute; left: 0; right: 0; top: 280px; display: flex; justify-content: center; align-items: baseline; gap: 20px; }
+        #hd b { font-size: 140px; font-weight: 800; letter-spacing: -0.04em; color: #720013; line-height: 1; }
+        .bt { position: absolute; width: 170px; height: 104px; border-radius: 20px; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 800; letter-spacing: 0.1em; color: #3F1521; }
+        #exp { position: absolute; left: 0; top: 0; }
+        #wires { position: absolute; left: 0; top: 0; }
+        .env { position: absolute; top: 1130px; width: 400px; height: 170px; border-radius: 28px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; }
+        .env b { font-size: 32px; font-weight: 800; letter-spacing: 0.04em; }
+        #swap { position: absolute; left: 510px; top: 1190px; font-size: 52px; font-weight: 800; color: #80011F; }
+
+      </style>
+      <div id="root" data-composition-id="s04-brands" data-width="1080" data-height="1920">
+
+        <div id="hd"><b data-layout-allow-overlap>8+</b><span class="lab" data-layout-allow-overlap>BRANDS</span></div>
+        <svg id="wires" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="tiles"></div>
+        <div id="expw"></div>
+        <div id="e1" class="env glass"><span id="e1i"></span><b data-layout-allow-overlap>IN-HOUSE</b></div>
+        <div id="swap">↔</div>
+        <div id="e2" class="env glass"><span id="e2i"></span><b data-layout-allow-overlap>AGENCY / FREELANCE</b></div>
+        <div id="gw"></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 23.65, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s04-brands"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        $('#e1i').outerHTML = K.icon("building", 56);
+        $('#e2i').outerHTML = K.icon("laptop", 56);
+        $('#e1').style.left = "90px"; $('#e2').style.left = "590px";
+        const cx = 540, cy = 760, R = 300;
+        const tiles = [...Array(8)].map((_, k) => {
+          const a = -Math.PI / 2 + k * Math.PI / 4;
+          return K.putC($('#tiles'), `<div class="bt glass" data-layout-allow-overlap>BRAND 0${k + 1}</div>`, cx + Math.cos(a) * R * 1.05, cy + Math.sin(a) * R * 0.95);
+        });
+        const exp = K.putC($('#expw'), K.node("EXPERIENCE", "star", "hot"), cx, cy);
+        const g = K.putC($('#gw'), K.node("GROWTH", "growth", "hot"), 540, 1420);
+        const svg = $('#wires');
+        // "প্রায় 8টি Brand"
+        fadeUp("#hd", C.brands - 0.1);
+        tl.fromTo(tiles, { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.6)", stagger: 0.12 }, at(C.brands + 0.1));
+        // the eight merge into one body of experience
+        tiles.forEach((t, k) => {
+          const a = -Math.PI / 2 + k * Math.PI / 4;
+          tl.to(t, { x: -Math.cos(a) * R * 1.05, y: -Math.sin(a) * R * 0.95, scale: 0.4, opacity: 0, duration: 0.7, ease: "power3.in" }, at(C.brands + 1.9) + k * 0.03);
+        });
+        pop(exp, C.brands + 2.45, 0.5);
+        // "In-house এবং Agency/Freelance"
+        tl.fromTo("#e1", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.inhouse - 0.08));
+        tl.fromTo("#e2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.agency - 0.08));
+        fadeUp("#swap", C.agency + 0.2, 0.3);
+        draw(line(svg, "M540 850 L290 1126", 'rgba(114,0,19,0.35)', 3), C.inhouse, 0.4);
+        draw(line(svg, "M540 850 L790 1126", 'rgba(114,0,19,0.35)', 3), C.agency, 0.4);
+        // "দুই ধরনের working environment" → both feed growth
+        draw(line(svg, "M290 1302 C 290 1380, 420 1420, 452 1420", '#80011F', 4), C.environment, 0.45);
+        draw(line(svg, "M790 1302 C 790 1380, 660 1420, 628 1420", '#80011F', 4), C.environment, 0.45);
+        pop(g, C.environment + 0.35, 0.5);
+
+        window.__timelines["s04-brands"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

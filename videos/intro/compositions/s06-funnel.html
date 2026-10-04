@@ -1,0 +1,102 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #ttl { top: 270px; }
+        .band { position: absolute; height: 106px; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; letter-spacing: 0.08em;
+          color: #3F1521; background: rgba(114,0,19,0.08); border: 2px solid rgba(114,0,19,0.16); border-radius: 18px; }
+        .band.hot { background: #720013; border-color: #720013; color: #FBFCEB; }
+        .call { position: absolute; }
+        #drops { position: absolute; left: 0; top: 0; }
+
+      </style>
+      <div id="root" data-composition-id="s06-funnel" data-width="1080" data-height="1920">
+
+        <div id="ttl" class="center lab" data-layout-allow-overlap>WHAT I WANT TO SEE</div>
+        <div id="bands"></div>
+        <svg id="drops" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="calls"></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 36.25, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s06-funnel"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        const ST = ["TRAFFIC", "LEAD", "CONTACTED", "QUALIFIED", "MEETING / SITE VISIT", "SALE", "REVENUE"];
+        const bands = ST.map((l, k) => {
+          const w = 860 - k * 82;
+          return K.put($('#bands'), `<div class="band" style="width:${w}px" data-layout-allow-overlap>${l}</div>`, 540 - w / 2, 400 + k * 122);
+        });
+        const call = (txt, ic, x, y) => K.put($('#calls'), `<div class="pill">${K.icon(ic, 28)}<span data-layout-allow-overlap>${txt}</span></div>`, x, y);
+        const cSrc = call("WHERE LEADS COME FROM", "search", 0, 0); cSrc.style.left = "0"; cSrc.style.right = "0"; cSrc.style.margin = "0 auto"; cSrc.style.width = "fit-content"; cSrc.style.top = "320px";
+        const top = (c) => { c.style.left = "0"; c.style.right = "0"; c.style.margin = "0 auto"; c.style.width = "fit-content"; c.style.top = "320px"; return c; };
+        const cQ = top(call("LEAD QUALITY", "star", 0, 0));
+        const cLk = top(call("FUNNEL LEAKAGE", "leak", 0, 0));
+        const cIm = top(call("CAMPAIGN IMPROVEMENT", "target", 0, 0));
+        const cRv = call("REVENUE", "revenue", 0, 0); cRv.style.left = "0"; cRv.style.right = "0"; cRv.style.margin = "0 auto"; cRv.style.width = "fit-content"; cRv.style.top = "320px";
+        // "আমি দেখতে চাই" — a transparent funnel builds
+        fadeUp("#ttl", C.dekhte - 0.1);
+        tl.fromTo(bands, { opacity: 0, scaleX: 0.85 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, at(C.dekhte));
+        // "কোথা থেকে Lead আসছে"
+        tl.to("#ttl", { opacity: 0, duration: 0.2 }, at(C.source - 0.2));
+        tl.to(bands[0], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.source));
+        fadeUp(cSrc, C.source + 0.1);
+        tl.to(bands[0], { backgroundColor: "rgba(114,0,19,0.08)", color: "#3F1521", duration: 0.3 }, at(C.valuable - 0.2));
+        tl.to(cSrc, { opacity: 0, duration: 0.25 }, at(C.valuable - 0.2));
+        // "কোন Lead সত্যিকার অর্থে Valuable"
+        tl.to(bands[3], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.valuable));
+        fadeUp(cQ, C.valuable + 0.1);
+        tl.to(cQ, { opacity: 0, duration: 0.25 }, at(C.leakage - 0.2));
+        tl.to(bands[3], { backgroundColor: "rgba(114,0,19,0.08)", color: "#3F1521", duration: 0.3 }, at(C.leakage - 0.2));
+        // "Funnel-এর কোথায় Leakage" — a quiet leak, a few particles escape
+        const svg = $('#drops');
+        const leakX = 540 + (860 - 2 * 82) / 2 - 10;
+        [0, 1, 2, 3, 4, 5].forEach((k) => {
+          const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          c.setAttribute('cx', leakX); c.setAttribute('cy', 400 + 2 * 122 + 80); c.setAttribute('r', 9 - (k % 3) * 2); c.setAttribute('fill', '#80011F');
+          svg.appendChild(c);
+          tl.fromTo(c, { opacity: 0, x: 0, y: 0 }, { opacity: 0.9, x: 40 + k * 14, y: 150 + k * 20, duration: 1.1, ease: "power1.in" }, at(C.leakage) + k * 0.16);
+          tl.to(c, { opacity: 0, duration: 0.3 }, at(C.leakage) + k * 0.16 + 1.0);
+        });
+        tl.to(bands[2], { borderColor: "#80011F", duration: 0.3 }, at(C.leakage));
+        fadeUp(cLk, C.leakage + 0.3);
+        tl.to(cLk, { opacity: 0, duration: 0.25 }, at(C.improve - 0.2));
+        fadeUp(cIm, C.improve);
+        tl.to(cIm, { opacity: 0, duration: 0.25 }, at(C.revenue - 0.2));
+        // "Campaign কোথায় Improve করা দরকার" — the top of the funnel tightens
+        tl.to([bands[0], bands[1]], { borderColor: "#80011F", duration: 0.3, yoyo: true, repeat: 1 }, at(C.improve));
+        // "Revenue Growth-এ Contribution"
+                tl.to(bands[6], { backgroundColor: "#80011F", color: "#FBFCEB", scale: 1.08, duration: 0.35 }, at(C.revenue));
+        fadeUp(cRv, C.revenue + 0.15);
+
+        window.__timelines["s06-funnel"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

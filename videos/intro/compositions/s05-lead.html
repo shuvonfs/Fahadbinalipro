@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #stmt { top: 280px; padding: 0 90px; }
+        #wires { position: absolute; left: 0; top: 0; }
+
+      </style>
+      <div id="root" data-composition-id="s05-lead" data-width="1080" data-height="1920">
+
+        <div id="stmt" class="center h3 bn" data-layout-allow-overlap>শুধু <span class="acc">Lead Generate</span> করা নয়</div>
+        <svg id="wires" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="nodes"></div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 31.95, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s05-lead"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        const svg = $('#wires');
+        // the conventional view: AD → LEAD
+        const ad0 = K.putC($('#nodes'), K.node("AD", "ads"), 330, 820);
+        const lead0 = K.putC($('#nodes'), K.node("LEAD", "users", "hot"), 750, 820);
+        const arr0 = line(svg, "M430 820 H 630", '#720013', 4);
+        fadeUp("#stmt", C.focus);
+        pop(ad0, C.focus + 0.1);
+        draw(arr0, C.focus + 0.4, 0.4);
+        pop(lead0, C.focus + 0.7);
+        // pause on "নয়" … then LEAD becomes one small step of a much longer chain
+        const CH = [["AD", "ads"], ["LEAD", "users"], ["CONTACTED", "phone"], ["QUALIFIED", "check"], ["MEETING / SITE VISIT", "cal"], ["SALE", "tag"], ["REVENUE", "revenue"]];
+        const chain = CH.map(([l, ic], k) => K.putC($('#nodes'), K.node(l, ic, k === 6 ? "hot" : (k === 1 ? "sm" : "")), 540, 500 + k * 150));
+        const t0 = C.leadGen + 0.6;
+        tl.to([ad0, lead0], { opacity: 0, scale: 0.8, duration: 0.35, ease: "power2.in" }, at(t0 - 0.35));
+        tl.to(arr0, { opacity: 0, duration: 0.2 }, at(t0 - 0.35));
+        tl.to("#stmt", { y: -60, opacity: 0.45, duration: 0.4 }, at(t0 - 0.35));
+        const span = Math.max(1.6, (C.dekhte - 0.5) - t0);
+        chain.forEach((n, k) => {
+          tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at(t0) + k * span / 7);
+          if (k < 6) draw(line(svg, `M540 ${540 + k * 150} V ${610 + k * 150}`, 'rgba(114,0,19,0.45)', 3), t0 + k * span / 7 + 0.2, 0.2);
+        });
+
+        window.__timelines["s05-lead"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

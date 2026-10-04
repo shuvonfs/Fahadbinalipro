@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        #ttl { top: 270px; }
+        #me { position: absolute; left: 420px; top: 820px; width: 240px; height: 240px; border-radius: 50%; overflow: hidden; border: 6px solid #720013; box-shadow: 0 30px 70px rgba(114,0,19,0.25); }
+        #me img { width: 100%; height: 133%; object-fit: cover; object-position: 50% 12%; }
+        #mel { position: absolute; left: 0; right: 0; top: 1075px; text-align: center; font-size: 34px; font-weight: 800; letter-spacing: 0.14em; color: #720013; }
+        #orb { position: absolute; left: 0; top: 0; }
+        #sub { top: 1500px; }
+
+      </style>
+      <div id="root" data-composition-id="s12-content" data-width="1080" data-height="1920">
+
+        <div id="ttl" class="center lab" data-layout-allow-overlap>ON THIS PLATFORM</div>
+        <svg id="orb" width="1080" height="1920" viewBox="0 0 1080 1920"></svg>
+        <div id="me"><img src="assets/fahad.jpg" alt="Fahad" /></div>
+        <div id="mel" data-layout-allow-overlap>FAHAD</div>
+        <div id="topics"></div>
+        <div id="sub" class="center lab" data-layout-allow-overlap>EXPERIENCE · ANALYSIS · PRACTICAL THINKING</div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 72.65, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s12-content"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        const svg = $('#orb');
+        const ring = line(svg, "M540 440 A 360 500 0 1 1 539.9 440 Z", 'rgba(114,0,19,0.18)', 2);
+        const TP = [["META ADS", "ads", "metaAds"], ["GOOGLE ADS", "search", "googleAds"], ["AI", "ai", "ai"], ["AUTOMATION", "gear", "automation"], ["FUNNEL", "funnel", "funnel2"], ["DATA", "db", "data2"], ["BUSINESS GROWTH", "growth", "bizGrowth"]];
+        const cx = 540, cy = 940, rx = 330, ry = 480;
+        const base = TP.map((_, k) => -Math.PI / 2 + k * (2 * Math.PI / TP.length));
+        const tops = TP.map(([l, ic], k) => K.putC($('#topics'), K.node(l, ic, k === 6 ? "hot sm" : "sm"), cx + Math.cos(base[k]) * rx, cy + Math.sin(base[k]) * ry));
+        fadeUp("#ttl", C.platform);
+        pop("#me", C.platform + 0.2, 0.55);
+        fadeUp("#mel", C.platform + 0.4);
+        draw(ring, C.platform + 0.5, 1.2);
+        // each topic card enters as it is named
+        TP.forEach(([, , cue], k) => pop(tops[k], C[cue] - 0.08, 0.35));
+        // the ecosystem slowly rotates around Fahad (seek-safe: positions derive from one tweened angle)
+        const rot = { a: 0 };
+        tl.to(rot, { a: 0.55, duration: Math.max(1, C.ifYou - 0.4 - C.bizGrowth), ease: "sine.inOut",
+          onUpdate: () => tops.forEach((t, k) => { gsap.set(t, { left: cx + Math.cos(base[k] + rot.a) * rx, top: cy + Math.sin(base[k] + rot.a) * ry }); }) }, at(C.bizGrowth));
+        fadeUp("#sub", C.experience);
+
+        window.__timelines["s12-content"] = tl;
+      </script>
+    </template>
+  </body>
+</html>

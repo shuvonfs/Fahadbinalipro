@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+  <head><meta charset="UTF-8" /></head>
+  <body>
+    <template>
+      <style>
+        #root { position: absolute; inset: 0; }
+
+        .pnl { position: absolute; top: 420px; width: 430px; height: 720px; padding: 34px 30px; border-radius: 32px; }
+        .pnl h4 { font-size: 40px; font-weight: 800; letter-spacing: 0.06em; margin: 14px 0 26px; }
+        .mrow { display: flex; align-items: center; justify-content: space-between; height: 150px; border-top: 2px solid rgba(114,0,19,0.1); }
+        .mrow span { font-size: 28px; font-weight: 800; letter-spacing: 0.04em; }
+        .mrow em { font-style: normal; font-size: 44px; font-weight: 800; color: #80011F; }
+        .mrow svg.sp { width: 120px; height: 60px; }
+        #neq { top: 1230px; }
+        #neq .h2 { font-size: 64px; }
+
+      </style>
+      <div id="root" data-composition-id="s07-campaign" data-width="1080" data-height="1920">
+
+        <div id="pl" class="pnl glass" style="left:100px"><span class="lab">DASHBOARD</span><h4 data-layout-allow-overlap>CAMPAIGN</h4><div id="lrows"></div></div>
+        <div id="pr" class="pnl glass" style="left:550px"><span class="lab">REALITY</span><h4 data-layout-allow-overlap>BUSINESS</h4><div id="rrows"></div></div>
+        <div id="neq" class="center">
+          <div class="mask"><div class="h2" id="n1" data-layout-allow-overlap>GOOD CAMPAIGN <span class="acc">≠</span></div></div>
+          <div class="mask"><div class="h2" id="n2" data-layout-allow-overlap>AUTOMATIC <span class="mark">BUSINESS GROWTH</span></div></div>
+        </div>
+
+      </div>
+      <script>
+        const tl = gsap.timeline({ paused: true });
+        const K = window.KIT;
+        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
+        const T0 = 49.25, at = (g) => +(g - T0).toFixed(3);
+        const scope = '[data-composition-id="s07-campaign"]';
+        const $ = (s) => document.querySelector(scope + ' ' + s);
+        const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
+        const rise = (sel, t, d) => tl.fromTo(sel, { yPercent: 125 }, { yPercent: 0, duration: d || 0.5, ease: "expo.out" }, at(t));
+        const fadeUp = (sel, t, d) => tl.fromTo(sel, { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: d || 0.45, ease: "power3.out" }, at(t));
+        const pop = (sel, t, d) => tl.fromTo(sel, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: d || 0.45, ease: "back.out(1.5)" }, at(t));
+        const fadeOut = (sel, t, d) => tl.to(sel, { opacity: 0, duration: d || 0.3, ease: "power2.in" }, at(t));
+        const dash = (el) => { const l = el.getTotalLength(); el.style.strokeDasharray = l; el.style.strokeDashoffset = l; return l; };
+        const draw = (el, t, d) => { const l = dash(el); tl.fromTo(el, { strokeDashoffset: l }, { strokeDashoffset: 0, duration: d || 0.6, ease: "power2.inOut" }, at(t)); };
+        const line = (svg, d, stroke, w) => {
+          const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', stroke || 'rgba(114,0,19,0.35)');
+          p.setAttribute('stroke-width', w || 3); p.setAttribute('stroke-linecap', 'round'); svg.appendChild(p); return p;
+        };
+        const pulse = (svg, d, t, until, w) => {
+          const p = line(svg, d, '#80011F', w || 6); const len = p.getTotalLength(); p.style.strokeDasharray = `22 ${len}`;
+          const n = Math.max(1, Math.floor((until - t) / 0.9));
+          tl.fromTo(p, { strokeDashoffset: 22 }, { strokeDashoffset: -len, duration: 0.9, ease: "none", repeat: n - 1 }, at(t));
+          return p;
+        };
+
+        const sp = (d) => `<svg class="sp" viewBox="0 0 120 60"><path d="${d}" fill="none" stroke="#80011F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+        const L = [["CTR", "↑", "M4 50 L40 40 L70 28 L116 8"], ["LEADS", "↑", "M4 52 L40 44 L74 22 L116 10"], ["CPL", "↓", "M4 10 L40 22 L74 36 L116 50"]];
+        const Rr = [["QUALIFIED", "?", "M4 40 L40 36 L74 38 L116 34"], ["SALES", "?", "M4 42 L40 42 L74 38 L116 40"], ["REVENUE", "?", "M4 40 L40 38 L74 40 L116 37"]];
+        const lrows = L.map(([n, a, d]) => { const r = K.el(`<div class="mrow"><span data-layout-allow-overlap>${n}</span>${sp(d)}<em data-layout-allow-overlap>${a}</em></div>`); $('#lrows').appendChild(r); return r; });
+        const rrows = Rr.map(([n, a, d]) => { const r = K.el(`<div class="mrow"><span data-layout-allow-overlap>${n}</span>${sp(d)}<em data-layout-allow-overlap>${a}</em></div>`); $('#rrows').appendChild(r); return r; });
+        $$('.sp path').forEach((p) => dash(p));
+        // "একটা Campaign ভালো Perform করছে" — the campaign side looks great
+        tl.fromTo("#pl", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.campaign - 0.1));
+        lrows.forEach((r, k) => { tl.fromTo(r, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at(C.campaign + 0.2 + k * 0.25)); tl.to(r.querySelector('path'), { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, at(C.campaign + 0.3 + k * 0.25)); });
+        // "মানেই Business ভালো Perform করছে" — the business side doesn't move the same way
+        tl.fromTo("#pr", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.business - 0.1));
+        rrows.forEach((r, k) => { tl.fromTo(r, { opacity: 0 }, { opacity: 1, duration: 0.3 }, at(C.business + 0.2 + k * 0.25)); tl.to(r.querySelector('path'), { strokeDashoffset: 0, duration: 0.6, ease: "power2.out" }, at(C.business + 0.3 + k * 0.25)); });
+        // "এটা সবসময় সত্যি না"
+        rise("#n1", C.notTrue);
+        rise("#n2", C.notTrue + 0.3);
+
+        window.__timelines["s07-campaign"] = tl;
+      </script>
+    </template>
+  </body>
+</html>
