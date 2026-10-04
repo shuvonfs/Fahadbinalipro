@@ -25,8 +25,8 @@
       <script>
         const tl = gsap.timeline({ paused: true });
         const K = window.KIT;
-        const C = {"notAds": 2.0, "growth": 4.6, "strategy": 6.6, "audience": 7.4, "creative": 8.2, "data": 8.9, "funnel": 9.5, "decision": 11.0, "fahad": 13.0, "years": 15.0, "realEstate": 16.4, "studyAbroad": 17.5, "localIntl": 19.3, "service": 21.4, "brands": 24.0, "inhouse": 27.2, "agency": 28.4, "environment": 29.8, "focus": 32.3, "leadGen": 34.3, "dekhte": 36.6, "source": 37.6, "valuable": 39.4, "leakage": 41.8, "improve": 44.2, "revenue": 46.6, "campaign": 49.6, "business": 51.6, "notTrue": 53.6, "today": 56.0, "dataDriven": 57.6, "aiPowered": 58.6, "connected": 59.6, "advertising": 61.6, "marketing": 63.0, "growthSystem": 65.2, "reStudy": 68.2, "service2": 70.6, "platform": 73.0, "metaAds": 74.6, "googleAds": 75.3, "ai": 76.0, "automation": 76.6, "funnel2": 77.4, "data2": 78.0, "bizGrowth": 78.7, "experience": 80.0, "ifYou": 83.2, "thinkGrowth": 85.0, "journey": 87.2, "fahad2": 90.4, "final": 91.6, "end": 98.5};
-        const T0 = 36.25, at = (g) => +(g - T0).toFixed(3);
+        const C = {"notAds": 2.1, "growth": 4.2, "strategy": 6.8, "audience": 7.9, "creative": 8.95, "data": 9.85, "funnel": 10.68, "decision": 13.2, "fahad": 15.05, "years": 16.55, "realEstate": 17.9, "studyAbroad": 18.66, "localIntl": 20.8, "service": 22.2, "brands": 26.2, "inhouse": 28.45, "agency": 29.3, "environment": 30.8, "focus": 34.25, "leadGen": 36.1, "dekhte": 38.04, "source": 38.92, "valuable": 40.4, "leakage": 43.2, "improve": 44.2, "revenue": 48.65, "campaign": 51.5, "business": 53.3, "notTrue": 54.95, "today": 56.7, "dataDriven": 58.9, "aiPowered": 59.78, "connected": 60.9, "advertising": 62.0, "marketing": 63.0, "growthSystem": 65.05, "reStudy": 68.2, "service2": 71.5, "platform": 75.2, "metaAds": 77.95, "googleAds": 78.83, "ai": 79.67, "automation": 80.3, "funnel2": 81.19, "data2": 81.79, "bizGrowth": 82.67, "experience": 83.87, "ifYou": 87.15, "thinkGrowth": 89.3, "journey": 91.4, "fahad2": 93.65, "final": 95.4, "end": 98.508};
+        const T0 = 38.62, at = (g) => +(g - T0).toFixed(3);
         const scope = '[data-composition-id="s06-funnel"]';
         const $ = (s) => document.querySelector(scope + ' ' + s);
         const $$ = (s) => Array.from(document.querySelectorAll(scope + ' ' + s));
@@ -61,11 +61,10 @@
         const cIm = top(call("CAMPAIGN IMPROVEMENT", "target", 0, 0));
         const cRv = call("REVENUE", "revenue", 0, 0); cRv.style.left = "0"; cRv.style.right = "0"; cRv.style.margin = "0 auto"; cRv.style.width = "fit-content"; cRv.style.top = "320px";
         // "আমি দেখতে চাই" — a transparent funnel builds
-        fadeUp("#ttl", C.dekhte - 0.1);
-        tl.fromTo(bands, { opacity: 0, scaleX: 0.85 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, at(C.dekhte));
+        gsap.set("#ttl", { opacity: 0 });
+        tl.fromTo(bands, { opacity: 0, scaleX: 0.85 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power3.out", stagger: 0.06 }, at(C.source - 0.3));
         // "কোথা থেকে Lead আসছে"
-        tl.to("#ttl", { opacity: 0, duration: 0.2 }, at(C.source - 0.2));
-        tl.to(bands[0], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.source));
+                tl.to(bands[0], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.source));
         fadeUp(cSrc, C.source + 0.1);
         tl.to(bands[0], { backgroundColor: "rgba(114,0,19,0.08)", color: "#3F1521", duration: 0.3 }, at(C.valuable - 0.2));
         tl.to(cSrc, { opacity: 0, duration: 0.25 }, at(C.valuable - 0.2));

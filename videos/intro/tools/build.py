@@ -3,8 +3,8 @@ import os, json
 from gen import C, ROOT
 
 SCENES = [  # id, start cue, lead-in (s)
-    ("s01-system", None, 0), ("s02-profile", "fahad", 0.35), ("s03-industries", "years", 0.35), ("s04-brands", "brands", 0.35),
-    ("s05-lead", "focus", 0.35), ("s06-funnel", "dekhte", 0.35), ("s07-campaign", "campaign", 0.35), ("s08-modern", "today", 0.35),
+    ("s01-system", None, 0), ("s02-profile", "fahad", 0.35), ("s03-industries", "realEstate", 0.55), ("s04-brands", "brands", 0.35),
+    ("s05-lead", "focus", 0.35), ("s06-funnel", "source", 0.3), ("s07-campaign", "campaign", 0.35), ("s08-modern", "today", 0.35),
     ("s09-nested", "advertising", 0.35), ("s10-system", "growthSystem", 0.3), ("s11-market", "reStudy", 0.35), ("s12-content", "platform", 0.35),
     ("s13-final", "ifYou", 0.35),
 ]

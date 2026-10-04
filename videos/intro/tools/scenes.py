@@ -86,10 +86,11 @@ scene("s02-profile", S["s02-profile"], '''
         // the portrait is the hero — revealed with a soft mask, then only a slow push-in
         tl.fromTo("#halo", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power2.out" }, at(C.fahad - 0.3));
         tl.fromTo("#frame", { clipPath: "inset(12% 12% 12% 12% round 44px)", opacity: 0 }, { clipPath: "inset(0% 0% 0% 0% round 44px)", opacity: 1, duration: 0.8, ease: "power3.out" }, at(C.fahad - 0.25));
-        tl.fromTo("#ph", { scale: 1.08 }, { scale: 1.0, duration: (C.years - C.fahad) + 0.3, ease: "power1.out" }, at(C.fahad - 0.25));
+        tl.fromTo("#ph", { scale: 1.08 }, { scale: 1.0, duration: (C.realEstate - C.fahad) + 0.2, ease: "power1.out" }, at(C.fahad - 0.25));
         rise("#nm", C.fahad, 0.55);
         fadeUp("#role", C.fahad + 0.45);
         fadeUp("#desc", C.fahad + 0.8);
+        tl.to("#desc", { color: "#80011F", scale: 1.06, duration: 0.35, ease: "power2.out" }, at(C.years));
 ''')
 
 # ───────────────────────── 03 · EXPERIENCE / INDUSTRIES ─────────────────────────
@@ -113,9 +114,9 @@ scene("s03-industries", S["s03-industries"], '''
         const cards = I.map(([l, ic, h], k) => K.put($('#cards'), `<div class="ind glass ${h || ""}">${K.icon(ic, 64)}<b data-layout-allow-overlap>${l}</b></div>`, k % 2 ? 550 : 110, 600 + Math.floor(k / 2) * 240));
         const ticks = [0, 1, 2, 3, 4, 5, 6].map((k) => K.put($('#tline'), '<div class="tk"></div>', k * 139 - 2, -9));
         // "গত 7+ বছর"
-        tl.fromTo("#yrs", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, at(C.years - 0.1));
-        tl.fromTo("#tfill", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, at(C.years + 0.1));
-        tl.fromTo(ticks, { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2)", stagger: 0.2 }, at(C.years + 0.1));
+        tl.fromTo("#yrs", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, at(C.realEstate - 0.55));
+        tl.fromTo("#tfill", { scaleX: 0 }, { scaleX: 1, duration: 1.4, ease: "power2.inOut" }, at(C.realEstate - 0.4));
+        tl.fromTo(ticks, { scale: 0 }, { scale: 1, duration: 0.25, ease: "back.out(2)", stagger: 0.2 }, at(C.realEstate - 0.4));
         // each industry enters with its spoken emphasis
         const T = [C.realEstate, C.studyAbroad, C.localIntl, C.localIntl + 0.4, C.localIntl + 0.8, C.service];
         cards.forEach((c, k) => tl.fromTo(c, { opacity: 0, y: 30, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, at(T[k]) - 0.08));
@@ -158,9 +159,9 @@ scene("s04-brands", S["s04-brands"], '''
         // the eight merge into one body of experience
         tiles.forEach((t, k) => {
           const a = -Math.PI / 2 + k * Math.PI / 4;
-          tl.to(t, { x: -Math.cos(a) * R * 1.05, y: -Math.sin(a) * R * 0.95, scale: 0.4, opacity: 0, duration: 0.7, ease: "power3.in" }, at(C.brands + 1.9) + k * 0.03);
+          tl.to(t, { x: -Math.cos(a) * R * 1.05, y: -Math.sin(a) * R * 0.95, scale: 0.4, opacity: 0, duration: 0.7, ease: "power3.in" }, at(C.brands + 1.45) + k * 0.03);
         });
-        pop(exp, C.brands + 2.45, 0.5);
+        pop(exp, C.brands + 1.95, 0.5);
         // "In-house এবং Agency/Freelance"
         tl.fromTo("#e1", { opacity: 0, x: -40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.inhouse - 0.08));
         tl.fromTo("#e2", { opacity: 0, x: 40 }, { opacity: 1, x: 0, duration: 0.45, ease: "power3.out" }, at(C.agency - 0.08));
@@ -195,11 +196,11 @@ scene("s05-lead", S["s05-lead"], '''
         // pause on "নয়" … then LEAD becomes one small step of a much longer chain
         const CH = [["AD", "ads"], ["LEAD", "users"], ["CONTACTED", "phone"], ["QUALIFIED", "check"], ["MEETING / SITE VISIT", "cal"], ["SALE", "tag"], ["REVENUE", "revenue"]];
         const chain = CH.map(([l, ic], k) => K.putC($('#nodes'), K.node(l, ic, k === 6 ? "hot" : (k === 1 ? "sm" : "")), 540, 500 + k * 150));
-        const t0 = C.leadGen + 0.6;
+        const t0 = C.leadGen + 1.0;
         tl.to([ad0, lead0], { opacity: 0, scale: 0.8, duration: 0.35, ease: "power2.in" }, at(t0 - 0.35));
         tl.to(arr0, { opacity: 0, duration: 0.2 }, at(t0 - 0.35));
         tl.to("#stmt", { y: -60, opacity: 0.45, duration: 0.4 }, at(t0 - 0.35));
-        const span = Math.max(1.6, (C.dekhte - 0.5) - t0);
+        const span = Math.max(1.6, (C.source - 0.55) - t0);
         chain.forEach((n, k) => {
           tl.fromTo(n, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, at(t0) + k * span / 7);
           if (k < 6) draw(line(svg, `M540 ${540 + k * 150} V ${610 + k * 150}`, 'rgba(114,0,19,0.45)', 3), t0 + k * span / 7 + 0.2, 0.2);
@@ -234,11 +235,10 @@ scene("s06-funnel", S["s06-funnel"], '''
         const cIm = top(call("CAMPAIGN IMPROVEMENT", "target", 0, 0));
         const cRv = call("REVENUE", "revenue", 0, 0); cRv.style.left = "0"; cRv.style.right = "0"; cRv.style.margin = "0 auto"; cRv.style.width = "fit-content"; cRv.style.top = "320px";
         // "আমি দেখতে চাই" — a transparent funnel builds
-        fadeUp("#ttl", C.dekhte - 0.1);
-        tl.fromTo(bands, { opacity: 0, scaleX: 0.85 }, { opacity: 1, scaleX: 1, duration: 0.4, ease: "power3.out", stagger: 0.1 }, at(C.dekhte));
+        gsap.set("#ttl", { opacity: 0 });
+        tl.fromTo(bands, { opacity: 0, scaleX: 0.85 }, { opacity: 1, scaleX: 1, duration: 0.35, ease: "power3.out", stagger: 0.06 }, at(C.source - 0.3));
         // "কোথা থেকে Lead আসছে"
-        tl.to("#ttl", { opacity: 0, duration: 0.2 }, at(C.source - 0.2));
-        tl.to(bands[0], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.source));
+                tl.to(bands[0], { backgroundColor: "#720013", color: "#FBFCEB", duration: 0.3 }, at(C.source));
         fadeUp(cSrc, C.source + 0.1);
         tl.to(bands[0], { backgroundColor: "rgba(114,0,19,0.08)", color: "#3F1521", duration: 0.3 }, at(C.valuable - 0.2));
         tl.to(cSrc, { opacity: 0, duration: 0.25 }, at(C.valuable - 0.2));
@@ -279,7 +279,7 @@ scene("s07-campaign", S["s07-campaign"], '''
         .mrow em { font-style: normal; font-size: 44px; font-weight: 800; color: #80011F; }
         .mrow svg.sp { width: 120px; height: 60px; }
         #neq { top: 1230px; }
-        #neq .h2 { font-size: 64px; }
+        #neq .h2 { font-size: 56px; }
 ''', '''
         <div id="pl" class="pnl glass" style="left:100px"><span class="lab">DASHBOARD</span><h4 data-layout-allow-overlap>CAMPAIGN</h4><div id="lrows"></div></div>
         <div id="pr" class="pnl glass" style="left:550px"><span class="lab">REALITY</span><h4 data-layout-allow-overlap>BUSINESS</h4><div id="rrows"></div></div>
@@ -330,7 +330,7 @@ scene("s08-modern", S["s08-modern"], '''
         // a subtle ecosystem: two acquisition paths → one growth outcome (no platform logos)
         const F = ["WEBSITE", "CRM", "CUSTOMER", "REVENUE"];
         const rows = [["META", 760], ["GOOGLE", 960]];
-        const t0 = C.connected + 0.6;
+        const t0 = C.today + 0.15;
         rows.forEach(([src, y], r) => {
           const xs = [140, 320, 500, 690, 880];
           const items = [src, ...F].map((l, k) => K.putC($('#eco'), K.node(l, null, "sm" + (k === 0 ? " hot" : "")), xs[k], y));
@@ -370,9 +370,9 @@ scene("s09-nested", S["s09-nested"], '''
         pop("#ad", C.advertising - 0.1, 0.5);
         tl.fromTo("#mk", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at(C.marketing - 0.3));
         tl.to("#grp", { scale: 1.3, duration: 1.0, ease: "power3.inOut" }, at(C.marketing - 0.3));
-        tl.fromTo("#gr", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at(C.marketing + 0.8));
-        tl.to("#grp", { scale: 1.0, duration: 1.0, ease: "power3.inOut" }, at(C.marketing + 0.8));
-        fadeUp("#formula", C.marketing + 1.4);
+        tl.fromTo("#gr", { opacity: 0 }, { opacity: 1, duration: 0.4 }, at(C.marketing + 0.6));
+        tl.to("#grp", { scale: 1.0, duration: 0.8, ease: "power3.inOut" }, at(C.marketing + 0.6));
+        fadeUp("#formula", C.marketing + 1.0);
 ''')
 
 # ───────────────────────── 10 · GROWTH SYSTEM (hero) ─────────────────────────
@@ -427,7 +427,7 @@ scene("s11-market", S["s11-market"], '''
         $('#fi1').outerHTML = K.icon("building", 96); $('#fi2').outerHTML = K.icon("grad", 96); $('#si').outerHTML = K.icon("nodes", 30);
         fadeUp("#ttl", C.reStudy - 0.1);
         pop("#f1", C.reStudy, 0.5);
-        pop("#f2", C.reStudy + 0.6, 0.5);
+        pop("#f2", C.reStudy + 0.9, 0.5);
         // a wider ring opens around them: broader service businesses
         tl.fromTo("#wide", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.9, ease: "power3.out" }, at(C.service2 - 0.1));
         fadeUp("#svc", C.service2 + 0.4);
