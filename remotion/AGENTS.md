@@ -24,7 +24,9 @@ src/
     components/             At (positioned pop-in), Headline/Rise/Eyebrow, Card, Pill, Lines + SignalLine,
                             AIEngine (uncertain/active), Node, Bar, ValueBar (LOW→HIGH, no numbers),
                             LeadCard, SearchBar, SettingRow, AdPreview, PageWire, Icon, Backdrop, SceneFader,
-                            PromptBox, BriefSection, AssetTile, ChapterTitle, Camera, Wipe, OutputCard, typed
+                            PromptBox, BriefSection, AssetTile, ChapterTitle, Camera, Wipe, OutputCard, typed,
+                            CreativeSignalCanvas (+canvasTrack/canvasPoint), Trail, Pulse, Ripple, PersonNode,
+                            ParticleField, SystemField
   components/               generic building blocks (import from "../../components")
     AnimatedText            kinetic type: per-word/char masked rise, stagger, highlight words
     Background              ivory backdrop + drifting grid + glow
@@ -40,6 +42,8 @@ src/
                             cues.ts = measured word times + scene windows, scenes/Act1–3 (19 scenes)
     AIMaxBriefing/          1920×1080 thought-leadership piece (257.9s) synced to public/ai-max-briefing/voiceover.mp3;
                             cues.ts (word times + SCENES with concepts), scenes/Act1–3 (28 scenes)
+    MetaCreativeSignal/     1920×1080 experimental piece (108.3s): one protagonist CreativeSignalCanvas keyframed across the whole
+                            timeline (protagonist.ts) + signal trails, reaction nodes, particle fields (scenes/Act1–2)
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs

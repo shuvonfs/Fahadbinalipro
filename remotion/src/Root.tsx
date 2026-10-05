@@ -3,6 +3,7 @@ import { FORMATS, VIDEO } from "./config/video";
 import { AI_MAX_BRIEFING_FPS, AI_MAX_BRIEFING_FRAMES, AIMaxBriefing } from "./compositions/AIMaxBriefing/AIMaxBriefing";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
 import { GOOGLE_ADS_AI_FPS, GOOGLE_ADS_AI_FRAMES, GoogleAdsAI } from "./compositions/GoogleAdsAI/GoogleAdsAI";
+import { META_CREATIVE_SIGNAL_FPS, META_CREATIVE_SIGNAL_FRAMES, MetaCreativeSignal } from "./compositions/MetaCreativeSignal/MetaCreativeSignal";
 import { SampleShowcase } from "./compositions/SampleShowcase/SampleShowcase";
 import { TOTAL_FRAMES } from "./compositions/SampleShowcase/timing";
 import "./theme/fonts";
@@ -57,6 +58,15 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO.width}
         height={VIDEO.height}
         defaultProps={{ voiceover: "ai-max-briefing/voiceover.mp3" }}
+      />
+      <Composition
+        id="MetaCreativeSignal"
+        component={MetaCreativeSignal}
+        durationInFrames={META_CREATIVE_SIGNAL_FRAMES}
+        fps={META_CREATIVE_SIGNAL_FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{ voiceover: "meta-creative-signal/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>
