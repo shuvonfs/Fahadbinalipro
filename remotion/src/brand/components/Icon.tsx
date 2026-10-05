@@ -44,6 +44,21 @@ const P = {
   money: '<rect x="3" y="6.5" width="18" height="11" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6.5 9.5v5M17.5 9.5v5"/>',
   page: '<rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 8.5h16M7.5 12h9M7.5 15.5h5"/>',
   cursor: '<path d="M6 3.5l12 7-5.2 1.5L10 17.5z"/>',
+  student: '<path d="M2.5 9L12 4.8 21.5 9 12 13.2z"/><path d="M6.5 11v4.2c0 1.4 2.5 2.8 5.5 2.8s5.5-1.4 5.5-2.8V11"/>',
+  uni: '<path d="M3 9.5L12 5l9 4.5M4.5 10.5v7M9 10.5v7M15 10.5v7M19.5 10.5v7M3 20h18"/>',
+  book: '<path d="M4 5.5c2.7-1 5.3-1 8 .7 2.7-1.7 5.3-1.7 8-.7v13c-2.7-1-5.3-1-8 .7-2.7-1.7-5.3-1.7-8-.7z"/><path d="M12 6.2v13"/>',
+  passport: '<rect x="5" y="3.5" width="14" height="17" rx="2"/><circle cx="12" cy="10.5" r="3"/><path d="M9 16.5h6"/>',
+  wallet: '<rect x="3.5" y="6" width="17" height="13" rx="2"/><path d="M16 12.5h4.5M3.5 9.5h17M6 6l9-2.5 1 2.5"/>',
+  steth: '<path d="M6 3.5v5a4 4 0 0 0 8 0v-5"/><path d="M10 12.5v2a4.5 4.5 0 0 0 9 0V13"/><circle cx="19" cy="11" r="2"/>',
+  heart: '<path d="M12 19.5s-7.5-4.6-7.5-10A4.1 4.1 0 0 1 12 7.2a4.1 4.1 0 0 1 7.5 2.3c0 5.4-7.5 10-7.5 10z"/>',
+  plan: '<rect x="3.5" y="4" width="17" height="16" rx="1.5"/><path d="M3.5 12h7V4M10.5 16v4M14.5 4v6h6M14.5 14h6"/>',
+  pool: '<path d="M3 16c1.5 1.2 3 1.2 4.5 0s3-1.2 4.5 0 3 1.2 4.5 0 3-1.2 4.5 0M8 13V5.5a2 2 0 0 1 4 0M14 13V5.5a2 2 0 0 1 4 0M8 8h6M8 11h6"/>',
+  family: '<circle cx="7.5" cy="7" r="2.3"/><circle cx="16.5" cy="7" r="2.3"/><circle cx="12" cy="13" r="1.8"/><path d="M3.5 19c.5-3 2-5 4-5s3 .8 3.4 1.8M20.5 19c-.5-3-2-5-4-5s-3 .8-3.4 1.8M9 20c.4-2 1.5-3.2 3-3.2s2.6 1.2 3 3.2"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+  lever: '<path d="M5 19h14M8 19l6-12"/><circle cx="14.5" cy="6" r="2.2"/>',
+  write: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>',
+  boundary: '<rect x="3.5" y="3.5" width="17" height="17" rx="5" stroke-dasharray="3 3"/><path d="M9 12l2 2 4-4"/>',
+  route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3.5 3.5 0 0 0 0-7h-4a3.5 3.5 0 0 1 0-7h6"/>',
 } satisfies Record<string, string>;
 export type IconName = keyof typeof P;
 

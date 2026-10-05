@@ -9,16 +9,16 @@ import { Icon, IconName } from "./Icon";
 import { Card } from "./Primitives";
 
 /** Search bar that types `query` between `at` and `at + typeDur`. */
-export const SearchBar: React.FC<{ t: number; at: number; query: string; typeDur?: number; w?: number }> = ({ t, at, query, typeDur = 1.6, w = 1100 }) => {
+export const SearchBar: React.FC<{ t: number; at: number; query: string; typeDur?: number; w?: number; size?: number }> = ({ t, at, query, typeDur = 1.6, w = 1100, size = 38 }) => {
   const n = Math.floor(interpolate(t, [at, at + typeDur], [0, query.length], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }));
   const caret = t < at + typeDur + 0.6 ? (Math.floor(t * 2.4) % 2 === 0 ? 1 : 0) : 0;
   return (
-    <div style={{ width: w, height: 104, borderRadius: 999, background: "#fff", border: `2px solid ${INK.line}`,
-      boxShadow: "0 24px 60px rgba(45,0,1,0.08)", display: "flex", alignItems: "center", gap: 22, padding: "0 40px", boxSizing: "border-box" }}>
-      <Icon name="search" size={42} color={COLORS.crimson} stroke={2} />
-      <div style={{ fontSize: 38, fontWeight: 600, color: INK.strong, whiteSpace: "nowrap" }}>
+    <div style={{ width: w, height: size * 2.7, borderRadius: 999, background: "#fff", border: `2px solid ${INK.line}`,
+      boxShadow: "0 24px 60px rgba(45,0,1,0.08)", display: "flex", alignItems: "center", gap: size * 0.55, padding: `0 ${size}px`, boxSizing: "border-box" }}>
+      <Icon name="search" size={size * 1.1} color={COLORS.crimson} stroke={2} />
+      <div style={{ fontSize: size, fontWeight: 600, color: INK.strong, whiteSpace: "nowrap" }}>
         {query.slice(0, n)}
-        <span style={{ display: "inline-block", width: 3, height: 40, marginLeft: 4, verticalAlign: "-6px", background: COLORS.crimson, opacity: caret }} />
+        <span style={{ display: "inline-block", width: 3, height: size * 1.05, marginLeft: 4, verticalAlign: "-6px", background: COLORS.crimson, opacity: caret }} />
       </div>
     </div>
   );

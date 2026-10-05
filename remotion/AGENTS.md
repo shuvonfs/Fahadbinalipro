@@ -23,7 +23,8 @@ src/
     motion.ts               seconds-based motion language: useT, p, on, rise, fadeUp, pop, drawn, along
     components/             At (positioned pop-in), Headline/Rise/Eyebrow, Card, Pill, Lines + SignalLine,
                             AIEngine (uncertain/active), Node, Bar, ValueBar (LOW→HIGH, no numbers),
-                            LeadCard, SearchBar, SettingRow, AdPreview, PageWire, Icon, Backdrop, SceneFader
+                            LeadCard, SearchBar, SettingRow, AdPreview, PageWire, Icon, Backdrop, SceneFader,
+                            PromptBox, BriefSection, AssetTile, ChapterTitle, Camera, Wipe, OutputCard, typed
   components/               generic building blocks (import from "../../components")
     AnimatedText            kinetic type: per-word/char masked rise, stagger, highlight words
     Background              ivory backdrop + drifting grid + glow
@@ -37,6 +38,8 @@ src/
                             cues.ts = measured word times (s), scenes/* key every motion to a cue
     GoogleAdsAI/            1920×1080 explainer synced to public/google-ads-ai/voiceover.mp3 (128.44s);
                             cues.ts = measured word times + scene windows, scenes/Act1–3 (19 scenes)
+    AIMaxBriefing/          1920×1080 thought-leadership piece (257.9s) synced to public/ai-max-briefing/voiceover.mp3;
+                            cues.ts (word times + SCENES with concepts), scenes/Act1–3 (28 scenes)
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs

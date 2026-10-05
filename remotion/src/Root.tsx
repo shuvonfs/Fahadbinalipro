@@ -1,5 +1,6 @@
 import { Composition } from "remotion";
 import { FORMATS, VIDEO } from "./config/video";
+import { AI_MAX_BRIEFING_FPS, AI_MAX_BRIEFING_FRAMES, AIMaxBriefing } from "./compositions/AIMaxBriefing/AIMaxBriefing";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
 import { GOOGLE_ADS_AI_FPS, GOOGLE_ADS_AI_FRAMES, GoogleAdsAI } from "./compositions/GoogleAdsAI/GoogleAdsAI";
 import { SampleShowcase } from "./compositions/SampleShowcase/SampleShowcase";
@@ -47,6 +48,15 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO.width}
         height={VIDEO.height}
         defaultProps={{ voiceover: "google-ads-ai/voiceover.mp3" }}
+      />
+      <Composition
+        id="AIMaxBriefing"
+        component={AIMaxBriefing}
+        durationInFrames={AI_MAX_BRIEFING_FRAMES}
+        fps={AI_MAX_BRIEFING_FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{ voiceover: "ai-max-briefing/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>
