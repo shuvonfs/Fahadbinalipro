@@ -1,6 +1,7 @@
 import { Composition } from "remotion";
 import { FORMATS, VIDEO } from "./config/video";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
+import { GOOGLE_ADS_AI_FPS, GOOGLE_ADS_AI_FRAMES, GoogleAdsAI } from "./compositions/GoogleAdsAI/GoogleAdsAI";
 import { SampleShowcase } from "./compositions/SampleShowcase/SampleShowcase";
 import { TOTAL_FRAMES } from "./compositions/SampleShowcase/timing";
 import "./theme/fonts";
@@ -37,6 +38,15 @@ export const RemotionRoot: React.FC = () => {
         width={FORMATS.portrait.width}
         height={FORMATS.portrait.height}
         defaultProps={{ voiceover: "fahad-intro/voiceover.mp3" }}
+      />
+      <Composition
+        id="GoogleAdsAI"
+        component={GoogleAdsAI}
+        durationInFrames={GOOGLE_ADS_AI_FRAMES}
+        fps={GOOGLE_ADS_AI_FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{ voiceover: "google-ads-ai/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>

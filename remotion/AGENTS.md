@@ -18,7 +18,13 @@ src/
   theme/theme.ts            COLORS / THEME / TYPE design tokens — use these, don't hard-code colours
   theme/fonts.ts            Inter loaded locally from public/fonts via @remotion/fonts
   lib/animation.ts          EASE, progress, mapRange, springIn, stagger, enter, exit
-  components/               reusable building blocks (import from "../../components")
+  brand/                    FAHAD BRAND design system for the whole series (import from "../../brand")
+    tokens.ts               COLORS, INK, SURFACE (card/glass/hot), TYPE, SAFE (16:9 safe area), MARK
+    motion.ts               seconds-based motion language: useT, p, on, rise, fadeUp, pop, drawn, along
+    components/             At (positioned pop-in), Headline/Rise/Eyebrow, Card, Pill, Lines + SignalLine,
+                            AIEngine (uncertain/active), Node, Bar, ValueBar (LOW→HIGH, no numbers),
+                            LeadCard, SearchBar, SettingRow, AdPreview, PageWire, Icon, Backdrop, SceneFader
+  components/               generic building blocks (import from "../../components")
     AnimatedText            kinetic type: per-word/char masked rise, stagger, highlight words
     Background              ivory backdrop + drifting grid + glow
     PopIn                   spring scale/rotate entrance for any child
@@ -29,6 +35,8 @@ src/
     SampleShowcase/         3 scenes + TransitionSeries (slide, fade); timing.ts holds scene lengths
     FahadIntro/             1080×1920 personal-brand intro synced to public/fahad-intro/voiceover.mp3;
                             cues.ts = measured word times (s), scenes/* key every motion to a cue
+    GoogleAdsAI/            1920×1080 explainer synced to public/google-ads-ai/voiceover.mp3 (128.44s);
+                            cues.ts = measured word times + scene windows, scenes/Act1–3 (19 scenes)
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs
@@ -78,6 +86,12 @@ If the Chrome Headless Shell download is blocked (CI/sandbox), set
 - Size a composition to its audio: `calculateMetadata` + `getAudioDurationInSeconds()`
   from `@remotion/media-utils` (see the `remotion-docs` skill).
 - Audio visualisation: `useAudioData` / `visualizeAudio` from `@remotion/media-utils`.
+
+## Voiceover-synced explainers (series workflow)
+1. Put the MP3 in `public/<video>/`, run `python3 tools/measure_voiceover.py <mp3> <timing.json>` (offline ASR word times).
+2. Write `cues.ts` (seconds) + `SCENES` windows; size the composition to `Math.ceil(C.end * fps)`.
+3. Build scenes from `src/brand` — every beat keyed to a cue via `useT(start)`; scenes crossfade with `SceneFader`.
+4. Brand rules: ivory dominant, burgundy/crimson for signal & value, Inter, no fake numbers/logos, glass sparingly.
 
 ## Changing format, fps, duration
 - Globally: edit `VIDEO` in `src/config/video.ts`.
