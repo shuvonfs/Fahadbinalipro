@@ -28,6 +28,10 @@ src/
                             CreativeSignalCanvas (+canvasTrack/canvasPoint), Trail, Pulse, Ripple, PersonNode,
                             ParticleField, SystemField,
                             AudienceField (+fieldDot/isHighlighted), FocusLens, Sharp, Soft, FocusTick, ApertureWipe
+    kinetic/                "Editorial Kinetic" kit (trend reel style): Stage (paper/dark + grain + vignette + corner stars),
+                            KLine (mixed-size blur-rise words), SelectBox (Figma selection + cursor), Obj (Fluent 3D objects,
+                            public/broad-sharp-v2/3d), AppTile/Logo (real brand glyphs, simple-icons CC0), PinNote, Phone,
+                            FeedPost, AdsPanel, Toggle, Chip, Stamp, shake
   components/               generic building blocks (import from "../../components")
     AnimatedText            kinetic type: per-word/char masked rise, stagger, highlight words
     Background              ivory backdrop + drifting grid + glow
@@ -47,6 +51,8 @@ src/
                             timeline (protagonist.ts) + signal trails, reaction nodes, particle fields (scenes/Act1–2)
     BroadSharp/             1920×1080 "Broad Delivery, Sharp Strategy" (191.7s): lens/focus motion language; one AudienceField
                             keyframed across the film (field.ts) under 13 scenes (scenes/Act1–2). Brief: videos/briefs/
+    BroadSharpV2/           Same voiceover, redesigned in the kinetic style: 26 fast-cut scenes (scenes/A–C), whip/zoom
+                            transitions, karaoke captions from the real script (captions.ts)
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs

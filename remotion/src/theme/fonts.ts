@@ -15,3 +15,9 @@ for (const weight of weights) {
   loadFont({ family: FONT_FAMILY, url: staticFile(`fonts/inter-latin-${weight}-normal.woff2`), weight });
   loadFont({ family: "Noto Sans Bengali", url: staticFile(`fonts/noto-sans-bengali-bengali-${weight}-normal.woff2`), weight });
 }
+
+/** Montserrat (geometric display) for the kinetic editorial style; Bengali falls back to Noto Sans Bengali. */
+export const DISPLAY_STACK = `"Montserrat", "Noto Sans Bengali", sans-serif`;
+for (const weight of ["500", "700", "800", "900"] as const) {
+  loadFont({ family: "Montserrat", url: staticFile(`fonts/montserrat-latin-${weight}-normal.woff2`), weight });
+}

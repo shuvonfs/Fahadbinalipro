@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { FORMATS, VIDEO } from "./config/video";
 import { AI_MAX_BRIEFING_FPS, AI_MAX_BRIEFING_FRAMES, AIMaxBriefing } from "./compositions/AIMaxBriefing/AIMaxBriefing";
 import { BROAD_SHARP_FPS, BROAD_SHARP_FRAMES, BroadSharp } from "./compositions/BroadSharp/BroadSharp";
+import { BROAD_SHARP_V2_FPS, BROAD_SHARP_V2_FRAMES, BroadSharpV2 } from "./compositions/BroadSharpV2/BroadSharpV2";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
 import { GOOGLE_ADS_AI_FPS, GOOGLE_ADS_AI_FRAMES, GoogleAdsAI } from "./compositions/GoogleAdsAI/GoogleAdsAI";
 import { META_CREATIVE_SIGNAL_FPS, META_CREATIVE_SIGNAL_FRAMES, MetaCreativeSignal } from "./compositions/MetaCreativeSignal/MetaCreativeSignal";
@@ -74,6 +75,15 @@ export const RemotionRoot: React.FC = () => {
         component={BroadSharp}
         durationInFrames={BROAD_SHARP_FRAMES}
         fps={BROAD_SHARP_FPS}
+        width={VIDEO.width}
+        height={VIDEO.height}
+        defaultProps={{ voiceover: "broad-delivery-sharp-strategy/voiceover.mp3" }}
+      />
+      <Composition
+        id="BroadSharpV2"
+        component={BroadSharpV2}
+        durationInFrames={BROAD_SHARP_V2_FRAMES}
+        fps={BROAD_SHARP_V2_FPS}
         width={VIDEO.width}
         height={VIDEO.height}
         defaultProps={{ voiceover: "broad-delivery-sharp-strategy/voiceover.mp3" }}
