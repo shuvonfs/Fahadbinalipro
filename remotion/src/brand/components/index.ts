@@ -8,3 +8,4 @@ export * from "./UI";
 export * from "./Briefing";
 export * from "./CreativeSignalCanvas";
 export * from "./SignalKit";
+export * from "./Optics";

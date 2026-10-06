@@ -26,7 +26,8 @@ src/
                             LeadCard, SearchBar, SettingRow, AdPreview, PageWire, Icon, Backdrop, SceneFader,
                             PromptBox, BriefSection, AssetTile, ChapterTitle, Camera, Wipe, OutputCard, typed,
                             CreativeSignalCanvas (+canvasTrack/canvasPoint), Trail, Pulse, Ripple, PersonNode,
-                            ParticleField, SystemField
+                            ParticleField, SystemField,
+                            AudienceField (+fieldDot/isHighlighted), FocusLens, Sharp, Soft, FocusTick, ApertureWipe
   components/               generic building blocks (import from "../../components")
     AnimatedText            kinetic type: per-word/char masked rise, stagger, highlight words
     Background              ivory backdrop + drifting grid + glow
@@ -44,6 +45,8 @@ src/
                             cues.ts (word times + SCENES with concepts), scenes/Act1–3 (28 scenes)
     MetaCreativeSignal/     1920×1080 experimental piece (108.3s): one protagonist CreativeSignalCanvas keyframed across the whole
                             timeline (protagonist.ts) + signal trails, reaction nodes, particle fields (scenes/Act1–2)
+    BroadSharp/             1920×1080 "Broad Delivery, Sharp Strategy" (191.7s): lens/focus motion language; one AudienceField
+                            keyframed across the film (field.ts) under 13 scenes (scenes/Act1–2). Brief: videos/briefs/
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs

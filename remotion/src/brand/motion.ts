@@ -59,3 +59,17 @@ export const along = (d: string, t: number, start: number, period = 1.2, offset 
   const phase = (((t - start) / period + offset) % 1 + 1) % 1;
   return { ...getPointAtLength(d, phase * getLength(d)), phase };
 };
+
+/** Generic numeric keyframe track: each key eases its fields toward new values from `at` over `dur`. */
+export const keyTrack = <T extends Record<string, number>>(t: number, keys: ({ at: number; dur?: number; ease?: (x: number) => number } & Partial<T>)[], base: T): T => {
+  const st: Record<string, number> = { ...base };
+  for (const k of keys) {
+    const e = p(t, k.at, k.dur ?? 0.8, k.ease ?? IN_OUT);
+    if (e <= 0) continue;
+    for (const f of Object.keys(k)) {
+      if (f === "at" || f === "dur" || f === "ease") continue;
+      st[f] = lerp(st[f], (k as Record<string, number>)[f], e);
+    }
+  }
+  return st as T;
+};
