@@ -53,6 +53,9 @@ src/
                             keyframed across the film (field.ts) under 13 scenes (scenes/Act1–2). Brief: videos/briefs/
     BroadSharpV2/           Same voiceover, redesigned in the kinetic style: 26 fast-cut scenes (scenes/A–C), whip/zoom
                             transitions, karaoke captions from the real script (captions.ts)
+    LeadSignal/             1080×1920 reel (70.7s) synced to public/lead-signal/voiceover.mp3: lead-gen offline-conversion
+                            system (Pixel+CAPI, Enhanced Conversions, Data Manager); data.ts = cues + captions + 14 scenes,
+                            reference look = dark grid, thin white curves, red #E3122F accent, vertical flow chains
     _Template/              starter copied by `npm run new`
 public/                     static assets → reference with staticFile("fonts/…", "audio/…", "images/…")
 scripts/                    new-composition.mjs, render-all.mjs

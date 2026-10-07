@@ -10,7 +10,7 @@
  *   Stamp        rubber-stamp slam
  * Every animation is a pure function of global seconds `t`.
  */
-import { Img, random, staticFile, useCurrentFrame } from "remotion";
+import { Img, random, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { BACK, IN, IN_OUT, lerp, OUT, p } from "../motion";
 import { COLORS } from "../tokens";
 import { LOGOS, LogoName } from "./logos";
@@ -25,13 +25,14 @@ export const K = {
 // ───────────── background stage ─────────────
 const Grain: React.FC<{ o?: number }> = ({ o = 0.08 }) => {
   const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
   return (
-    <svg width={1920} height={1080} style={{ position: "absolute", inset: 0, opacity: o, mixBlendMode: "multiply", pointerEvents: "none" }}>
+    <svg width={width} height={height} style={{ position: "absolute", inset: 0, opacity: o, mixBlendMode: "multiply", pointerEvents: "none" }}>
       <filter id={`grain${frame % 6}`}>
         <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves={2} seed={frame % 6} stitchTiles="stitch" />
         <feColorMatrix type="saturate" values="0" />
       </filter>
-      <rect width={1920} height={1080} filter={`url(#grain${frame % 6})`} />
+      <rect width={width} height={height} filter={`url(#grain${frame % 6})`} />
     </svg>
   );
 };

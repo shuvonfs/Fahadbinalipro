@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { FORMATS, VIDEO } from "./config/video";
 import { AI_MAX_BRIEFING_FPS, AI_MAX_BRIEFING_FRAMES, AIMaxBriefing } from "./compositions/AIMaxBriefing/AIMaxBriefing";
 import { BROAD_SHARP_FPS, BROAD_SHARP_FRAMES, BroadSharp } from "./compositions/BroadSharp/BroadSharp";
+import { LEAD_SIGNAL_FPS, LEAD_SIGNAL_FRAMES, LeadSignal } from "./compositions/LeadSignal/LeadSignal";
 import { BROAD_SHARP_V2_FPS, BROAD_SHARP_V2_FRAMES, BroadSharpV2 } from "./compositions/BroadSharpV2/BroadSharpV2";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
 import { GOOGLE_ADS_AI_FPS, GOOGLE_ADS_AI_FRAMES, GoogleAdsAI } from "./compositions/GoogleAdsAI/GoogleAdsAI";
@@ -87,6 +88,15 @@ export const RemotionRoot: React.FC = () => {
         width={VIDEO.width}
         height={VIDEO.height}
         defaultProps={{ voiceover: "broad-delivery-sharp-strategy/voiceover.mp3" }}
+      />
+      <Composition
+        id="LeadSignal"
+        component={LeadSignal}
+        durationInFrames={LEAD_SIGNAL_FRAMES}
+        fps={LEAD_SIGNAL_FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{ voiceover: "lead-signal/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>
