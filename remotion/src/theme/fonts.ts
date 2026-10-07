@@ -21,3 +21,9 @@ export const DISPLAY_STACK = `"Montserrat", "Noto Sans Bengali", sans-serif`;
 for (const weight of ["500", "700", "800", "900"] as const) {
   loadFont({ family: "Montserrat", url: staticFile(`fonts/montserrat-latin-${weight}-normal.woff2`), weight });
 }
+
+/** Playfair Display italic (editorial serif lead-ins, LeadAutomation reel). */
+export const SERIF_STACK = `"Playfair Display", "Noto Sans Bengali", serif`;
+for (const weight of ["700", "800"] as const) {
+  loadFont({ family: "Playfair Display", url: staticFile(`fonts/playfair-display-latin-${weight}-italic.woff2`), weight, style: "italic" });
+}

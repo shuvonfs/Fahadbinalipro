@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { FORMATS, VIDEO } from "./config/video";
 import { AI_MAX_BRIEFING_FPS, AI_MAX_BRIEFING_FRAMES, AIMaxBriefing } from "./compositions/AIMaxBriefing/AIMaxBriefing";
 import { BROAD_SHARP_FPS, BROAD_SHARP_FRAMES, BroadSharp } from "./compositions/BroadSharp/BroadSharp";
+import { LEAD_AUTOMATION_FPS, LEAD_AUTOMATION_FRAMES, LeadAutomation } from "./compositions/LeadAutomation/LeadAutomation";
 import { LEAD_SIGNAL_FPS, LEAD_SIGNAL_FRAMES, LeadSignal } from "./compositions/LeadSignal/LeadSignal";
 import { BROAD_SHARP_V2_FPS, BROAD_SHARP_V2_FRAMES, BroadSharpV2 } from "./compositions/BroadSharpV2/BroadSharpV2";
 import { FAHAD_INTRO_FPS, FAHAD_INTRO_FRAMES, FahadIntro } from "./compositions/FahadIntro/FahadIntro";
@@ -97,6 +98,15 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         defaultProps={{ voiceover: "lead-signal/voiceover.mp3" }}
+      />
+      <Composition
+        id="LeadAutomation"
+        component={LeadAutomation}
+        durationInFrames={LEAD_AUTOMATION_FRAMES}
+        fps={LEAD_AUTOMATION_FPS}
+        width={1080}
+        height={1920}
+        defaultProps={{ voiceover: "lead-automation/voiceover.mp3" }}
       />
       {/* <new-compositions> */}
     </>
